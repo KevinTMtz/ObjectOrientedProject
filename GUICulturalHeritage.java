@@ -22,17 +22,18 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.collections.ObservableList;
 
-public class GUILogin extends Application {
+public class GUICulturalHeritage extends Application {
     Scene signInScene, signUpScene;
     private TextField txtUserLogin, txtPasswordLogin, txtUserRegister, txtPasswordRegister;
 	private ComboBox typeOfUser;
 
     public void start(Stage stage) throws Exception {
-        stage.setTitle("Login");
+        stage.setTitle("Cultural Heritage");
         stage.setWidth(800);
         stage.setHeight(500);
 
-        // 1. Create the base/root node
+
+
         /***************************************/
         /*            Sign in pane             */
         /***************************************/
@@ -91,6 +92,8 @@ public class GUILogin extends Application {
         signInControlsPane.setVgap(10);
         signInControlsPane.setHgap(10);
         signInContentPane.getChildren().add(loginButtonPane);
+
+
 
         /***************************************/
         /*            Sign up pane             */
@@ -160,16 +163,30 @@ public class GUILogin extends Application {
         signUpControlsPane.getChildren().add(registerButtonPane);
 
         
-        /***************************************/
-        // 2. Create the main scene
-        /***************************************/
         signInScene = new Scene(signInPane);
         signUpScene = new Scene(signUpPane);
 
-        //scene.getStylesheets().add(GUILogin.class.getResource("Application.css").toExternalForm());
+        /*
+        Add style to the scene
+        scene.getStylesheets().add(GUILogin.class.getResource("Application.css").toExternalForm());
+        */
+        
         stage.setScene(signInScene);
+        
+        /*
+        Show manager GUI
+        stage.setScene(new GUIManager());
 
-        // 3. Call the show method for the stage
+        Show information manager GUI
+        stage.setScene(new GUIInformationManager());
+
+        Show information translator GUI
+        stage.setScene(new GUITranslator());
+
+        Show information consultant GUI
+        stage.setScene(new GUIConsultant());
+        */
+
         stage.show();
     }
 
