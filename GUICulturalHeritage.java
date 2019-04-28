@@ -1,6 +1,5 @@
 import javafx.application.Application;
 import javafx.collections.FXCollections;
-import javafx.stage.Stage;
 import javafx.scene.layout.GridPane;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -21,18 +20,19 @@ import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.collections.ObservableList;
+import javafx.stage.Stage;
 
 public class GUICulturalHeritage extends Application {
+    private static Stage newStage;
     Scene signInScene, signUpScene;
-    private TextField txtUserLogin, txtPasswordLogin, txtUserRegister, txtPasswordRegister;
-	private ComboBox typeOfUser;
+    private static TextField txtUserLogin, txtPasswordLogin, txtUserRegister, txtPasswordRegister;
+	private static ComboBox typeOfUser;
 
     public void start(Stage stage) throws Exception {
-        stage.setTitle("Cultural Heritage");
-        stage.setWidth(800);
-        stage.setHeight(500);
-
-
+        newStage = stage;
+        newStage.setTitle("Cultural Heritage");
+        newStage.setWidth(800);
+        newStage.setHeight(500);
 
         /***************************************/
         /*            Sign in pane             */
@@ -82,9 +82,14 @@ public class GUICulturalHeritage extends Application {
 
         Button signInButton = new Button("Sign in");
         signInControlsPane.getChildren().add(signInButton);
+        signInButton.addEventFilter(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+            public void handle (MouseEvent e) {
+                AppCulturalHeritage.signIn();
+            }
+        });
         
         Button buttonChangeToSignUp = new Button("Or sign up");
-        buttonChangeToSignUp.setOnAction(e -> stage.setScene(signUpScene));
+        buttonChangeToSignUp.setOnAction(e -> newStage.setScene(signUpScene));
         signInControlsPane.getChildren().add(buttonChangeToSignUp);
         
         signInControlsPane.setAlignment(Pos.CENTER);
@@ -143,6 +148,7 @@ public class GUICulturalHeritage extends Application {
         
         Label lblTypeOfUserRegister = new Label("Type of user");
         typeOfUser = new ComboBox(FXCollections.observableArrayList(users));
+        typeOfUser.setValue("Manager");
         registerPane.add(lblTypeOfUserRegister, 0, 2);
         registerPane.add(typeOfUser, 1, 2);
         
@@ -151,9 +157,14 @@ public class GUICulturalHeritage extends Application {
 
         Button signUpButton = new Button("Sign up");
         signUpControlsPane.getChildren().add(signUpButton);
+        signUpButton.addEventFilter(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+            public void handle (MouseEvent e) {
+                AppCulturalHeritage.addUser();
+            }
+        });
         
         Button buttonChangeToSignIn = new Button("Cancel sign up");
-        buttonChangeToSignIn.setOnAction(e -> stage.setScene(signInScene));
+        buttonChangeToSignIn.setOnAction(e -> newStage.setScene(signInScene));
         signUpControlsPane.getChildren().add(buttonChangeToSignIn);
         
         signUpControlsPane.setAlignment(Pos.CENTER);
@@ -171,23 +182,32 @@ public class GUICulturalHeritage extends Application {
         scene.getStylesheets().add(GUILogin.class.getResource("Application.css").toExternalForm());
         */
         
-        stage.setScene(signInScene);
-        
-        /*
-        Show manager GUI
-        stage.setScene(new GUIManager());
+        newStage.setScene(signInScene);
+        newStage.show();
+    }
 
-        Show information manager GUI
-        stage.setScene(new GUIInformationManager());
+    public static String getUsernameLoginValue() {
+        return(txtUserLogin.getText());
+    }
 
-        Show information translator GUI
-        stage.setScene(new GUITranslator());
+    public static String getPasswordLoginValue() {
+        return(txtPasswordLogin.getText());
+    }
 
-        Show information consultant GUI
-        stage.setScene(new GUIConsultant());
-        */
+    public static String getUsernameRegisterValue() {
+        return(txtUserRegister.getText());
+    }
 
-        stage.show();
+    public static String getPasswordRegisterValue() {
+        return(txtPasswordRegister.getText());
+    }
+
+    public static String getUserTypeRegister() {
+        return((String) typeOfUser.getValue());
+    }
+
+    public static void changeScene(Scene scene) {
+        newStage.setScene(scene);
     }
 
     public static void main(String[] args) {

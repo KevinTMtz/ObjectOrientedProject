@@ -1,3 +1,5 @@
-public class Translator extends User {
+import java.io.Serializable;
+
+public class Translator extends User implements Serializable {
     
 }
