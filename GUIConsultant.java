@@ -30,24 +30,21 @@ import java.io.*;
 import java.io.File;
 import java.io.IOException;
 
-public class GUIInformationManager extends Scene {
+public class GUIConsultant extends Scene {
     private static ObservableList<Resource> data;
     private static ListView<Resource> lvResource;
     private static ArrayList<Resource> resources = new ArrayList<Resource>();
-    private static TextField txtTitle, txtLanguage, txtRegion, txtResponsible;
-    private static Text txtStatus;
-    private static Label lblInfo, lblTitle, lblLanguage, lblRegion, lblResponsible, lblStatus;
-    private static TextField txtPages, txtWords;
+    private static Text txtTitle, txtLanguage, txtRegion, txtResponsible;
+    private static Label lblInfo, lblTitle, lblLanguage, lblRegion, lblResponsible, lblClass;
+    private static Text txtPages, txtWords;
     private static Label lblPages, lblWords;
-    private static TextField txtDuration, txtPath;
+    private static Text txtDuration, txtPath;
     private static Label lblDuration, lblPath;
     private static BorderPane mainPane;
     private static FlowPane leftPane, rightPane;
-    private static GridPane listPane, infoPane, controlsPane;
-    private static CheckBox recording, textual;
-    private static Button bttnContent;
+    private static GridPane listPane, infoPane;
 
-    public GUIInformationManager() {
+    public GUIConsultant() {
         super(new SignUpPane());
     }
 
@@ -58,16 +55,14 @@ public class GUIInformationManager extends Scene {
             leftPane= new FlowPane();
             rightPane= new FlowPane();
             mainPane.setLeft(leftPane);
-            mainPane.setCenter(rightPane);
-            rightPane.setAlignment(Pos.TOP_CENTER);
-            
+            mainPane.setRight(rightPane);
             mainPane.setMargin(leftPane, new Insets(10, 0, 10, 10));
             mainPane.setMargin(rightPane, new Insets(10, 10, 10, 0));
             
 
             //ListPane-->Left Side and the list
             listPane=new GridPane();
-            Text user = new Text("Information Manager ");
+            Text user = new Text("Consultant 3");
             listPane.add(user, 0, 0);
             //getChildren().add(user);
             data = FXCollections.observableArrayList();
@@ -76,7 +71,7 @@ public class GUIInformationManager extends Scene {
             leftPane.getChildren().add(listPane);
             lvResource.setMaxWidth(220);
             readData();
-
+            
             //RightPane-->Right Side and the info
             infoPane=new GridPane();
             infoPane.setVgap(10);
@@ -87,160 +82,46 @@ public class GUIInformationManager extends Scene {
 
                 lblTitle=new Label("Title");
                 infoPane.add(lblTitle, 0, 1);
-                txtTitle=new TextField();
-                txtTitle.setPromptText("Title");
+                txtTitle=new Text("-");
                 infoPane.add(txtTitle, 1, 1);
 
                 lblLanguage=new Label("Language:");
                 infoPane.add(lblLanguage, 0, 2);
-                txtLanguage=new TextField();
-                txtLanguage.setPromptText("Language");
+                txtLanguage=new Text("-");
                 infoPane.add(txtLanguage, 1, 2);
 
                 lblRegion=new Label("Region");
                 infoPane.add(lblRegion, 0, 3);
-                txtRegion=new TextField();
-                txtRegion.setPromptText("Region");
+                txtRegion=new Text("-");
                 infoPane.add(txtRegion, 1, 3);
                 
                 lblResponsible=new Label("Responsible");
                 infoPane.add(lblResponsible, 0, 4);
-                txtResponsible=new TextField();
-                txtResponsible.setPromptText("Responsible");
+                txtResponsible=new Text("-");
                 infoPane.add(txtResponsible, 1, 4);
+
+                lblClass=new Label();
 
                 //If it is a text
                 lblPages= new Label("Number of Pages:");
-                txtPages= new TextField();
-                txtPages.setPromptText("Pages");
+                txtPages= new Text("-");
                 lblWords=new Label("Number of Words");
-                txtWords= new TextField();
-                txtWords.setPromptText("Words");
+                txtWords= new Text("-");
 
                 //If it is a recording
                 lblDuration=new Label("Duration:");
-                txtDuration= new TextField();
-                txtDuration.setPromptText("Duration");
+                txtDuration= new Text("-");
                 lblPath=new Label("Path:");
-                txtPath=new TextField();
-                txtPath.setPromptText("Path");
+                txtPath=new Text("-");
 
-                recording=new CheckBox("Recording");
-                textual=new CheckBox("Textual");
-                Label lblSelect=new Label("Select one: ");
-                lblSelect.setFont(Font.font("Verdana", FontWeight.BOLD, 10));
-                infoPane.add(lblSelect, 0, 7);
-                infoPane.add(recording, 1, 8);
-                infoPane.add(textual, 1, 9);
-
-                lblStatus=new Label("Status:");
-                txtStatus=new Text();
-
-                //Buttons
-                controlsPane=new GridPane();
-                Button bttnAdd=new Button("Add");
-                controlsPane.add(bttnAdd, 0, 0);
-                Button bttnDelete=new Button("Delete");
-                controlsPane.add(bttnDelete, 1, 0);
-                Button bttnUpdate= new Button("Update");
-                controlsPane.add(bttnUpdate, 2, 0);
-                Button bttnNew= new Button("New");
-                controlsPane.add(bttnNew, 3, 0);
-                mainPane.setBottom(controlsPane);
-                controlsPane.setAlignment(Pos.CENTER_LEFT);
-
-                bttnContent=new Button("Check content");
-                bttnContent.setAlignment(Pos.CENTER);
-                infoPane.add(bttnContent, 1, 11);
-                //bttnContent.setOnAction(e->newStage);
-
-
-
-                //The events
+                lblClass.setFont(Font.font("Verdana", FontWeight.BOLD, 10));
                 lvResource.addEventFilter(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
                     public void handle(MouseEvent a) {
                         selectResource();
                     }
                 });
-                bttnAdd.addEventFilter(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
-                    public void handle (MouseEvent a){
-                        addResource();
-                    }
-                });
-                bttnNew.addEventFilter(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
-                    public void handle (MouseEvent a){
-                        newResource();
-                    }
-                });
-                bttnDelete.addEventFilter(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
-                    public void handle (MouseEvent a){
-                        deleteResource();
-                    }
-                });
-                bttnUpdate.addEventFilter(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
-                    public void handle (MouseEvent a){
-                        updateResource();
-                    }
-                });
-                EventHandler<ActionEvent> eventRecording = new EventHandler<ActionEvent>() { 
-  
-                    public void handle(ActionEvent e) 
-                    { 
-                        recording.setSelected(true);
-                        txtWords.setText("");
-                        txtPages.setText("");
-                        infoPane.getChildren().remove(lblPages);
-                        infoPane.getChildren().remove(txtPages);
-                        infoPane.getChildren().remove(lblWords);
-                        infoPane.getChildren().remove(txtWords);
-                        infoPane.getChildren().remove(lblDuration);
-                        infoPane.getChildren().remove(txtDuration);
-                        infoPane.getChildren().remove(lblPath);
-                        infoPane.getChildren().remove(txtPath);
-                        textual.setSelected(false);
-                        infoPane.add(lblDuration, 0, 5);
-                        infoPane.add(txtDuration, 1, 5);
-                        infoPane.add(lblPath, 0, 6);
-                        infoPane.add(txtPath, 1, 6);
-                    } 
-      
-                }; 
-                EventHandler<ActionEvent> eventTextual = new EventHandler<ActionEvent>() { 
-  
-                    public void handle(ActionEvent e) 
-                    { 
-                        textual.setSelected(true);
-                        //Remove what was there before
-                        txtDuration.setText("");
-                        txtPath.setText("");
-                        infoPane.getChildren().remove(lblPages);
-                        infoPane.getChildren().remove(txtPages);
-                        infoPane.getChildren().remove(lblWords);
-                        infoPane.getChildren().remove(txtWords);
-                        infoPane.getChildren().remove(lblDuration);
-                        infoPane.getChildren().remove(txtDuration);
-                        infoPane.getChildren().remove(lblPath);
-                        infoPane.getChildren().remove(txtPath);
-                        recording.setSelected(false);
-                        infoPane.add(lblPages, 0, 5);
-                        infoPane.add(txtPages, 1, 5);
-                        infoPane.add(lblWords, 0, 6);
-                        infoPane.add(txtWords, 1, 6);
-                    } 
-      
-                };
-                bttnContent.addEventFilter(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
-                    public void handle(MouseEvent a){
-                        displayContent();
-                    }
-                });
-
-                // set event to checkbox 
-                recording.setOnAction(eventRecording); 
-                textual.setOnAction(eventTextual); 
-
+                
                 //For the width
-                lblInfo.setPrefWidth(100);
                 lblDuration.setPrefWidth(100);
                 lblLanguage.setPrefWidth(100);
                 lblPages.setPrefWidth(100);
@@ -249,13 +130,9 @@ public class GUIInformationManager extends Scene {
                 lblResponsible.setPrefWidth(100);
                 lblTitle.setPrefWidth(100);
                 lblWords.setPrefWidth(100);
-                recording.setPrefWidth(100);
-                textual.setPrefWidth(100);
-                lblStatus.setPrefWidth(100);
-                lblSelect.setPrefWidth(100);
 
-                //For the text-aligment
                 lblInfo.setAlignment(Pos.CENTER_RIGHT);
+                lblClass.setAlignment(Pos.CENTER_RIGHT);
                 lblDuration.setAlignment(Pos.CENTER_RIGHT);
                 lblLanguage.setAlignment(Pos.CENTER_RIGHT);
                 lblPages.setAlignment(Pos.CENTER_RIGHT);
@@ -263,197 +140,17 @@ public class GUIInformationManager extends Scene {
                 lblRegion.setAlignment(Pos.CENTER_RIGHT);
                 lblResponsible.setAlignment(Pos.CENTER_RIGHT);
                 lblTitle.setAlignment(Pos.CENTER_RIGHT);
-                lblSelect.setAlignment(Pos.CENTER_RIGHT);
                 lblWords.setAlignment(Pos.CENTER_RIGHT);
-                recording.setAlignment(Pos.CENTER_RIGHT);
-                textual.setAlignment(Pos.CENTER_RIGHT);
-                lblStatus.setAlignment(Pos.CENTER_RIGHT);
-                
-                //For the font-weight
-                lblStatus.setFont(Font.font("Verdana", FontWeight.BOLD, 10));
-                txtStatus.setFont(Font.font("Verdana", FontWeight.BOLD, 15));
 
                 //For the margins
-                infoPane.setMargin(lblSelect, new Insets(10, 0, 0, 0));
-                infoPane.setMargin(lblStatus, new Insets(20, 0, 0, 0));
-                infoPane.setMargin(txtStatus, new Insets(20, 0, 0, 0));
-                controlsPane.setMargin(bttnAdd, new Insets(0, 5, 20, 10));
-                controlsPane.setMargin(bttnDelete, new Insets(0, 5, 20, 5));
-                controlsPane.setMargin(bttnNew, new Insets(0, 10, 20, 5));
-                controlsPane.setMargin(bttnUpdate, new Insets(0, 5, 20, 5));
+                infoPane.setMargin(lblClass, new Insets(10, 0, 0, 0));
 
+                //Escribe tu código a partir de aquií. Agrega los botones al rightPane
+            
             rightPane.getChildren().add(infoPane);
-        }
-        //Buttons and selector
-        private void newResource(){
-            //Clear all textField
-            setResource(new Recording());
-            setResource(new Textual());
-            recording.setSelected(false);
-            textual.setSelected(false);
-            //Remove the selective info and status
-            infoPane.getChildren().remove(lblPages);
-            infoPane.getChildren().remove(txtPages);
-            infoPane.getChildren().remove(lblWords);
-            infoPane.getChildren().remove(txtWords);
-            infoPane.getChildren().remove(lblDuration);
-            infoPane.getChildren().remove(txtDuration);
-            infoPane.getChildren().remove(lblPath);
-            infoPane.getChildren().remove(txtPath);
-            infoPane.getChildren().remove(lblStatus);
-            infoPane.getChildren().remove(txtStatus);
-
-            
-
-        }
-        private void addResource(){
-            try{
-                //Check if a box is checked
-                if(recording.isSelected()==false && textual.isSelected()==false) 
-                    throw new UncheckedBoxException("You have to select if it is a recording or a text");
-                // Read the information for a resource and create an object
-                else{
-                    Recording r=new Recording();
-                    Textual t=new Textual();
-                    boolean different=true;
-                    if(recording.isSelected()){
-                        getResource(r);
-                        for(int i=0; i<resources.size();i++){
-                            if(r.getTitle().equalsIgnoreCase(resources.get(i).getTitle())){
-                                different=false;
-                            }
-                        }
-                    }
-                    if(textual.isSelected()) {
-                        getResource(t);
-                        for(int i=0; i<resources.size();i++){
-                            if(t.getTitle().equalsIgnoreCase(resources.get(i).getTitle())){
-                                different=false;
-                            }
-                        }
-                    }
-                    
-                    if(different){
-                        if(recording.isSelected()){
-                            /*FileOutputStream ofs = new FileOutputStream(new File("resources/" +
-                            txtTitle.getText() + ".rcd"));
-                            ObjectOutputStream oos = new ObjectOutputStream(ofs);
-                            // Add the object to my list
-                            oos.writeObject(r);
-                            oos.close();*/
-                            resources.add(r);
-                            data.add(r);
-                        }
-                        if(textual.isSelected()) {
-                            /*FileOutputStream ofs = new FileOutputStream(new File("resources/" +
-                            txtTitle.getText() + ".txtl"));
-                            ObjectOutputStream oos = new ObjectOutputStream(ofs);
-                            // Add the object to my list
-                            oos.writeObject(t);
-                            oos.close();*/
-                            resources.add(t);
-                            data.add(t);
-                        }
-                        // Clear the Form
-                        newResource();
-                        saveData();
-                        lvResource.getSelectionModel().clearSelection();
-                    }else throw new SameResourceException("You already added this resource");
-                }
-                
-            }catch(EmptyFieldException efe){
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Add/Update a resource");
-                alert.setHeaderText("Error while adding/updating a new resource");
-                alert.setContentText(efe.getMessage());
-                alert.showAndWait();
-            }catch(SameResourceException sre){
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Add a resource");
-                alert.setHeaderText("Error while adding a new resource");
-                alert.setContentText(sre.getMessage());
-                alert.showAndWait();
-            }catch(UncheckedBoxException ube){
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Add a resource");
-                alert.setHeaderText("Error while adding a new resource");
-                alert.setContentText(ube.getMessage());
-                alert.showAndWait();
-            }
-        }
-        private void deleteResource(){
-            try{
-                if(lvResource.getSelectionModel().getSelectedIndex()!=-1){
-                    //Check which type of resource it is
-                    boolean deleted=false;
-                    resources.remove(lvResource.getSelectionModel().getSelectedIndex());
-                    if(lvResource.getSelectionModel().getSelectedItem() instanceof Recording && !deleted){
-                        deleted=true;
-                        Recording r=(Recording)lvResource.getSelectionModel().getSelectedItem();
-                        /*File recordingD= new File("resources/"+r.getTitle()+".rcd");
-                        recordingD.delete();*/
-                        data.remove(r);
-                    }
-                    if(lvResource.getSelectionModel().getSelectedItem() instanceof Textual&& !deleted){
-                        deleted=true;
-                        Textual t=(Textual)lvResource.getSelectionModel().getSelectedItem();
-                        /*File textualD= new File("resources/"+t.getTitle()+".txtl");
-                        textualD.delete();*/
-                        data.remove(t);
-                    }
-                    // Empty the fields
-                    newResource();
-                    saveData();
-                    lvResource.getSelectionModel().clearSelection();
-                }
-                else throw new NullPointerException();
-            } catch(NullPointerException npe){
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Delete a resource");
-                alert.setHeaderText("Error while deleting a resource");
-                alert.setContentText("You have not selected a resource");
-                alert.showAndWait();
-            }
-            
-        }
-        private void updateResource(){
-            
-            try {
-                if(lvResource.getSelectionModel().getSelectedIndex()!=-1){
-                    //Add it again
-                    addResource();
-                    //Check which type of resource it is and delete it
-                    resources.remove(lvResource.getSelectionModel().getSelectedIndex());
-                    boolean deleted=false;
-                    if(lvResource.getSelectionModel().getSelectedItem() instanceof Recording && !deleted){
-                        System.out.println("It is a recording");
-                        deleted=true;
-                        Recording r=(Recording)lvResource.getSelectionModel().getSelectedItem();
-                        /*File recordingD= new File("resources/"+r.getTitle()+".rcd");
-                        recordingD.delete();*/
-                        data.remove(r);
-                    }
-                    if(lvResource.getSelectionModel().getSelectedItem() instanceof Textual && !deleted){
-                        deleted=true;
-                        System.out.println("It is a textual");
-                        Textual t=(Textual)lvResource.getSelectionModel().getSelectedItem();
-                        /*File textualD= new File("resources/"+t.getTitle()+".txtl");
-                        textualD.delete();*/
-                        data.remove(t);
-                    }
-                } else throw new NullPointerException();
-                }catch(NullPointerException npe){
-                    Alert alert = new Alert(Alert.AlertType.ERROR);
-                    alert.setTitle("Update a resource");
-                    alert.setHeaderText("Error while updating a resource");
-                    alert.setContentText("You have not selected a resource");
-                    alert.showAndWait();
-                }
         }
         private void selectResource() {
             //Remove previous nodes
-            setResource(new Recording());
-            setResource(new Textual());
             infoPane.getChildren().remove(lblPages);
             infoPane.getChildren().remove(txtPages);
             infoPane.getChildren().remove(lblWords);
@@ -462,80 +159,61 @@ public class GUIInformationManager extends Scene {
             infoPane.getChildren().remove(txtDuration);
             infoPane.getChildren().remove(lblPath);
             infoPane.getChildren().remove(txtPath);
-            infoPane.getChildren().remove(lblStatus);
-            infoPane.getChildren().remove(txtStatus);
-            infoPane.getChildren().remove(bttnContent);
-
-            infoPane.add(bttnContent, 1, 11);
-
-            //Display the staus (Hide it if nothing is selected)
-            infoPane.add(lblStatus, 0, 10);
-            txtStatus.setText(lvResource.getSelectionModel().getSelectedItem().getCurrentStatus().toUpperCase());
-            infoPane.add(txtStatus, 1, 10);
+            infoPane.getChildren().remove(lblClass);
 
             if(lvResource.getSelectionModel().getSelectedItem() instanceof Textual){
                 System.out.println("The selected resource is: textual");
                 Textual t=(Textual) lvResource.getSelectionModel().getSelectedItem();
                 setResource(t);
-                infoPane.add(lblPages, 0, 5);
-                infoPane.add(txtPages, 1, 5);
-                infoPane.add(lblWords, 0, 6);
-                infoPane.add(txtWords, 1, 6);
-                textual.setSelected(true);
-                recording.setSelected(false);
+                lblClass.setText("Text info:");
+                infoPane.add(lblClass, 0, 5);
+                infoPane.add(lblPages, 0, 6);
+                infoPane.add(txtPages, 1, 6);
+                infoPane.add(lblWords, 0, 7);
+                infoPane.add(txtWords, 1, 7);
             }
             if(lvResource.getSelectionModel().getSelectedItem() instanceof Recording){
                 System.out.println("The selected resource is: recording");
                 Recording r=(Recording) lvResource.getSelectionModel().getSelectedItem();
                 setResource(r);
-                infoPane.add(lblDuration, 0, 5);
-                infoPane.add(txtDuration, 1, 5);
-                infoPane.add(lblPath, 0, 6);
-                infoPane.add(txtPath, 1, 6);
-                textual.setSelected(false);
-                recording.setSelected(true);
+                lblClass.setText("Audio info: ");
+                infoPane.add(lblClass, 0, 5);
+                infoPane.add(lblDuration, 0, 6);
+                infoPane.add(txtDuration, 1, 6);
+                infoPane.add(lblPath, 0, 7);
+                infoPane.add(txtPath, 1, 7);
             }
         }
-        private void displayContent(){
-            Scene contentScene=new Scene();
-            GUICulturalHeritage.changeScene(contentScene);
+        private void readData(){
+            try {
+                FileInputStream fis = new FileInputStream("resources/resources.list");
+                ObjectInputStream ois = new ObjectInputStream(fis);
+                System.out.println("Readed");
+                resources = (ArrayList) ois.readObject();
+                //System.out.println("Size: " + resources.size());
+                Recording r=null;
+                Textual t=null;
+                // Add the existing data
+                for (int i = 0; i < resources.size(); i++) {
+                    if(resources.get(i).getCurrentStatus().equalsIgnoreCase("freed")){
+                        if(resources.get(i) instanceof Recording) {
+                            r=(Recording) resources.get(i);
+                            data.add(r);
+                        }
+                        if(resources.get(i) instanceof Textual) {
+                            t=(Textual) resources.get(i);
+                            data.add(t);
+                        }
+                    }
+                    saveData();
+                }
+                ois.close();
+            } catch (IOException ioe) {
+                System.out.println(ioe.getMessage());
+            } catch(ClassNotFoundException cnfe){
+                System.out.println(cnfe.getMessage());
+            }
         }
-        //Getters and setters
-        private void setResource(Textual t){
-            txtTitle.setText(t.getTitle());
-            txtLanguage.setText(t.getLanguage());
-            txtRegion.setText(t.getRegionOfOrigin());
-            txtResponsible.setText(t.getResponsibleOfTheFinding());
-            txtWords.setText(t.getNumberOfWords());
-            txtPages.setText(t.getNumberOfPages());
-        }
-        private void setResource(Recording r){
-            txtTitle.setText(r.getTitle());
-            txtLanguage.setText(r.getLanguage());
-            txtRegion.setText(r.getRegionOfOrigin());
-            txtResponsible.setText(r.getResponsibleOfTheFinding());
-            txtDuration.setText(r.getDuration());
-            txtPath.setText(r.getPathOfFile());
-        }
-        private void getResource(Textual t) throws EmptyFieldException{
-            t.setTitle(txtTitle.getText());
-            t.setLanguage(txtLanguage.getText());
-            t.setNumberOfPages(txtPages.getText());
-            t.setNumberOfWords(txtWords.getText());
-            t.setRegionOfOrigin(txtRegion.getText());
-            t.setResponsibleOfTheFinding(txtResponsible.getText());
-            t.setCurrentStatus("finding");
-        }
-        private void getResource(Recording r) throws EmptyFieldException{
-            r.setTitle(txtTitle.getText());
-            r.setLanguage(txtLanguage.getText());
-            r.setDuration(txtDuration.getText());
-            r.setPathOfFile(txtPath.getText());
-            r.setRegionOfOrigin(txtRegion.getText());
-            r.setResponsibleOfTheFinding(txtResponsible.getText());
-            r.setCurrentStatus("finding");
-        }
-        
         private void saveData(){
             // Create the arraylist
             ArrayList<Resource> temp = new ArrayList<>();
@@ -554,36 +232,24 @@ public class GUIInformationManager extends Scene {
                 System.out.println("File not found");
             } catch (IOException ioe) {
                 System.out.println(ioe.getMessage());
-            }            
-        }
-        private void readData(){
-            try {
-                FileInputStream fis = new FileInputStream("resources/resources.list");
-                ObjectInputStream ois = new ObjectInputStream(fis);
-                System.out.println("Readed");
-                resources = (ArrayList) ois.readObject();
-                //System.out.println("Size: " + resources.size());
-                Recording r=null;
-                Textual t=null;
-                // Add the existing data
-                for (int i = 0; i < resources.size(); i++) {
-                    if(resources.get(i) instanceof Recording) {
-                        r=(Recording) resources.get(i);
-                        data.add(r);
-                    }
-                    if(resources.get(i) instanceof Textual) {
-                        t=(Textual) resources.get(i);
-                        data.add(t);
-                    }
-                    saveData();
-                }
-                ois.close();
-            } catch (IOException ioe) {
-                System.out.println(ioe.getMessage());
-            } catch(ClassNotFoundException cnfe){
-                System.out.println(cnfe.getMessage());
-            }
+            } 
         }
         
+        private void setResource(Textual t){
+            txtTitle.setText(t.getTitle());
+            txtLanguage.setText(t.getLanguage());
+            txtRegion.setText(t.getRegionOfOrigin());
+            txtResponsible.setText(t.getResponsibleOfTheFinding());
+            txtWords.setText(""+t.getNumberOfWords());
+            txtPages.setText(""+t.getNumberOfPages());
+        }
+        private void setResource(Recording r){
+            txtTitle.setText(r.getTitle());
+            txtLanguage.setText(r.getLanguage());
+            txtRegion.setText(r.getRegionOfOrigin());
+            txtResponsible.setText(r.getResponsibleOfTheFinding());
+            txtDuration.setText(""+r.getDuration());
+            txtPath.setText(r.getPathOfFile());
+        }
     }
 }
