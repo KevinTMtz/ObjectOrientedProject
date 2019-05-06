@@ -497,7 +497,7 @@ public class GUIInformationManager extends Scene {
             }
         }
         private void displayContent(){
-            Scene contentScene=new Scene();
+            //Scene contentScene=new Scene();
             //GUICulturalHeritage.changeScene(contentScene);
         }
         //Getters and setters
