@@ -1,3 +1,5 @@
+// La cagaste bro, me la pelas y sebiti también
+
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.stage.Stage;

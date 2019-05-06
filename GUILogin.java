@@ -31,8 +31,8 @@ public class GUILogin extends Application {
     public void start(Stage stage) throws Exception {
         newStage = stage;
         newStage.setTitle("Cultural Heritage");
-        newStage.setWidth(800);
-        newStage.setHeight(500);
+        newStage.setWidth(900);
+        newStage.setHeight(620);
 
         /***************************************/
         /*            Sign in pane             */
