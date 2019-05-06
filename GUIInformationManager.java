@@ -151,6 +151,8 @@ public class GUIInformationManager extends Scene {
 
                 bttnContent=new Button("Check content");
                 bttnContent.setAlignment(Pos.CENTER);
+                bttnContent.setOnAction(e -> GUILogin.changeScene(new GUIManager()));
+
                 infoPane.add(bttnContent, 1, 11);
                 //bttnContent.setOnAction(e->newStage);
 
@@ -497,8 +499,8 @@ public class GUIInformationManager extends Scene {
             }
         }
         private void displayContent(){
-            Scene contentScene=new Scene();
-            GUICulturalHeritage.changeScene(contentScene);
+            //Scene contentScene=new Scene();
+            //GUICulturalHeritage.changeScene(contentScene);
         }
         //Getters and setters
         private void setResource(Textual t){
