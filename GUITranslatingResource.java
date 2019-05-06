@@ -45,7 +45,7 @@ public class GUITranslatingResource extends Scene{
     public static class Translating extends HBox{
         public  Translating() {
             /*leftPane = new VBox();
-            rightPane = new VBox();*
+            rightPane = new VBox();*/
         }
     }
 }
