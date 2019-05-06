@@ -58,7 +58,7 @@ public abstract class AppLogin implements IPersist {
         }
     }
 
-    // For loading all the saved movies
+    // For loading all the saved users
     public static void loadUsers() {
         try {
             File checkArrayList = new File("users/arrayListUsers");
@@ -67,7 +67,7 @@ public abstract class AppLogin implements IPersist {
                 FileInputStream fis = new FileInputStream("users/arrayListUsers");
                 ObjectInputStream ois = new ObjectInputStream(fis);
 
-                arrayListUsers= new ArrayList<User>();
+                arrayListUsers = new ArrayList<User>();
                 arrayListUsers = (ArrayList<User>) ois.readObject();
                 
                 ois.close();
