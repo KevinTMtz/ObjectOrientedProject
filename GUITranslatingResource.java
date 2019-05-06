@@ -30,7 +30,7 @@ import java.io.*;
 import java.io.File;
 import java.io.IOException;
 
-public class GUITranslate extends Scene{
+public class GUITranslatingResource extends Scene{
     public GUITranslator() {
         super(new SignUpPane());
     }
