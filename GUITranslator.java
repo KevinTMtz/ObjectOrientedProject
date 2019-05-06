@@ -1,4 +1,4 @@
-// La cagaste bro, me la pelas y sebiti también
+// Te amo bro, no me la pelas y sebiti tampoco
 
 import javafx.application.Application;
 import javafx.collections.FXCollections;
