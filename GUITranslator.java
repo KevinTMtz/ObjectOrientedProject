@@ -1,5 +1,3 @@
-// Te amo bro, no me la pelas y sebiti tampoco
-
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.stage.Stage;
@@ -119,7 +117,7 @@ public class GUITranslator extends Scene {
                 txtPath=new Text("-");
                 
                 bttnTranslate = new Button("Translate");
-                bttnTranslate.setOnAction(e -> GUILogin.changeScene(new GUITranslator()));
+                bttnTranslate.setOnAction(e -> GUILogin.changeScene(new GUITransl()));
 
                 lblClass.setFont(Font.font("Verdana", FontWeight.BOLD, 10));
                 lvResource.addEventFilter(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
