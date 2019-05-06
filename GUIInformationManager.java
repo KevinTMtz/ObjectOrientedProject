@@ -151,6 +151,8 @@ public class GUIInformationManager extends Scene {
 
                 bttnContent=new Button("Check content");
                 bttnContent.setAlignment(Pos.CENTER);
+                bttnContent.setOnAction(e -> GUILogin.changeScene(new GUIManager()));
+
                 infoPane.add(bttnContent, 1, 11);
                 //bttnContent.setOnAction(e->newStage);
 

@@ -1,5 +1,3 @@
-// Te amo bro, no me la pelas y sebiti tampoco
-
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.stage.Stage;
