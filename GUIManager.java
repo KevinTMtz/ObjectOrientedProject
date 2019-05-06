@@ -29,10 +29,10 @@ public class GUIManager extends Scene {
     }
 
     public static class SignUpPane extends GridPane {
-        private TextField txtDirector, txtTitle, txtDuration, txtYear, txtClassification;
+        private TextField txtPassword, txtUsername, txtDuration, txtYear, txtClassification;
         private ComboBox typeOfUser;
-	    //private ObservableList<Movie> data;
-	    //private ListView<Movie> lvMovie;
+	    private ObservableList<User> data;
+	    private ListView<User> lvUser;
 
         public SignUpPane() {
             this.setAlignment(Pos.CENTER);
@@ -69,18 +69,18 @@ public class GUIManager extends Scene {
             moviePane.setHgap(20);
             moviePane.setVgap(10);
 
-            Label lblTitle = new Label("Title");
-            txtTitle = new TextField();
-            moviePane.add(lblTitle, 0, 0);
-            moviePane.add(txtTitle, 1, 0);
+            Label lblUsername = new Label("Username");
+            txtUsername = new TextField();
+            moviePane.add(lblUsername, 0, 0);
+            moviePane.add(txtUsername, 1, 0);
 
-            Label lblDirector = new Label("Director");
-            txtDirector = new TextField();
-            moviePane.add(lblDirector, 0, 1);
-            moviePane.add(txtDirector, 1, 1);
+            Label lblPassword = new Label("Password");
+            txtPassword = new TextField();
+            moviePane.add(lblPassword, 0, 1);
+            moviePane.add(txtPassword, 1, 1);
             
             String users[] = { "Manager", "Information Manager", "Translator", "Consultant" };
-        
+            
             Label lblTypeOfUserRegister = new Label("Type of user");
             typeOfUser = new ComboBox(FXCollections.observableArrayList(users));
             typeOfUser.setValue("Manager");
@@ -137,98 +137,6 @@ public class GUIManager extends Scene {
             contentPane.getChildren().add(buttonPane);
 
             getChildren().add(mainPane);
-        
-        /*
-
-        // Add movie
-        private void addMovie() {
-            try {
-                Movie m = new Movie();
-                
-                // Read the information for the movie an create an object
-                m.setTitle(txtTitle.getText());
-                m.setDirector(txtDirector.getText());
-                m.setDuration(txtDuration.getText());
-                m.setYear(txtYear.getText());
-                m.setClassification(txtClassification.getText());
-                
-                // Add the object to my list
-                data.add(m);
-                
-                //Clear the form
-                txtTitle.setText("");
-                txtDirector.setText("");
-                txtDuration.setText("");
-                txtClassification.setText("");
-                txtYear.setText("");
-            } catch (EmptyFieldException e) {
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Textfield empty");
-                alert.setHeaderText("Error while adding new movie");
-                alert.setContentText(e.getMessage());
-
-                alert.showAndWait();
-            }
-        }
-
-        // Delete selected movie
-        private void deleteMovie() {
-            // Obtain the selected movie
-            Movie m = lvMovie.getSelectionModel().getSelectedItem();
-
-            // Remove it from the data
-            data.remove(m);
-
-            // Clear the form
-            txtTitle.setText("");
-            txtDirector.setText("");
-            txtDuration.setText("");
-            txtClassification.setText("");
-            txtYear.setText("");
-        }
-
-        // Display movie info
-        private void checkInfoMovie() {
-            // Obtain the selected movie
-            Movie m = lvMovie.getSelectionModel().getSelectedItem();
-
-            txtTitle.setText(m.getTitle());
-            txtDirector.setText(m.getDirector());
-            txtDuration.setText(m.getDuration());
-            txtClassification.setText(m.getClassification());
-            txtYear.setText(m.getYear());
-        }
-
-        // Update selected movie info
-        private void updateMovie() {
-            try {
-                // Obtain the selected movie
-                Movie m = lvMovie.getSelectionModel().getSelectedItem();
-
-                Movie n = new Movie();
-
-                n.setTitle(txtTitle.getText());
-                n.setDirector(txtDirector.getText());
-                n.setDuration(txtDuration.getText());
-                n.setYear(txtYear.getText());
-                n.setClassification(txtClassification.getText());
-
-                // Clear the form
-                txtTitle.setText("");
-                txtDirector.setText("");
-                txtDuration.setText("");
-                txtClassification.setText("");
-                txtYear.setText("");
-
-                data.set(data.indexOf(m), n);
-            } catch (EmptyFieldException e) {
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Textfield empty");
-                alert.setHeaderText("Error while updating movie");
-                alert.setContentText(e.getMessage());
-
-                alert.showAndWait();
-            }*/
         }
     }
 }

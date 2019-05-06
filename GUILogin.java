@@ -186,6 +186,9 @@ public class GUILogin extends Application {
         signUpGrid.add(signUpPane, 0, 0);
         signUpScene = new Scene(signUpGrid);
 
+        // For loading all users
+        AppLogin.loadUsers();
+
         /*
         Add style to the scene
         scene.getStylesheets().add(GUILogin.class.getResource("GUILogin.css").toExternalForm());
