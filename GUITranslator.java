@@ -30,7 +30,7 @@ public class GUITranslator extends Scene {
 
     public static class SignUpPane extends GridPane {
         public SignUpPane() {
-            Text user = new Text("Information Manager");
+            Text user = new Text("Translator");
             getChildren().add(user);
         }
     }

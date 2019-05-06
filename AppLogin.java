@@ -3,18 +3,22 @@ import java.io.IOException;
 import java.io.FileNotFoundException;
 import javafx.scene.control.*;
 
-public abstract class AppCulturalHeritage implements IPersist {
+public abstract class AppLogin implements IPersist {
+    /*
+    Not using this:
+
     private Resource[] resources;
     private int resourceCounter;
     private static User[] users = new User[10];
     private static int userCounter;
+    */
 
     // Sign in
     public static void signIn() {
         try {
-            File userCheck = new File("users/"+GUICulturalHeritage.getUsernameLoginValue()+".bro");
+            File userCheck = new File("users/"+GUILogin.getUsernameLoginValue()+".bro");
 
-            if ((0 == GUICulturalHeritage.getUsernameLoginValue().length()) || (0 == GUICulturalHeritage.getPasswordLoginValue().length())) {
+            if ((0 == GUILogin.getUsernameLoginValue().length()) || (0 == GUILogin.getPasswordLoginValue().length())) {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Error while signing in");
                 alert.setHeaderText("Enter user and password");
@@ -23,24 +27,23 @@ public abstract class AppCulturalHeritage implements IPersist {
                 alert.showAndWait();
 
             } else if (userCheck.exists()){
-                    //Make this a separated string ("storageFiles/+users+.bro")
-                    FileInputStream userFile = new FileInputStream("users/"+GUICulturalHeritage.getUsernameLoginValue()+".bro");
+                    FileInputStream userFile = new FileInputStream("users/"+GUILogin.getUsernameLoginValue()+".bro");
                     ObjectInputStream userRead = new ObjectInputStream(userFile);
 
                     User tempUser = (User) userRead.readObject();
                     userRead.close();
 
-                    if (tempUser.getPassword().equals(GUICulturalHeritage.getPasswordLoginValue())) {
+                    if (tempUser.getPassword().equals(GUILogin.getPasswordLoginValue())) {
                         String userType = tempUser.getUserType();
 
                         if (userType.equals("Manager")) {
-                            GUICulturalHeritage.changeScene(new GUIManager());
+                            GUILogin.changeScene(new GUIManager());
                         } else if (userType.equals("Information Manager")) {
-                            GUICulturalHeritage.changeScene(new GUIInformationManager());
+                            GUILogin.changeScene(new GUIInformationManager());
                         } else if (userType.equals("Translator")) {
-                            GUICulturalHeritage.changeScene(new GUITranslator());
+                            GUILogin.changeScene(new GUITranslator());
                         } else if (userType.equals("Consultant")) {
-                            GUICulturalHeritage.changeScene(new GUIConsultant());
+                            GUILogin.changeScene(new GUIConsultant());
                         }
  
                     } else {
@@ -77,8 +80,8 @@ public abstract class AppCulturalHeritage implements IPersist {
     // Add user in the register window
     public static void addUser() {
         try {
-            File userCheck = new File("users/"+GUICulturalHeritage.getUsernameRegisterValue()+".bro");
-            if ((0 == GUICulturalHeritage.getUsernameRegisterValue().length()) || (0 == GUICulturalHeritage.getPasswordRegisterValue().length())) {
+            File userCheck = new File("users/"+GUILogin.getUsernameRegisterValue()+".bro");
+            if ((0 == GUILogin.getUsernameRegisterValue().length()) || (0 == GUILogin.getPasswordRegisterValue().length())) {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Enter all info");
                 alert.setHeaderText("Enter user and password");
@@ -86,24 +89,24 @@ public abstract class AppCulturalHeritage implements IPersist {
                 alert.showAndWait();
             } else if (!userCheck.exists()) {
                 //Make this a separated string ("storageFiles/+users+.bro")
-                FileOutputStream userFile = new FileOutputStream("users/"+GUICulturalHeritage.getUsernameRegisterValue()+".bro");
+                FileOutputStream userFile = new FileOutputStream("users/"+GUILogin.getUsernameRegisterValue()+".bro");
                 ObjectOutputStream userWrite = new ObjectOutputStream(userFile);
 
                 User newUser = null;
     
-                if (GUICulturalHeritage.getUserTypeRegister().equals("Manager")) {
+                if (GUILogin.getUserTypeRegister().equals("Manager")) {
                     newUser = new Manager();
-                } else if (GUICulturalHeritage.getUserTypeRegister().equals("Information Manager")) {
+                } else if (GUILogin.getUserTypeRegister().equals("Information Manager")) {
                     newUser = new InformationManager();
-                } else if (GUICulturalHeritage.getUserTypeRegister().equals("Translator")) {
+                } else if (GUILogin.getUserTypeRegister().equals("Translator")) {
                     newUser = new Translator();
-                } else if (GUICulturalHeritage.getUserTypeRegister().equals("Consultant")) {
+                } else if (GUILogin.getUserTypeRegister().equals("Consultant")) {
                     newUser = new Consultant();
                 }
     
-                newUser.setUsername(GUICulturalHeritage.getUsernameRegisterValue());
-                newUser.setPassword(GUICulturalHeritage.getPasswordRegisterValue());
-                newUser.setUserType(GUICulturalHeritage.getUserTypeRegister());
+                newUser.setUsername(GUILogin.getUsernameRegisterValue());
+                newUser.setPassword(GUILogin.getPasswordRegisterValue());
+                newUser.setUserType(GUILogin.getUserTypeRegister());
     
                 userWrite.writeObject(newUser);
                 userWrite.close();

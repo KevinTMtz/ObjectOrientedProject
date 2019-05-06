@@ -22,7 +22,7 @@ import javafx.geometry.Pos;
 import javafx.collections.ObservableList;
 import javafx.stage.Stage;
 
-public class GUICulturalHeritage extends Application {
+public class GUILogin extends Application {
     private static Stage newStage;
     Scene signInScene, signUpScene;
     private static TextField txtUserLogin, txtPasswordLogin, txtUserRegister, txtPasswordRegister;
@@ -37,11 +37,16 @@ public class GUICulturalHeritage extends Application {
         /***************************************/
         /*            Sign in pane             */
         /***************************************/
+        GridPane signInGrid = new GridPane();
+        signInGrid.maxHeight(350);
+        signInGrid.setAlignment(Pos.CENTER);
+
         BorderPane signInPane = new BorderPane();
+        signInPane.setMaxHeight(300);
         
         FlowPane signInTitle = new FlowPane();
         signInTitle.setAlignment(Pos.CENTER);
-        signInTitle.setPadding(new Insets(30));
+        signInTitle.setPadding(new Insets(0, 0, 30, 0));
 
         Text signInTitletxt = new Text("Login");
         signInTitletxt.setFont(Font.font("Tahoma", FontWeight.NORMAL, 40));
@@ -84,7 +89,7 @@ public class GUICulturalHeritage extends Application {
         signInControlsPane.getChildren().add(signInButton);
         signInButton.addEventFilter(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
             public void handle (MouseEvent e) {
-                AppCulturalHeritage.signIn();
+                AppLogin.signIn();
             }
         });
         
@@ -98,16 +103,21 @@ public class GUICulturalHeritage extends Application {
         signInControlsPane.setHgap(10);
         signInContentPane.getChildren().add(loginButtonPane);
 
-
+        signInGrid.add(signInPane, 0, 0);
+        signInScene = new Scene(signInGrid);
 
         /***************************************/
         /*            Sign up pane             */
         /***************************************/
+        GridPane signUpGrid = new GridPane();
+        signUpGrid.maxHeight(350);
+        signUpGrid.setAlignment(Pos.CENTER);
+
         BorderPane signUpPane = new BorderPane();
 
         FlowPane signUpTitle = new FlowPane();
         signUpTitle.setAlignment(Pos.CENTER);
-        signUpTitle.setPadding(new Insets(30));
+        signUpTitle.setPadding(new Insets(0, 0, 30, 0));
 
         Text signUpTitletxt = new Text("Sign Up");
         signUpTitletxt.setFont(Font.font("Tahoma", FontWeight.NORMAL, 40));
@@ -159,7 +169,7 @@ public class GUICulturalHeritage extends Application {
         signUpControlsPane.getChildren().add(signUpButton);
         signUpButton.addEventFilter(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
             public void handle (MouseEvent e) {
-                AppCulturalHeritage.addUser();
+                AppLogin.addUser();
             }
         });
         
@@ -170,16 +180,15 @@ public class GUICulturalHeritage extends Application {
         signUpControlsPane.setAlignment(Pos.CENTER);
         signUpControlsPane.setPadding(new Insets(20));
         signUpControlsPane.setVgap(10);
-        signUpControlsPane.setHgap(10);
+        signUpControlsPane.setHgap(15);
         signUpControlsPane.getChildren().add(registerButtonPane);
 
-        
-        signInScene = new Scene(signInPane);
-        signUpScene = new Scene(signUpPane);
+        signUpGrid.add(signUpPane, 0, 0);
+        signUpScene = new Scene(signUpGrid);
 
         /*
         Add style to the scene
-        scene.getStylesheets().add(GUILogin.class.getResource("Application.css").toExternalForm());
+        scene.getStylesheets().add(GUILogin.class.getResource("GUILogin.css").toExternalForm());
         */
         
         newStage.setScene(signInScene);
