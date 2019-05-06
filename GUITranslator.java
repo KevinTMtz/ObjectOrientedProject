@@ -117,7 +117,7 @@ public class GUITranslator extends Scene {
                 txtPath=new Text("-");
                 
                 bttnTranslate = new Button("Translate");
-                bttnTranslate.setOnAction(e -> GUILogin.changeScene(new GUITransl()));
+                bttnTranslate.setOnAction(e -> GUILogin.changeScene(new GUITranslatingResource()));
 
                 lblClass.setFont(Font.font("Verdana", FontWeight.BOLD, 10));
                 lvResource.addEventFilter(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
