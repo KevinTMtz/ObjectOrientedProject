@@ -2,7 +2,9 @@ import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.stage.Stage;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.TextField;
@@ -31,11 +33,19 @@ import java.io.File;
 import java.io.IOException;
 
 public class GUITranslatingResource extends Scene{
-    public GUITranslator() {
-        super(new SignUpPane());
+
+    /*private
+    private static VBox leftPane, rightPane;
+    */
+
+    public GUITranslatingResource() {
+        super(new Translating());
     }
 
-    public static class Translate extends GridPane{
-
+    public static class Translating extends HBox{
+        public  Translating() {
+            leftPane = new VBox();
+            rightPane = new VBox();
+        }
     }
 }
