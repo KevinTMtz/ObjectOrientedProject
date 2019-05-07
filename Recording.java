@@ -1,5 +1,5 @@
 import java.io.Serializable;
-public class Recording extends Resource implements Serializable{
+public class Recording extends Recurso implements Serializable{
     private String duration;
     private String pathOfFile;
 
