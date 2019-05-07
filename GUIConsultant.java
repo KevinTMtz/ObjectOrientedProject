@@ -179,6 +179,9 @@ public class GUIConsultant extends Scene {
             infoPane.getChildren().remove(lblPath);
             infoPane.getChildren().remove(txtPath);
             infoPane.getChildren().remove(lblClass);
+            infoPane.getChildren().remove(bttnconsult);
+
+            infoPane.add(bttnconsult, 1, 11);
 
             if(lvResource.getSelectionModel().getSelectedItem() instanceof Textual){
                 System.out.println("The selected resource is: textual");
@@ -248,7 +251,7 @@ public class GUIConsultant extends Scene {
             txtPath.setText(r.getPathOfFile());
         }
         private void beginConsult(){
-            GUILogin.changeScene(new GUITranslatingResource());
+            GUILogin.changeScene(new GUIConsultorResource());
         }
     }
 }

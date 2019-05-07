@@ -51,7 +51,7 @@ public class GUIConsultorResource extends Scene{
 
     public static class SignUpPane extends GridPane{
         public SignUpPane() {
-            
+            this.setAlignment(Pos.CENTER);
             //select the resource to translate
             resources = new ArrayList<Recurso>();
             readData();
@@ -77,13 +77,17 @@ public class GUIConsultorResource extends Scene{
             lblOriginal.setTextAlignment(TextAlignment.JUSTIFY);
             lblOriginal.setTextOrigin(VPos.TOP);
             txtTranslation = new Text(r.getTranslatedConent());
+            txtTranslation.setWrappingWidth(300);
             
             txtTranslation.prefHeight(500);
             txtTranslation.prefWidth(300);
+            lblOriginal.prefHeight(500);
+            lblOriginal.prefWidth(300);
 
             rightPane = new VBox();
             rightPane.getChildren().add(txtTranslation);
-            rightPane.getChildren().add(controls);
+            mainPane.setBottom(controls);
+            controls.setAlignment(Pos.CENTER);
             leftPane = new VBox();
             leftPane.getChildren().add(lblOriginal);
             mainPane.setRight(rightPane);
