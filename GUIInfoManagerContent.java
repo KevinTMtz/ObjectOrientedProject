@@ -81,11 +81,13 @@ public class GUIInfoManagerContent extends Scene {
             controlsPane.setVgap(10);
             controlsPane.setHgap(10);
 
-            setInfo();
+            //setInfo();
         }
 
-        public void setInfo() {
+        /*public void setInfo() {
+            String content = AppLogin.getArraylistResource().get(GUIInformationManager.getSelectedIndex()).getTextualContent();
 
-        }
+            txtContent.setText(content);
+        }*/
     }
 }
