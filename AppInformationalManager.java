@@ -1,5 +1,5 @@
 import java.util.ArrayList;
-public abstract class AppInformationalManager implements IPersist {
+public abstract class AppInformationalManager {
     private static ArrayList<Resource> resources = AppLogin.getArraylistResource();
 
         public void addToArray(Resource r) throws SameResourceException{
@@ -17,6 +17,7 @@ public abstract class AppInformationalManager implements IPersist {
 
                 //Add it to the array list
                 resources.add(r);
+                //Send it back to AppLogin
                 
             } else throw new SameResourceException("You already add this resource");
         }
