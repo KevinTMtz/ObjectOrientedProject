@@ -157,7 +157,17 @@ public class GUITranslator extends Scene {
 
         private void beginTranslate(){
             try{
-                lvResource.getSelectionModel().getSelectedItem().setCurrentStatus("translating");
+                if(lvResource.getSelectionModel().getSelectedItem().getCurrentStatus().equals("to amend")){
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("Translation");
+                    alert.setHeaderText("Error while translating");
+                    alert.setContentText("Cannot translate a resource with \"to amend\" status");
+                    alert.showAndWait();
+                }
+                else{
+                    lvResource.getSelectionModel().getSelectedItem().setCurrentStatus("translating");
+                    GUILogin.changeScene(new GUITranslatingResource());
+                }
             } catch (EmptyFieldException e){
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Title cannot be null");
@@ -165,7 +175,6 @@ public class GUITranslator extends Scene {
                 alert.setContentText(e.getMessage());
                 alert.showAndWait();
             }
-            GUILogin.changeScene(new GUITranslatingResource());
         }
 
 
