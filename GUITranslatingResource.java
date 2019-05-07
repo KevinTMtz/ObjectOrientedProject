@@ -54,13 +54,15 @@ public class GUITranslatingResource extends Scene{
             //select the resource to translate
             resources = new ArrayList<Recurso>();
             readData();
-            for(int i = 0; i<resources.size(); i++)
+            for(int i = 0; i<resources.size(); i++){
                 if(resources.get(i).getTranslating()){
                     r = resources.get(i);
                     break;
                 }
-                
+            }    
             mainPane = new BorderPane();
+            mainPane.setPrefWidth(900);
+            mainPane.setPrefHeight(620);
             getChildren().add(mainPane);
             controls = new HBox();
 
@@ -114,8 +116,8 @@ public class GUITranslatingResource extends Scene{
             leftPane.getChildren().add(lblOriginal);
             mainPane.setRight(rightPane);
             mainPane.setLeft(leftPane);
-            mainPane.setMargin(rightPane, new Insets(10, 10, 10, 0));
-            mainPane.setMargin(leftPane, new Insets(10, 0, 10, 10));
+            mainPane.setMargin(rightPane, new Insets(20, 50, 10, 0));
+            mainPane.setMargin(leftPane, new Insets(30, 0, 10, 50));
             
         }
         private void save(){

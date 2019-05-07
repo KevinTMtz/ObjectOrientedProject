@@ -58,6 +58,8 @@ public class GUITranslator extends Scene {
 
             mainPane= new BorderPane();
             getChildren().add(mainPane);
+            mainPane.setPrefWidth(900);
+            mainPane.setPrefHeight(620);
             leftPane= new FlowPane();
             rightPane= new FlowPane();
             mainPane.setLeft(leftPane);
