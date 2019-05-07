@@ -75,7 +75,7 @@ public class GUIInformationManager extends Scene {
             listPane.add(lvResource, 0, 1);
             leftPane.getChildren().add(listPane);
             lvResource.setMaxWidth(220);
-            readData();
+            //readData();
 
             //RightPane-->Right Side and the info
             infoPane=new GridPane();
@@ -323,7 +323,6 @@ public class GUIInformationManager extends Scene {
                         // Clear the Form
                         newResource();
                         //saveData();
-                        lvResource.getSelectionModel().clearSelection();
                 }
                 
             }catch(EmptyFieldException efe){
@@ -368,6 +367,9 @@ public class GUIInformationManager extends Scene {
             }
         }
         private void updateResource(){
+            addResource();
+            deleteResource();
+            /*
             try {
                 addResource();
                 int index=lvResource.getSelectionModel().getSelectedIndex();
@@ -386,27 +388,7 @@ public class GUIInformationManager extends Scene {
                 alert.setHeaderText("Error while deleting a resource");
                 alert.setContentText("You have not selected a resource");
                 alert.showAndWait();
-            }
-            /*
-            try {
-                if(lvResource.getSelectionModel().getSelectedIndex()!=-1){
-                    //Add it again
-                    addResource();
-                    //Check which type of resource it is and delete it
-                    resources.remove(lvResource.getSelectionModel().getSelectedIndex());
-                    boolean deleted=false;
-                    if(lvResource.getSelectionModel().getSelectedItem() instanceof Recording && !deleted){
-                        System.out.println("It is a recording");
-                        deleted=true;
-                        Recording r=(Recording)lvResource.getSelectionModel().getSelectedItem();
-                        data.remove(r);
-                    }
-                    if(lvResource.getSelectionModel().getSelectedItem() instanceof Textual && !deleted){
-                        deleted=true;
-                        System.out.println("It is a textual");
-                        Textual t=(Textual)lvResource.getSelectionModel().getSelectedItem();
-                        data.remove(t);
-                    }*/
+            }*/
         }
         private void selectResource() {
             //Remove previous nodes
