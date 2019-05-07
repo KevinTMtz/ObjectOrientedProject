@@ -31,6 +31,7 @@ import java.io.FileNotFoundException;
 import java.io.*;
 import java.io.File;
 import java.io.IOException;
+import javafx.geometry.VPos;
 
 public class GUITranslatingResource extends Scene{
 
@@ -38,7 +39,7 @@ public class GUITranslatingResource extends Scene{
     private static Recurso r;
     private static BorderPane mainPane;
     private static VBox leftPane, rightPane;
-    private static Label lblOriginal;
+    private static Text lblOriginal;
     private static TextArea txtTranslation;
     private static HBox controls;
     private static Button bttnSave, bttnToAmend;
@@ -88,14 +89,17 @@ public class GUITranslatingResource extends Scene{
                 System.out.println("Cannot add an empty content");
             }
 
-            lblOriginal = new Label(r.getTextualContent());
-            lblOriginal.setWrapText(true);
+            lblOriginal = new Text(0,0,r.getTextualContent());
+            lblOriginal.setWrappingWidth(300);
             lblOriginal.setTextAlignment(TextAlignment.JUSTIFY);
+            lblOriginal.setTextOrigin(VPos.TOP);
             txtTranslation = new TextArea(r.getTranslatedConent());
             txtTranslation.setWrapText(true);
             
+            /*
             lblOriginal.setPrefHeight(500);
             lblOriginal.setPrefWidth(300);
+            */
             txtTranslation.setPrefHeight(500);
             txtTranslation.setPrefWidth(300);
 
