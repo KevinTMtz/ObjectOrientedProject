@@ -31,9 +31,9 @@ import java.io.File;
 import java.io.IOException;
 
 public class GUIInformationManager extends Scene {
-    private static ObservableList<Resource> data;
-    private static ListView<Resource> lvResource;
-    private static ArrayList<Resource> resources = new ArrayList<Resource>();
+    private static ObservableList<Recurso> data;
+    private static ListView<Recurso> lvResource;
+    private static ArrayList<Recurso> resources = new ArrayList<Recurso>();
     private static TextField txtTitle, txtLanguage, txtRegion, txtResponsible;
     private static Text txtStatus;
     private static Label lblInfo, lblTitle, lblLanguage, lblRegion, lblResponsible, lblStatus;
@@ -75,7 +75,7 @@ public class GUIInformationManager extends Scene {
             listPane.add(lvResource, 0, 1);
             leftPane.getChildren().add(listPane);
             lvResource.setMaxWidth(220);
-            //readData();
+            readData();
 
             //RightPane-->Right Side and the info
             infoPane=new GridPane();
@@ -516,34 +516,11 @@ public class GUIInformationManager extends Scene {
                 System.out.println(ioe.getMessage());
             }            
         }*/
-        /*private void readData(){
-            try {
-                FileInputStream fis = new FileInputStream("resources/resources.list");
-                ObjectInputStream ois = new ObjectInputStream(fis);
-                System.out.println("Readed");
-                resources = (ArrayList) ois.readObject();
-                //System.out.println("Size: " + resources.size());
-                Recording r=null;
-                Textual t=null;
-                // Add the existing data
-                for (int i = 0; i < resources.size(); i++) {
-                    if(resources.get(i) instanceof Recording) {
-                        r=(Recording) resources.get(i);
-                        data.add(r);
-                    }
-                    if(resources.get(i) instanceof Textual) {
-                        t=(Textual) resources.get(i);
-                        data.add(t);
-                    }
-                    saveData();
-                }
-                ois.close();
-            } catch (IOException ioe) {
-                System.out.println(ioe.getMessage());
-            } catch(ClassNotFoundException cnfe){
-                System.out.println(cnfe.getMessage());
+        private void readData(){
+            for(int i=0; i<AppLogin.getArraylistResource().size(); i++){
+                data.add(AppLogin.getArraylistResource().get(i));
             }
-        }*/
+        }
         
     }
 }
