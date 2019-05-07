@@ -31,9 +31,9 @@ import java.io.File;
 import java.io.IOException;
 
 public class GUITranslator extends Scene {
-    private static ObservableList<Resource> data;
-    private static ListView<Resource> lvResource;
-    private static ArrayList<Resource> resources = new ArrayList<Resource>();
+    private static ObservableList<Recurso> data;
+    private static ListView<Recurso> lvResource;
+    private static ArrayList<Recurso> resources = new ArrayList<Recurso>();
     private static Text txtTitle, txtLanguage, txtRegion, txtResponsible;
     private static Label lblInfo, lblTitle, lblLanguage, lblRegion, lblResponsible, lblClass;
     private static Text txtPages, txtWords;
@@ -154,7 +154,7 @@ public class GUITranslator extends Scene {
             
             rightPane.getChildren().add(infoPane);
         }
-        private Resource selectResource() {
+        private Recurso selectResource() {
             try{
                 if(lvResource.getSelectionModel().getSelectedIndex()!=-1){
                     return lvResource.getSelectionModel().getSelectedItem();
@@ -201,7 +201,7 @@ public class GUITranslator extends Scene {
         }
         private void saveData(){
             // Create the arraylist
-            ArrayList<Resource> temp = new ArrayList<>();
+            ArrayList<Recurso> temp = new ArrayList<>();
             temp = resources;
             // Add the resources
             try {
