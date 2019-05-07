@@ -75,8 +75,7 @@ public class GUIInformationManager extends Scene {
             mainPane.setTop(title);
             //ListPane-->Left Side and the list
             listPane=new GridPane();
-            Text user = new Text("Information Manager ");
-            listPane.add(user, 0, 0);
+            
             //getChildren().add(user);
             data = FXCollections.observableArrayList();
             lvResource = new ListView<>(data);

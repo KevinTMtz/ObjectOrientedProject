@@ -132,6 +132,11 @@ public class GUITranslator extends Scene {
                 
                 bttnTranslate = new Button("Translate");
                 bttnTranslate.setOnAction(e -> beginTranslate());
+                
+                Button bttnLogOut=new Button("Log out");
+                infoPane.add(bttnLogOut, 1, 15);
+                bttnLogOut.setAlignment(Pos.BOTTOM_RIGHT);
+                bttnLogOut.setOnAction(e -> GUILogin.backLogin());
 
                 lblClass.setFont(Font.font("Verdana", FontWeight.BOLD, 10));
                 lvResource.addEventFilter(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
