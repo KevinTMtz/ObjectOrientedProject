@@ -186,30 +186,34 @@ public class GUIManager extends Scene {
         }
 
         public void updateUser() {
-            ArrayList<User> tempArrayList = AppLogin.getArraylistUser();
+            try {
+                ArrayList<User> tempArrayList = AppLogin.getArraylistUser();
 
-            User newUser = lvUser.getSelectionModel().getSelectedItem();
-            int userIndex = lvUser.getSelectionModel().getSelectedIndex();
-
-            User updatedUser = null;
-            
-            if (((String) typeOfUser.getValue()).equals("Manager")) {
-                newUser = new Manager();
-            } else if (((String) typeOfUser.getValue()).equals("Information Manager")) {
-                newUser = new InformationManager();
-            } else if (((String) typeOfUser.getValue()).equals("Translator")) {
-                newUser = new Translator();
-            } else if (((String) typeOfUser.getValue()).equals("Consultant")) {
-                newUser = new Consultant();
-            }
-
-            newUser.setUsername(txtUsername.getText());
-            newUser.setPassword(txtPassword.getText());
-            newUser.setUserType((String) typeOfUser.getValue());
-
-            data.set(userIndex, newUser);
-            tempArrayList.set(userIndex, newUser);
-            AppLogin.setArraylistUser(tempArrayList);
+                User newUser = lvUser.getSelectionModel().getSelectedItem();
+                int userIndex = lvUser.getSelectionModel().getSelectedIndex();
+    
+                User updatedUser = null;
+                
+                if (((String) typeOfUser.getValue()).equals("Manager")) {
+                    newUser = new Manager();
+                } else if (((String) typeOfUser.getValue()).equals("Information Manager")) {
+                    newUser = new InformationManager();
+                } else if (((String) typeOfUser.getValue()).equals("Translator")) {
+                    newUser = new Translator();
+                } else if (((String) typeOfUser.getValue()).equals("Consultant")) {
+                    newUser = new Consultant();
+                }
+    
+                newUser.setUsername(txtUsername.getText());
+                newUser.setPassword(txtPassword.getText());
+                newUser.setUserType((String) typeOfUser.getValue());
+    
+                data.set(userIndex, newUser);
+                tempArrayList.set(userIndex, newUser);
+                AppLogin.setArraylistUser(tempArrayList);
+            } catch (EmptyFieldException efe) {
+                System.out.println(efe.getMessage());
+            } 
         }
     }
 }
