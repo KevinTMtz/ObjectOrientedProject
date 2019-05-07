@@ -204,22 +204,19 @@ public class GUIManager extends Scene {
         public void updateUser() {
             try {
                 ArrayList<User> tempArrayList = AppLogin.getArraylistUser();
+                User u = lvUser.getSelectionModel().getSelectedItem();
 
-                Boolean userCheck = false;
+                boolean userCheck = false;
+                int userIndexTemp = -1;
                 
                 for (int i=0; i<tempArrayList.size(); i++) {
-                    System.out.println(i);
                     if ((tempArrayList.get(i).getUsername()).equals(txtUsername.getText())) {
                         userCheck = true;
+                        userIndexTemp = i;
                     }
                 }
                 
-                if (userCheck) {
-                    Alert alert = new Alert(Alert.AlertType.ERROR);
-                    alert.setTitle("User not available");
-                    alert.setHeaderText("This username, already exist");
-                    alert.showAndWait();
-                } else {
+                if (((tempArrayList.get(userIndexTemp).getUsername()).equals(u.getUsername())) || (!userCheck)) {
                     User newUser = lvUser.getSelectionModel().getSelectedItem();
                     int userIndex = lvUser.getSelectionModel().getSelectedIndex();
     
@@ -242,6 +239,12 @@ public class GUIManager extends Scene {
                     data.set(userIndex, newUser);
                     tempArrayList.set(userIndex, newUser);
                     AppLogin.setArraylistUser(tempArrayList);
+
+                } else if (userCheck) {
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("User not available");
+                    alert.setHeaderText("This username, already exist");
+                    alert.showAndWait();
                 }
 
             } catch (EmptyFieldException efe) {
