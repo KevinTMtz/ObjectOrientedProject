@@ -1,7 +1,8 @@
 import java.io.Serializable;
 public abstract class Recurso implements Serializable{
+    //Cambiar a que esto se haga en Info manager
     private String textualContent = "";
-    private String translatedContent;
+    private String translatedContent = "";
     private String title;
     private String language;
     private String currentStatus;

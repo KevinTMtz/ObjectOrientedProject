@@ -34,43 +34,43 @@ import java.io.IOException;
 
 public class GUITranslatingResource extends Scene{
 
-    private static FlowPane leftPane, rightPane;
-    private static HBox controls;
-    private static TextField txtTranslation;
-    private static Label lblTitle, lblOriginal;
-    private static Button bttnSave, bttnToAmend;
-    private static BorderPane mainPane;
+    private static ArrayList<Recurso> resources;
     private static Recurso r;
-    private static ArrayList<Recurso> data;
-
+    private static BorderPane mainPane;
+    private static VBox leftPane, rightPane;
+    private static Text lblOriginal;
+    private static TextField txtTranslation;
+    private static HBox controls;
+    private static Button bttnSave, bttnToAmend;
+    
     public GUITranslatingResource() {
         super(new SignUpPane());
     }
 
     public static class SignUpPane extends GridPane{
         public SignUpPane() {
+            
+            //select the resource to translate
+            resources = new ArrayList<Recurso>();
             readData();
-            for(int i = 0; i<data.size(); i++)
-                if(data.get(i).getCurrentStatus().equals("translating")){
-                    r = data.get(i);
+            for(int i = 0; i<resources.size(); i++)
+                if(resources.get(i).getCurrentStatus().equals("translating")){
+                    r = resources.get(i);
                     break;
                 }
-
-
-            mainPane= new BorderPane();
+                
+            mainPane = new BorderPane();
             getChildren().add(mainPane);
-            leftPane= new FlowPane();
-            rightPane= new FlowPane();
-            mainPane.setLeft(leftPane);
-            mainPane.setRight(rightPane);
-            mainPane.setMargin(leftPane, new Insets(10, 0, 10, 10));
-            mainPane.setMargin(rightPane, new Insets(10, 10, 10, 0));
+            controls = new HBox();
 
             bttnSave = new Button("Save");
             controls.getChildren().add(bttnSave);
             bttnSave.addEventFilter(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>(){
                 public void handle(MouseEvent e) {
                     save();
+                    /*
+                    Arreglar cuando da OutOfMemory
+                    */
                 }
             });
 
@@ -81,31 +81,47 @@ public class GUITranslatingResource extends Scene{
                     amend();
                 }
             });
-            
-            lblTitle = new Label(r.getTitle());
-            lblOriginal = new Label(r.getTextualContent());
 
+            try{
+                r.setTextualContent("[This is the textual content]");
+            } catch(EmptyFieldException e){
+                System.out.println("Cannot add an empty content");
+            }
+
+            lblOriginal = new Text(r.getTextualContent());
             txtTranslation = new TextField(r.getTranslatedConent());
-            controls = new HBox(bttnSave);
-
-            lblTitle.setPrefWidth(100);
-            lblOriginal.setPrefWidth(100);
+            
+            /*
             lblOriginal.setPrefHeight(500);
+            lblOriginal.setPrefWidth(500);
+            */
+            txtTranslation.setPrefHeight(500);
+            txtTranslation.setPrefWidth(500);
+
+            rightPane = new VBox();
+            rightPane.getChildren().add(txtTranslation);
+            rightPane.getChildren().add(controls);
+            leftPane = new VBox();
+            leftPane.getChildren().add(lblOriginal);
+            mainPane.setRight(rightPane);
+            mainPane.setLeft(leftPane);
+            mainPane.setMargin(rightPane, new Insets(10, 10, 10, 0));
+            mainPane.setMargin(leftPane, new Insets(10, 0, 10, 10));
             
         }
         private void save(){
-            ArrayList<Recurso> temporalArray = data;
-            data.clear();
+            ArrayList<Recurso> temporalArray = resources;
+            resources.clear();
             r.setTranslatedContent(txtTranslation.getText());
-            data.add(r);
+            resources.add(r);
             for(int i = 0; i<temporalArray.size(); i++)
-                data.add(temporalArray.get(i));
-
+                resources.add(temporalArray.get(i));
+            
             try {
                 FileOutputStream userResource = new FileOutputStream("build/arrayListResources");
                 ObjectOutputStream resourceWrite = new ObjectOutputStream(userResource);
                 
-                resourceWrite.writeObject(data);
+                resourceWrite.writeObject(resources);
                 resourceWrite.close();
             } catch (IOException ioe) {
                 System.out.println(ioe.getMessage());
@@ -127,7 +143,7 @@ public class GUITranslatingResource extends Scene{
         }
         private void readData(){
             for(int i=0; i<AppLogin.getArraylistResource().size(); i++){
-                data.add(AppLogin.getArraylistResource().get(i));
+                resources.add(AppLogin.getArraylistResource().get(i));
             }
         }
     }
