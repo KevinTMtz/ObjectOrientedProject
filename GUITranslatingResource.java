@@ -39,7 +39,7 @@ public class GUITranslatingResource extends Scene{
     private static BorderPane mainPane;
     private static VBox leftPane, rightPane;
     private static Label lblOriginal;
-    private static TextField txtTranslation;
+    private static TextArea txtTranslation;
     private static HBox controls;
     private static Button bttnSave, bttnToAmend;
     
@@ -89,7 +89,8 @@ public class GUITranslatingResource extends Scene{
             }
 
             lblOriginal = new Label(r.getTextualContent());
-            txtTranslation = new TextField(r.getTranslatedConent());
+            txtTranslation = new TextArea(r.getTranslatedConent());
+            txtTranslation.setWrapText(true);
             
             lblOriginal.setPrefHeight(500);
             lblOriginal.setPrefWidth(300);
