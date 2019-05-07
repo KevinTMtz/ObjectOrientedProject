@@ -154,9 +154,53 @@ public class GUITranslator extends Scene {
             
             rightPane.getChildren().add(infoPane);
         }
+
+
         private void selectResource() {
             try{
                 if(lvResource.getSelectionModel().getSelectedIndex()!=-1){
+                    //Remove previous nodes
+                    setResource(new Recording());
+                    setResource(new Textual());
+                    infoPane.getChildren().remove(lblPages);
+                    infoPane.getChildren().remove(txtPages);
+                    infoPane.getChildren().remove(lblWords);
+                    infoPane.getChildren().remove(txtWords);
+                    infoPane.getChildren().remove(lblDuration);
+                    infoPane.getChildren().remove(txtDuration);
+                    infoPane.getChildren().remove(lblPath);
+                    infoPane.getChildren().remove(txtPath);
+                    infoPane.getChildren().remove(lblStatus);
+                    infoPane.getChildren().remove(txtStatus);
+                    infoPane.getChildren().remove(bttnContent);
+
+                    //Display the staus (Hide it if nothing is selected)
+                    infoPane.add(lblStatus, 0, 10);
+                    txtStatus.setText(lvResource.getSelectionModel().getSelectedItem().getCurrentStatus().toUpperCase());
+                    infoPane.add(txtStatus, 1, 10);
+
+                    if(lvResource.getSelectionModel().getSelectedItem() instanceof Textual){
+                        System.out.println("The selected resource is: textual");
+                        Textual t=(Textual) lvResource.getSelectionModel().getSelectedItem();
+                        setResource(t);
+                        infoPane.add(lblPages, 0, 5);
+                        infoPane.add(txtPages, 1, 5);
+                        infoPane.add(lblWords, 0, 6);
+                        infoPane.add(txtWords, 1, 6);
+                        textual.setSelected(true);
+                        recording.setSelected(false);
+                    }
+                    if(lvResource.getSelectionModel().getSelectedItem() instanceof Recording){
+                        System.out.println("The selected resource is: recording");
+                        Recording r=(Recording) lvResource.getSelectionModel().getSelectedItem();
+                        setResource(r);
+                        infoPane.add(lblDuration, 0, 5);
+                        infoPane.add(txtDuration, 1, 5);
+                        infoPane.add(lblPath, 0, 6);
+                        infoPane.add(txtPath, 1, 6);
+                        textual.setSelected(false);
+                        recording.setSelected(true);
+                    }
                 }
                 else throw new NullPointerException();
             } catch(NullPointerException npe){
@@ -166,8 +210,8 @@ public class GUITranslator extends Scene {
                 alert.setContentText("You have not selected a resource");
                 alert.showAndWait();
             }
-            
         }
+
         private void readData(){
             for(int i=0; i<AppLogin.getArraylistResource().size(); i++){
                 data.add(AppLogin.getArraylistResource().get(i));
