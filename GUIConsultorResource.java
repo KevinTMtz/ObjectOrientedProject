@@ -98,6 +98,7 @@ public class GUIConsultorResource extends Scene{
             }
         }
         private void goBack(){
+            GUILogin.changeScene(new GUIConsultant());
         }
     }
 }
