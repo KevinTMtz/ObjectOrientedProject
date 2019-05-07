@@ -155,6 +155,7 @@ public class GUITranslatingResource extends Scene{
             }
         }
         private void goBack(){
+            GUILogin.changeScene(new GUITranslator());
         }
     }
 }
