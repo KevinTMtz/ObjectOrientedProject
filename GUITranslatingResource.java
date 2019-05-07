@@ -37,24 +37,35 @@ public class GUITranslatingResource extends Scene{
     private static VBox leftPane, rightPane;
     private static HBox controls;
     private static TextField txtOriginal, txtTranslation;
+    private static Label lblTitle;
     private static Button bttnSave, bttnSaveAndQuit;
+    private static BorderPane mainPane;
 
-    public GUITranslatingResource() {
-        super(new Translating());
+    public GUITranslatingResource(Resource r) {
+        super(new Translating(r));
     }
+
+    public static class Translating extends GridPane{
+        public  Translating(Resource r) {
+
+            mainPane= new BorderPane();
+            getChildren().add(mainPane);
+            controls = new HBox(bttnSave, bttnSaveAndQuit);
+            leftPane = new VBox(lblTitle, txtOriginal);
+            rightPane = new VBox(txtTranslation, controls);
+            mainPane.setLeft(leftPane);
+            mainPane.setRight(rightPane);
+            mainPane.setMargin(leftPane, new Insets(10, 0, 10, 10));
+            mainPane.setMargin(rightPane, new Insets(10, 10, 10, 0));
+
+            //Recibe resource
     
-    public static class Translating extends HBox{
-        public  Translating() {
-    
-            txtOriginal = new TextField();
-            txtTranslation = new TextField();
+            txtOriginal = new TextField(r.getTextualContent());
+            txtTranslation = new TextField(/*Resource salvado*/);
     
             bttnSave = new Button("Save");
             bttnSaveAndQuit = new Button("Save and quit");
-    
-            controls = new HBox(bttnSave, bttnSaveAndQuit);
-            leftPane = new VBox(txtOriginal);
-            rightPane = new VBox(txtTranslation, controls);
+
         }
     }
 }
