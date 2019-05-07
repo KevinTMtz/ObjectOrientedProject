@@ -73,8 +73,6 @@ public class GUIConsultant extends Scene {
             mainPane.setTop(title);
             //ListPane-->Left Side and the list
             listPane=new GridPane();
-            Text user = new Text("Consultant 3");
-            listPane.add(user, 0, 0);
             //getChildren().add(user);
             data = FXCollections.observableArrayList();
             lvResource = new ListView<>(data);
@@ -162,7 +160,6 @@ public class GUIConsultant extends Scene {
                 infoPane.add(bttnLogOut, 1, 15);
                 bttnLogOut.setAlignment(Pos.BOTTOM_RIGHT);
                 bttnLogOut.setOnAction(e -> GUILogin.backLogin());
-                bttnLogOut.setAlignment(Pos.CENTER_LEFT);
 
                 //Escribe tu código a partir de aquií. Agrega los botones al rightPane
             
