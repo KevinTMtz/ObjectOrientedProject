@@ -114,7 +114,7 @@ public class GUIManager extends Scene {
                 }
             });
 
-            Button buttonSave = new Button("Save");
+            Button buttonSave = new Button("Update");
             controlsPane.getChildren().add(buttonSave);
             buttonSave.addEventFilter(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
                 public void handle (MouseEvent e) {
@@ -153,7 +153,6 @@ public class GUIManager extends Scene {
                 Boolean userCheck = false;
                 
                 for (int i=0; i<tempArrayList.size(); i++) {
-                    System.out.println(i);
                     if ((tempArrayList.get(i).getUsername()).equals(txtUsername.getText())) {
                         userCheck = true;
                     }
@@ -186,70 +185,99 @@ public class GUIManager extends Scene {
                     AppLogin.setArraylistUser(tempArrayList);
                 }
             } catch (EmptyFieldException efe) {
-                System.out.println(efe.getMessage());
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Textfield empty");
+                alert.setHeaderText("Error while adding new user");
+                alert.setContentText("Enter all info");
+
+                alert.showAndWait();
             }
         }
 
         public void deleteUser() {
-            ArrayList<User> tempArrayList = AppLogin.getArraylistUser();
-
-            User u = lvUser.getSelectionModel().getSelectedItem();
-            int userIndex = lvUser.getSelectionModel().getSelectedIndex();
-
-            data.remove(u);
-            tempArrayList.remove(userIndex);
-            AppLogin.setArraylistUser(tempArrayList);
+            try {
+                if(lvUser.getSelectionModel().getSelectedIndex()!=-1) {
+                    ArrayList<User> tempArrayList = AppLogin.getArraylistUser();
+    
+                    User u = lvUser.getSelectionModel().getSelectedItem();
+                    int userIndex = lvUser.getSelectionModel().getSelectedIndex();
+        
+                    data.remove(u);
+                    tempArrayList.remove(userIndex);
+                    AppLogin.setArraylistUser(tempArrayList);
+                } else {
+                    throw new NullPointerException();
+                }
+            } catch (NullPointerException npe) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error deleting user");
+                alert.setHeaderText("Error while deleting user");
+                alert.setContentText("First select a user");
+    
+                alert.showAndWait();
+            }
         }
 
         public void updateUser() {
             try {
-                ArrayList<User> tempArrayList = AppLogin.getArraylistUser();
-                User u = lvUser.getSelectionModel().getSelectedItem();
-
-                boolean userCheck = false;
-                int userIndexTemp = -1;
-                
-                for (int i=0; i<tempArrayList.size(); i++) {
-                    if ((tempArrayList.get(i).getUsername()).equals(txtUsername.getText())) {
-                        userCheck = true;
-                        userIndexTemp = i;
-                    }
-                }
-                
-                if (((tempArrayList.get(userIndexTemp).getUsername()).equals(u.getUsername())) || (!userCheck)) {
-                    User newUser = lvUser.getSelectionModel().getSelectedItem();
-                    int userIndex = lvUser.getSelectionModel().getSelectedIndex();
+                if(lvUser.getSelectionModel().getSelectedIndex()!=-1) {
+                    ArrayList<User> tempArrayList = AppLogin.getArraylistUser();
+                    User u = lvUser.getSelectionModel().getSelectedItem();
     
-                    User updatedUser = null;
+                    boolean userCheck = false;
+                    int userIndexTemp = -1;
                     
-                    if (((String) typeOfUser.getValue()).equals("Manager")) {
-                        newUser = new Manager();
-                    } else if (((String) typeOfUser.getValue()).equals("Information Manager")) {
-                        newUser = new InformationManager();
-                    } else if (((String) typeOfUser.getValue()).equals("Translator")) {
-                        newUser = new Translator();
-                    } else if (((String) typeOfUser.getValue()).equals("Consultant")) {
-                        newUser = new Consultant();
+                    for (int i=0; i<tempArrayList.size(); i++) {
+                        if ((tempArrayList.get(i).getUsername()).equals(txtUsername.getText())) {
+                            userCheck = true;
+                            userIndexTemp = i;
+                        }
                     }
+                    
+                    if (((tempArrayList.get(userIndexTemp).getUsername()).equals(u.getUsername())) || (!userCheck)) {
+                        User newUser = lvUser.getSelectionModel().getSelectedItem();
+                        int userIndex = lvUser.getSelectionModel().getSelectedIndex();
         
-                    newUser.setUsername(txtUsername.getText());
-                    newUser.setPassword(txtPassword.getText());
-                    newUser.setUserType((String) typeOfUser.getValue());
-        
-                    data.set(userIndex, newUser);
-                    tempArrayList.set(userIndex, newUser);
-                    AppLogin.setArraylistUser(tempArrayList);
-
-                } else if (userCheck) {
-                    Alert alert = new Alert(Alert.AlertType.ERROR);
-                    alert.setTitle("User not available");
-                    alert.setHeaderText("This username, already exist");
-                    alert.showAndWait();
+                        User updatedUser = null;
+                        
+                        if (((String) typeOfUser.getValue()).equals("Manager")) {
+                            newUser = new Manager();
+                        } else if (((String) typeOfUser.getValue()).equals("Information Manager")) {
+                            newUser = new InformationManager();
+                        } else if (((String) typeOfUser.getValue()).equals("Translator")) {
+                            newUser = new Translator();
+                        } else if (((String) typeOfUser.getValue()).equals("Consultant")) {
+                            newUser = new Consultant();
+                        }
+            
+                        newUser.setUsername(txtUsername.getText());
+                        newUser.setPassword(txtPassword.getText());
+                        newUser.setUserType((String) typeOfUser.getValue());
+            
+                        data.set(userIndex, newUser);
+                        tempArrayList.set(userIndex, newUser);
+                        AppLogin.setArraylistUser(tempArrayList);
+    
+                    } else if (userCheck) {
+                        Alert alert = new Alert(Alert.AlertType.ERROR);
+                        alert.setTitle("User not available");
+                        alert.setHeaderText("This username, already exist");
+                        alert.showAndWait();
+                    }
+                } else {
+                    throw new NullPointerException();
                 }
 
             } catch (EmptyFieldException efe) {
                 System.out.println(efe.getMessage());
-            } 
+            } catch (NullPointerException npe) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error updating user");
+                alert.setHeaderText("Error while updating user");
+                alert.setContentText("First select a user");
+    
+                alert.showAndWait();
+            }
         }
     }
 }
