@@ -1,12 +1,14 @@
 import java.io.Serializable;
 public abstract class Recurso implements Serializable{
+    //Cambiar a que esto se haga en Info manager
     private String textualContent = "";
-    private String translatedContent;
+    private String translatedContent = "";
     private String title;
     private String language;
     private String currentStatus;
     private String regionOfOrigin;
     private String responsibleOfTheFinding;
+    private boolean translating;
 
     public String toString(){
         return title+" ("+responsibleOfTheFinding+")";
@@ -51,6 +53,9 @@ public abstract class Recurso implements Serializable{
     public void setTranslatedContent(String translatedContent){
         this.translatedContent = translatedContent;
     }
+    public void setTranslating(Boolean translating){
+        this.translating = translating;
+    }
 
     public String getTextualContent() {
         return textualContent;
@@ -72,6 +77,9 @@ public abstract class Recurso implements Serializable{
     }
     public String getTranslatedConent(){
         return translatedContent;
+    }
+    public Boolean getTranslating(){
+        return translating;
     }
     
 }

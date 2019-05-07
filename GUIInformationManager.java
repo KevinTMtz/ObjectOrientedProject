@@ -156,7 +156,7 @@ public class GUIInformationManager extends Scene {
                 //bttnContent.setOnAction(e->newStage);
 
                 Button bttnLogOut=new Button("Log out");
-                infoPane.add(bttnLogOut, 2, 15);
+                infoPane.add(bttnLogOut, 1, 15);
                 bttnLogOut.setAlignment(Pos.BOTTOM_RIGHT);
                 bttnLogOut.setOnAction(e -> GUILogin.backLogin());
 

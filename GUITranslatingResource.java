@@ -31,82 +31,142 @@ import java.io.FileNotFoundException;
 import java.io.*;
 import java.io.File;
 import java.io.IOException;
+import javafx.geometry.VPos;
 
 public class GUITranslatingResource extends Scene{
 
-    private static VBox leftPane, rightPane;
-    private static HBox controls;
-    private static TextField txtTranslation;
-    private static Label lblTitle, lblOriginal;
-    private static Button bttnSave, bttnToAmend;
+    private static ArrayList<Recurso> resources;
+    private static Recurso r;
     private static BorderPane mainPane;
-
-    public GUITranslatingResource(Recurso r) {
-        super(new Translating(r));
+    private static VBox leftPane, rightPane;
+    private static Text lblOriginal;
+    private static TextArea txtTranslation;
+    private static HBox controls;
+    private static Button bttnSave, bttnToAmend, bttnFreeResource;
+    
+    public GUITranslatingResource() {
+        super(new SignUpPane());
     }
 
-    public static class Translating extends GridPane{
-        public Translating(Recurso r) {
-
-            mainPane= new BorderPane();
-            getChildren().add(mainPane);
+    public static class SignUpPane extends GridPane{
+        public SignUpPane() {
             
+            //select the resource to translate
+            resources = new ArrayList<Recurso>();
+            readData();
+            for(int i = 0; i<resources.size(); i++){
+                if(resources.get(i).getTranslating()){
+                    r = resources.get(i);
+                    break;
+                }
+            }    
+            mainPane = new BorderPane();
+            mainPane.setPrefWidth(900);
+            mainPane.setPrefHeight(620);
+            getChildren().add(mainPane);
+            controls = new HBox();
+
             bttnSave = new Button("Save");
             controls.getChildren().add(bttnSave);
             bttnSave.addEventFilter(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>(){
                 public void handle(MouseEvent e) {
-                    save(r);
+                    save();
+                    /*
+                    Arreglar cuando da OutOfMemory
+                    */
                 }
             });
+
             bttnToAmend = new Button("Amend");
             controls.getChildren().add(bttnToAmend);
             bttnToAmend.addEventFilter(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>(){
                 public void handle(MouseEvent e) {
-                    //amend();
+                    amend();
                 }
             });
             
-            lblTitle = new Label(r.getTitle());
-            lblOriginal = new Label(r.getTextualContent());
-            leftPane = new VBox(lblTitle, lblOriginal);
-
-            txtTranslation = new TextField(r.getTranslatedConent());
-            controls = new HBox(bttnSave);
-            rightPane = new VBox(txtTranslation, controls);
-
-            lblTitle.setPrefWidth(100);
-            lblOriginal.setPrefWidth(100);
-            lblOriginal.setPrefHeight(500);
-            
-            mainPane.setLeft(leftPane);
-            mainPane.setRight(rightPane);
-            mainPane.setMargin(leftPane, new Insets(10, 0, 10, 10));
-            mainPane.setMargin(rightPane, new Insets(10, 10, 10, 0));
-        }
-        private static void save(Recurso r){
-            r.setTranslatedContent(txtTranslation.getText());
-            /*
-            try{
-                ArrayList<Resource> tempArrayList = AppLogin.getArraylistResource();
-                for(Resource r: tempArrayList){
-                    r[i] = data.get(i);
+            bttnFreeResource = new Button("Free resource");
+            controls.getChildren().add(bttnFreeResource);
+            bttnFreeResource.addEventFilter(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>(){
+                public void handle(MouseEvent e) {
+                    FreeResource();
                 }
-                tempArrayList.add(r);
-                AppLogin.setArraylistResource();
-                FileOutputStream fos = new FileOutputStream("Movies.oop");
-                ObjectOutputStream oos = new ObjectOutputStream(fos);
-                oos.writeObject(tempArrayList);
-                oos.close();
-            } catch(FileNotFoundException fe){
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("File not found");
-                alert.setHeaderText("Error while reading the file");
-                alert.setContentText(fe.getMessage());
-                alert.showAndWait();
-            } catch(IOException ioe){
+            });
+
+            try{
+                r.setTextualContent("[This is the textual content and it is exciting because it has automatic text wrap, you can see this because it continues in the next line]");
+            } catch(EmptyFieldException e){
+                System.out.println("Cannot add an empty content");
+            }
+
+            lblOriginal = new Text(0,0,r.getTextualContent());
+            lblOriginal.setWrappingWidth(300);
+            lblOriginal.setTextAlignment(TextAlignment.JUSTIFY);
+            lblOriginal.setTextOrigin(VPos.TOP);
+            txtTranslation = new TextArea(r.getTranslatedConent());
+            txtTranslation.setWrapText(true);
+            
+            txtTranslation.setPrefHeight(500);
+            txtTranslation.setPrefWidth(300);
+
+            rightPane = new VBox();
+            rightPane.getChildren().add(txtTranslation);
+            rightPane.getChildren().add(controls);
+            leftPane = new VBox();
+            leftPane.getChildren().add(lblOriginal);
+            mainPane.setRight(rightPane);
+            mainPane.setLeft(leftPane);
+            mainPane.setMargin(rightPane, new Insets(20, 50, 10, 0));
+            mainPane.setMargin(leftPane, new Insets(30, 0, 10, 50));
+            
+        }
+        private void save(){
+            ArrayList<Recurso> temporalArray = resources;
+            resources.clear();
+            r.setTranslatedContent(txtTranslation.getText());
+            resources.add(r);
+            for(int i = 0; i<temporalArray.size(); i++)
+                resources.add(temporalArray.get(i));
+            
+            try {
+                FileOutputStream userResource = new FileOutputStream("build/arrayListResources");
+                ObjectOutputStream resourceWrite = new ObjectOutputStream(userResource);
+                
+                resourceWrite.writeObject(resources);
+                resourceWrite.close();
+            } catch (IOException ioe) {
                 System.out.println(ioe.getMessage());
             }
-            */
+        }
+        private void amend(){
+
+            try{
+                r.setCurrentStatus("to amend");
+            } catch (EmptyFieldException e){
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Title cannot be null");
+                alert.setHeaderText("Error");
+                alert.setContentText(e.getMessage());
+                alert.showAndWait();
+            }
+
+            GUILogin.changeScene(new GUITranslator());
+        }
+        private void FreeResource(){
+            try{
+                r.setCurrentStatus("finding");
+            } catch (EmptyFieldException e){
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Title cannot be null");
+                alert.setHeaderText("Error");
+                alert.setContentText(e.getMessage());
+                alert.showAndWait();
+            }
+        }
+        private void readData(){
+            for(int i=0; i<AppLogin.getArraylistResource().size(); i++){
+                resources.add(AppLogin.getArraylistResource().get(i));
+            }
         }
     }
 }

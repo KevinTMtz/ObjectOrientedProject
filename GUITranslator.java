@@ -52,8 +52,14 @@ public class GUITranslator extends Scene {
 
     public static class SignUpPane extends GridPane {
         public SignUpPane() {
+
+            for(int i = 0; i<resources.size(); i++)
+                resources.get(i).setTranslating(false);
+
             mainPane= new BorderPane();
             getChildren().add(mainPane);
+            mainPane.setPrefWidth(900);
+            mainPane.setPrefHeight(620);
             leftPane= new FlowPane();
             rightPane= new FlowPane();
             mainPane.setLeft(leftPane);
@@ -117,7 +123,7 @@ public class GUITranslator extends Scene {
                 txtPath=new Text("-");
                 
                 bttnTranslate = new Button("Translate");
-                bttnTranslate.setOnAction(e -> GUILogin.changeScene(new GUIInformationManager()));
+                bttnTranslate.setOnAction(e -> beginTranslate());
 
                 lblClass.setFont(Font.font("Verdana", FontWeight.BOLD, 10));
                 lvResource.addEventFilter(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
@@ -153,6 +159,29 @@ public class GUITranslator extends Scene {
                 //Escribe tu código a partir de aquií. Agrega los botones al rightPane
             
             rightPane.getChildren().add(infoPane);
+        }
+
+        private void beginTranslate(){
+            try{
+                if(lvResource.getSelectionModel().getSelectedItem().getCurrentStatus().equals("to amend")){
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("Translation");
+                    alert.setHeaderText("Error while translating");
+                    alert.setContentText("Cannot translate a resource with \"to amend\" status");
+                    alert.showAndWait();
+                }
+                else{
+                    lvResource.getSelectionModel().getSelectedItem().setCurrentStatus("translating");
+                    lvResource.getSelectionModel().getSelectedItem().setTranslating(true);
+                    GUILogin.changeScene(new GUITranslatingResource());
+                }
+            } catch (EmptyFieldException e){
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Title cannot be null");
+                alert.setHeaderText("Error");
+                alert.setContentText(e.getMessage());
+                alert.showAndWait();
+            }
         }
 
 
