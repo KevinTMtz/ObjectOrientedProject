@@ -52,7 +52,7 @@ public class GUITranslator extends Scene {
 
     public static class SignUpPane extends GridPane {
         public SignUpPane() {
-
+            this.setAlignment(Pos.CENTER);
             for(int i = 0; i<resources.size(); i++)
                 resources.get(i).setTranslating(false);
 

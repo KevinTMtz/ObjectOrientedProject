@@ -53,6 +53,7 @@ public class GUIInformationManager extends Scene {
 
     public static class SignUpPane extends GridPane {
         public SignUpPane() {
+            this.setAlignment(Pos.CENTER);
             mainPane= new BorderPane();
             getChildren().add(mainPane);
             leftPane= new FlowPane();

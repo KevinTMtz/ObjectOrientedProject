@@ -170,7 +170,7 @@ public class GUILogin extends Application {
         signUpButton.addEventFilter(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
             public void handle (MouseEvent e) {
                 AppLogin.registerUser();
-                backLogin();
+                
             }
         });
 
@@ -230,6 +230,8 @@ public class GUILogin extends Application {
         changeScene(signInScene);
         txtUserLogin.setText("");
         txtPasswordLogin.setText("");
+        txtPasswordRegister.setText("");
+        txtUserRegister.setText("");
     }
     public static void main(String[] args) {
         launch(args);
