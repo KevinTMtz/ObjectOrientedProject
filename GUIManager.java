@@ -98,6 +98,14 @@ public class GUIManager extends Scene {
                 }
             });
 
+            Button logOutButton = new Button("Log Out");
+            controlsPane.getChildren().add(logOutButton);
+            logOutButton.addEventFilter(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+                public void handle (MouseEvent e) {
+                    GUILogin.backLogin();
+                }
+            });
+
             Button buttonAdd = new Button("Add");
             controlsPane.getChildren().add(buttonAdd);
             buttonAdd.addEventFilter(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
@@ -225,7 +233,7 @@ public class GUIManager extends Scene {
                     User u = lvUser.getSelectionModel().getSelectedItem();
     
                     boolean userCheck = false;
-                    int userIndexTemp = -1;
+                    int userIndexTemp = lvUser.getSelectionModel().getSelectedIndex();
                     
                     for (int i=0; i<tempArrayList.size(); i++) {
                         if ((tempArrayList.get(i).getUsername()).equals(txtUsername.getText())) {
