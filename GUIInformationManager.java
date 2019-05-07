@@ -521,9 +521,9 @@ public class GUIInformationManager extends Scene {
                 data.add(AppLogin.getArraylistResource().get(i));
             }
         }
-
-        /*public static int getSelectedIndex() {
-            return(lvResource.getSelectionModel().getSelectedIndex());
-        }*/
     }
+
+    public static int getIndex() {
+        return(lvResource.getSelectionModel().getSelectedIndex());
+    } 
 }

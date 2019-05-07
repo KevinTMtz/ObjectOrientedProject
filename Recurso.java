@@ -1,6 +1,6 @@
 import java.io.Serializable;
 public abstract class Recurso implements Serializable{
-    private String textualContent;
+    private String textualContent = "";
     private String translatedContent;
     private String title;
     private String language;
