@@ -61,7 +61,7 @@ public class GUITranslatingResource extends Scene{
             //Recibe resource
     
             txtOriginal = new TextField(r.getTextualContent());
-            txtTranslation = new TextField(/*Resource salvado*/);
+            txtTranslation = new TextField(r.getTranslatedConent());
     
             bttnSave = new Button("Save");
             bttnSaveAndQuit = new Button("Save and quit");
