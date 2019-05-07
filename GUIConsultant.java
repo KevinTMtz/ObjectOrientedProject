@@ -50,10 +50,13 @@ public class GUIConsultant extends Scene {
 
     public static class SignUpPane extends GridPane {
         public SignUpPane() {
+            this.setAlignment(Pos.CENTER);
             mainPane= new BorderPane();
             getChildren().add(mainPane);
             leftPane= new FlowPane();
             rightPane= new FlowPane();
+            mainPane.setPrefWidth(900);
+            mainPane.setPrefHeight(620);
             mainPane.setLeft(leftPane);
             mainPane.setRight(rightPane);
             mainPane.setMargin(leftPane, new Insets(10, 0, 10, 10));
@@ -145,9 +148,10 @@ public class GUIConsultant extends Scene {
                 //For the margins
                 infoPane.setMargin(lblClass, new Insets(10, 0, 0, 0));
                 Button bttnLogOut=new Button("Log out");
-                infoPane.add(bttnLogOut, 2, 15);
+                infoPane.add(bttnLogOut, 1, 15);
                 bttnLogOut.setAlignment(Pos.BOTTOM_RIGHT);
                 bttnLogOut.setOnAction(e -> GUILogin.backLogin());
+                bttnLogOut.setAlignment(Pos.CENTER_LEFT);
 
                 //Escribe tu código a partir de aquií. Agrega los botones al rightPane
             

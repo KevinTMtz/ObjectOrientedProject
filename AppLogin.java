@@ -153,6 +153,11 @@ public abstract class AppLogin implements IPersist {
                 newUser.setUserType(GUILogin.getUserTypeRegister());
     
                 arrayListUsers.add(newUser);
+                Alert success = new Alert(Alert.AlertType.ERROR);
+                success.setTitle("Successfull operation");
+                success.setHeaderText("User succesfully created");
+                success.showAndWait();
+                GUILogin.backLogin();
                 
             } else {
                 Alert alert = new Alert(Alert.AlertType.ERROR);

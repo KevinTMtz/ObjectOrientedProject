@@ -95,7 +95,14 @@ public class GUIInfoManagerContent extends Scene {
                 ArrayList<Recurso> tempArray = AppLogin.getArraylistResource();
 
                 tempArray.get(GUIInformationManager.getIndex()).setTextualContent(txtContent.getText());
-    
+                if(tempArray.get(GUIInformationManager.getIndex()).getCurrentStatus().equals("to amend")){
+                    tempArray.get(GUIInformationManager.getIndex()).setCurrentStatus("translating");
+                    Alert amend = new Alert(Alert.AlertType.ERROR);
+                    amend.setTitle("Succesful Operation");
+                    amend.setHeaderText("Amend requested has been solved");
+                    amend.setContentText("Back to translating state");
+                    amend.showAndWait();
+                }
                 AppLogin.setArraylistResource(tempArray);
             } catch (EmptyFieldException efe) {
                 Alert alert = new Alert(Alert.AlertType.ERROR);

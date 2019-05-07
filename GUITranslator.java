@@ -52,12 +52,14 @@ public class GUITranslator extends Scene {
 
     public static class SignUpPane extends GridPane {
         public SignUpPane() {
-
+            this.setAlignment(Pos.CENTER);
             for(int i = 0; i<resources.size(); i++)
                 resources.get(i).setTranslating(false);
 
             mainPane= new BorderPane();
             getChildren().add(mainPane);
+            mainPane.setPrefWidth(900);
+            mainPane.setPrefHeight(620);
             leftPane= new FlowPane();
             rightPane= new FlowPane();
             mainPane.setLeft(leftPane);

@@ -53,6 +53,7 @@ public class GUIInformationManager extends Scene {
 
     public static class SignUpPane extends GridPane {
         public SignUpPane() {
+            this.setAlignment(Pos.CENTER);
             mainPane= new BorderPane();
             getChildren().add(mainPane);
             leftPane= new FlowPane();
@@ -156,7 +157,7 @@ public class GUIInformationManager extends Scene {
                 //bttnContent.setOnAction(e->newStage);
 
                 Button bttnLogOut=new Button("Log out");
-                infoPane.add(bttnLogOut, 2, 15);
+                infoPane.add(bttnLogOut, 1, 15);
                 bttnLogOut.setAlignment(Pos.BOTTOM_RIGHT);
                 bttnLogOut.setOnAction(e -> GUILogin.backLogin());
 
