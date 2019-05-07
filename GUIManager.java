@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.stage.Stage;
@@ -30,7 +32,7 @@ public class GUIManager extends Scene {
     }
 
     public static class SignUpPane extends BorderPane {
-        private TextField txtPassword, txtUsername, txtDuration, txtYear, txtClassification;
+        private TextField txtPassword, txtUsername;
         private ComboBox typeOfUser;
 	    private ObservableList<User> data;
 	    private ListView<User> lvUser;
@@ -90,19 +92,18 @@ public class GUIManager extends Scene {
             lvUser.setPrefHeight(80);
             lvUser.setPrefWidth(350);
             contentPane.getChildren().add(lvUser);
-            /*
+
             lvUser.addEventFilter(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
                 public void handle (MouseEvent e) {
-                    // Check User Info();
+                    checkUserInfo();
                 }
             });
-            */
 
             Button buttonAdd = new Button("Add");
             controlsPane.getChildren().add(buttonAdd);
             buttonAdd.addEventFilter(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
                 public void handle (MouseEvent e) {
-                    // addUser();
+                    addUser();
                 }
             });
 
@@ -126,6 +127,52 @@ public class GUIManager extends Scene {
             controlsPane.setPadding(new Insets(20));
             controlsPane.setVgap(10);
             controlsPane.setHgap(10);
+
+            loadUsers();
+        }
+
+        public void loadUsers() {
+            ArrayList<User> tempArrayList = AppLogin.getArraylistUser();
+
+            for (int i=0; i<tempArrayList.size(); i++) {
+                data.add(tempArrayList.get(i));
+            }
+        }
+
+        public void checkUserInfo() {
+            User u = lvUser.getSelectionModel().getSelectedItem();
+
+            txtUsername.setText(u.getUsername());
+            txtPassword.setText(u.getPassword());
+            typeOfUser.setValue(u.getUserType());
+        }
+
+        public void addUser() {
+            try {
+                ArrayList<User> tempArrayList = AppLogin.getArraylistUser();
+
+                User newUser = null;
+    
+                if (((String) typeOfUser.getValue()).equals("Manager")) {
+                    newUser = new Manager();
+                } else if (((String) typeOfUser.getValue()).equals("Information Manager")) {
+                    newUser = new InformationManager();
+                } else if (((String) typeOfUser.getValue()).equals("Translator")) {
+                    newUser = new Translator();
+                } else if (((String) typeOfUser.getValue()).equals("Consultant")) {
+                    newUser = new Consultant();
+                }
+    
+                newUser.setUsername(txtUsername.getText());
+                newUser.setPassword(txtPassword.getText());
+                newUser.setUserType((String) typeOfUser.getValue());
+    
+                data.add(newUser);
+                tempArrayList.add(newUser);
+                AppLogin.setArraylistUser(tempArrayList);
+            } catch (EmptyFieldException efe) {
+                System.out.println(efe.getMessage());
+            }
         }
     }
 }

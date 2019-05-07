@@ -5,6 +5,10 @@ public abstract class User implements Serializable {
     private String password;
     private String userType;
 
+    public String toString(){
+		return name;
+	}
+
     public void setUsername(String name) throws EmptyFieldException {
         if (name == null || name.length() == 0)
 			throw new EmptyFieldException("The username cannot be null");
