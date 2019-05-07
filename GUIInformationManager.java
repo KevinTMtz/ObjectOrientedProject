@@ -498,7 +498,7 @@ public class GUIInformationManager extends Scene {
         /*
         private void saveData(){
             // Create the arraylist
-            ArrayList<Resource> temp = new ArrayList<>();
+            ArrayList<Recurso> temp = new ArrayList<>();
             temp = resources;
             // Add the resources
             try {
