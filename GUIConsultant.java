@@ -24,7 +24,7 @@ import javafx.geometry.Pos;
 import javafx.collections.ObservableList;
 import java.util.ArrayList;
 import javafx.scene.control.CheckBox;
-import javafx.event.ActionEvent; 
+import javafx.event.ActionEvent;
 import java.io.FileNotFoundException;
 import java.io.*;
 import java.io.File;
