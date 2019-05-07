@@ -42,7 +42,7 @@ public class GUITranslatingResource extends Scene{
     private static Text lblOriginal;
     private static TextArea txtTranslation;
     private static HBox controls;
-    private static Button bttnSave, bttnToAmend, bttnFreeResource;
+    private static Button bttnSave, bttnToAmend, bttnFreeResource, bttnBack;
     private static int index;
     
     public GUITranslatingResource() {
@@ -91,6 +91,10 @@ public class GUITranslatingResource extends Scene{
                     FreeResource();
                 }
             });
+
+            bttnBack = new Button("Back");
+            controls.getChildren().add(bttnBack);
+            bttnBack.setOnAction(e -> goBack());
 
             lblOriginal = new Text(0,0,r.getTextualContent());
             lblOriginal.setWrappingWidth(300);
@@ -149,6 +153,8 @@ public class GUITranslatingResource extends Scene{
             for(int i=0; i<AppLogin.getArraylistResource().size(); i++){
                 resources.add(AppLogin.getArraylistResource().get(i));
             }
+        }
+        private void goBack(){
         }
     }
 }
