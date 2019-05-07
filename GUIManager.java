@@ -29,20 +29,17 @@ public class GUIManager extends Scene {
         super(new SignUpPane());
     }
 
-    public static class SignUpPane extends GridPane {
+    public static class SignUpPane extends BorderPane {
         private TextField txtPassword, txtUsername, txtDuration, txtYear, txtClassification;
         private ComboBox typeOfUser;
 	    private ObservableList<User> data;
 	    private ListView<User> lvUser;
 
         public SignUpPane() {
-            this.setAlignment(Pos.CENTER);
-            BorderPane mainPane = new BorderPane();
-            
             //Check This
             FlowPane title = new FlowPane();
             title.setAlignment(Pos.CENTER);
-            title.setPadding(new Insets(0, 0, 30, 0));
+            title.setPadding(new Insets(40, 0, 20, 0));
 
             Text titletxt = new Text("User manager");
             titletxt.setFont(Font.font("Tahoma", FontWeight.NORMAL, 25));
@@ -57,9 +54,9 @@ public class GUIManager extends Scene {
             FlowPane controlsPane = new FlowPane();
             controlsPane.setAlignment(Pos.CENTER);
             
-            mainPane.setTop(title);
-            mainPane.setCenter(contentPane);
-            mainPane.setBottom(controlsPane);
+            this.setTop(title);
+            this.setCenter(contentPane);
+            this.setBottom(controlsPane);
 
             // Content
             GridPane userPane = new GridPane();
@@ -91,7 +88,7 @@ public class GUIManager extends Scene {
             data = FXCollections.observableArrayList();
             lvUser = new ListView<User>(data);
             lvUser.setPrefHeight(80);
-            lvUser.setPrefWidth(200);
+            lvUser.setPrefWidth(350);
             contentPane.getChildren().add(lvUser);
             /*
             lvUser.addEventFilter(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
@@ -129,8 +126,6 @@ public class GUIManager extends Scene {
             controlsPane.setPadding(new Insets(20));
             controlsPane.setVgap(10);
             controlsPane.setHgap(10);
-
-            getChildren().add(mainPane);
         }
     }
 }
