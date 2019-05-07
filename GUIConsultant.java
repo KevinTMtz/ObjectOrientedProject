@@ -62,7 +62,14 @@ public class GUIConsultant extends Scene {
             mainPane.setMargin(leftPane, new Insets(10, 0, 10, 10));
             mainPane.setMargin(rightPane, new Insets(10, 10, 10, 0));
             
-
+            FlowPane title = new FlowPane();
+            title.setAlignment(Pos.CENTER);
+            title.setPadding(new Insets(20, 0, 40, 0));
+            Text titletxt = new Text("Consultor");
+            titletxt.setFont(Font.font("Tahoma", FontWeight.NORMAL, 25));
+            titletxt.setFill(Color.BLACK);
+            title.getChildren().add(titletxt);
+            mainPane.setTop(title);
             //ListPane-->Left Side and the list
             listPane=new GridPane();
             Text user = new Text("Consultant 3");

@@ -58,6 +58,14 @@ public class GUITranslator extends Scene {
 
             mainPane= new BorderPane();
             getChildren().add(mainPane);
+            FlowPane title = new FlowPane();
+            title.setAlignment(Pos.CENTER);
+            title.setPadding(new Insets(20, 0, 40, 0));
+            Text titletxt = new Text("Translator");
+            titletxt.setFont(Font.font("Tahoma", FontWeight.NORMAL, 25));
+            titletxt.setFill(Color.BLACK);
+            title.getChildren().add(titletxt);
+            mainPane.setTop(title);
             mainPane.setPrefWidth(900);
             mainPane.setPrefHeight(620);
             leftPane= new FlowPane();
