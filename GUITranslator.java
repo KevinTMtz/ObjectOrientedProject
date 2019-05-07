@@ -117,6 +117,7 @@ public class GUITranslator extends Scene {
                 txtPath=new Text("-");
                 
                 bttnTranslate = new Button("Translate");
+                bttnTranslate.setOnAction(e -> beginTranslate());
 
                 lblClass.setFont(Font.font("Verdana", FontWeight.BOLD, 10));
                 lvResource.addEventFilter(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
@@ -152,6 +153,19 @@ public class GUITranslator extends Scene {
                 //Escribe tu código a partir de aquií. Agrega los botones al rightPane
             
             rightPane.getChildren().add(infoPane);
+        }
+
+        private void beginTranslate(){
+            try{
+                lvResource.getSelectionModel().getSelectedItem().setCurrentStatus("translating");
+            } catch (EmptyFieldException e){
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Title cannot be null");
+                alert.setHeaderText("Error");
+                alert.setContentText(e.getMessage());
+                alert.showAndWait();
+            }
+            GUILogin.changeScene(new GUITranslatingResource());
         }
 
 
