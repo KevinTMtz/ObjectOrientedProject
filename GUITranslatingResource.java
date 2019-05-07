@@ -43,7 +43,7 @@ public class GUITranslatingResource extends Scene{
         super(new Translating());
     }
 
-    public static class Translating extends HBox{
+    public static class Translating extends GridPane{
         public  Translating() {
 
             txtOriginal = new TextField();
