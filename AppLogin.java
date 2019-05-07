@@ -166,4 +166,20 @@ public abstract class AppLogin implements IPersist {
             System.out.println(efe.getMessage());
         }
     }
+
+    public ArrayList<User> getArraylistUser() {
+        return arrayListUsers;
+    }
+
+    public void setArraylistUser(ArrayList<User> tempArrayList) {
+        arrayListUsers = tempArrayList;
+    }
+
+    public ArrayList<Resource> getArraylistResource() {
+        return arrayListResources;
+    }
+
+    public void setArraylistResource(ArrayList<Resource> tempArrayList) {
+        arrayListResources = tempArrayList;
+    }
 }
