@@ -42,7 +42,7 @@ public class GUITranslatingResource extends Scene{
     private static Text lblOriginal;
     private static TextArea txtTranslation;
     private static HBox controls;
-    private static Button bttnSave, bttnToAmend;
+    private static Button bttnSave, bttnToAmend, bttnFreeResource;
     
     public GUITranslatingResource() {
         super(new SignUpPane());
@@ -55,7 +55,7 @@ public class GUITranslatingResource extends Scene{
             resources = new ArrayList<Recurso>();
             readData();
             for(int i = 0; i<resources.size(); i++)
-                if(resources.get(i).getCurrentStatus().equals("translating")){
+                if(resources.get(i).getTranslating()){
                     r = resources.get(i);
                     break;
                 }
@@ -82,6 +82,14 @@ public class GUITranslatingResource extends Scene{
                     amend();
                 }
             });
+            
+            bttnFreeResource = new Button("Free resource");
+            controls.getChildren().add(bttnFreeResource);
+            bttnFreeResource.addEventFilter(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>(){
+                public void handle(MouseEvent e) {
+                    FreeResource();
+                }
+            });
 
             try{
                 r.setTextualContent("[This is the textual content and it is exciting because it has automatic text wrap, you can see this because it continues in the next line]");
@@ -96,10 +104,6 @@ public class GUITranslatingResource extends Scene{
             txtTranslation = new TextArea(r.getTranslatedConent());
             txtTranslation.setWrapText(true);
             
-            /*
-            lblOriginal.setPrefHeight(500);
-            lblOriginal.setPrefWidth(300);
-            */
             txtTranslation.setPrefHeight(500);
             txtTranslation.setPrefWidth(300);
 
@@ -145,6 +149,17 @@ public class GUITranslatingResource extends Scene{
             }
 
             GUILogin.changeScene(new GUITranslator());
+        }
+        private void FreeResource(){
+            try{
+                r.setCurrentStatus("finding");
+            } catch (EmptyFieldException e){
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Title cannot be null");
+                alert.setHeaderText("Error");
+                alert.setContentText(e.getMessage());
+                alert.showAndWait();
+            }
         }
         private void readData(){
             for(int i=0; i<AppLogin.getArraylistResource().size(); i++){

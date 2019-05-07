@@ -52,6 +52,10 @@ public class GUITranslator extends Scene {
 
     public static class SignUpPane extends GridPane {
         public SignUpPane() {
+
+            for(int i = 0; i<resources.size(); i++)
+                resources.get(i).setTranslating(false);
+
             mainPane= new BorderPane();
             getChildren().add(mainPane);
             leftPane= new FlowPane();
@@ -166,6 +170,7 @@ public class GUITranslator extends Scene {
                 }
                 else{
                     lvResource.getSelectionModel().getSelectedItem().setCurrentStatus("translating");
+                    lvResource.getSelectionModel().getSelectedItem().setTranslating(true);
                     GUILogin.changeScene(new GUITranslatingResource());
                 }
             } catch (EmptyFieldException e){

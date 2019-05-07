@@ -8,6 +8,7 @@ public abstract class Recurso implements Serializable{
     private String currentStatus;
     private String regionOfOrigin;
     private String responsibleOfTheFinding;
+    private boolean translating;
 
     public String toString(){
         return title+" ("+responsibleOfTheFinding+")";
@@ -52,6 +53,9 @@ public abstract class Recurso implements Serializable{
     public void setTranslatedContent(String translatedContent){
         this.translatedContent = translatedContent;
     }
+    public void setTranslating(Boolean translating){
+        this.translating = translating;
+    }
 
     public String getTextualContent() {
         return textualContent;
@@ -73,6 +77,9 @@ public abstract class Recurso implements Serializable{
     }
     public String getTranslatedConent(){
         return translatedContent;
+    }
+    public Boolean getTranslating(){
+        return translating;
     }
     
 }
