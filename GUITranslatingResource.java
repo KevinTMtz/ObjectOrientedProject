@@ -43,25 +43,16 @@ public class GUITranslatingResource extends Scene{
     private static TextArea txtTranslation;
     private static HBox controls;
     private static Button bttnSave, bttnToAmend, bttnFreeResource, bttnBack;
-    private static int index;
     
-    public GUITranslatingResource() {
-        super(new SignUpPane());
+    public GUITranslatingResource(int index) {
+        super(new SignUpPane(index));
     }
 
     public static class SignUpPane extends GridPane{
-        public SignUpPane() {
+        private static int index;
+        public SignUpPane(int index) {
+            this.index = index;
             
-            //select the resource to translate
-            resources = new ArrayList<Recurso>();
-            readData();
-            for(int i = 0; i<resources.size(); i++){
-                if(resources.get(i).getTranslating()){
-                    index = i;
-                    r = resources.get(i);
-                    break;
-                }
-            }    
             mainPane = new BorderPane();
             mainPane.setPrefWidth(900);
             mainPane.setPrefHeight(620);
@@ -96,12 +87,14 @@ public class GUITranslatingResource extends Scene{
             controls.getChildren().add(bttnBack);
             bttnBack.setOnAction(e -> goBack());
 
-            lblOriginal = new Text(0,0,r.getTextualContent());
+            lblOriginal = new Text(0,0,"");
             lblOriginal.setWrappingWidth(300);
             lblOriginal.setTextAlignment(TextAlignment.JUSTIFY);
             lblOriginal.setTextOrigin(VPos.TOP);
-            txtTranslation = new TextArea(r.getTranslatedConent());
+            txtTranslation = new TextArea();
             txtTranslation.setWrapText(true);
+
+            setInfo();
             
             txtTranslation.setPrefHeight(500);
             txtTranslation.setPrefWidth(300);
@@ -127,7 +120,8 @@ public class GUITranslatingResource extends Scene{
         private void amend(){
 
             try{
-                r.setCurrentStatus("to amend");
+                AppLogin.getArraylistResource().get(index).setCurrentStatus("to amend");
+                GUILogin.changeScene(new GUITranslator());
             } catch (EmptyFieldException e){
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Title cannot be null");
@@ -140,7 +134,8 @@ public class GUITranslatingResource extends Scene{
         }
         private void FreeResource(){
             try{
-                r.setCurrentStatus("freed");
+                AppLogin.getArraylistResource().get(index).setCurrentStatus("freed");
+                GUILogin.changeScene(new GUITranslator());
             } catch (EmptyFieldException e){
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Title cannot be null");
@@ -149,13 +144,14 @@ public class GUITranslatingResource extends Scene{
                 alert.showAndWait();
             }
         }
-        private void readData(){
-            for(int i=0; i<AppLogin.getArraylistResource().size(); i++){
-                resources.add(AppLogin.getArraylistResource().get(i));
-            }
-        }
         private void goBack(){
             GUILogin.changeScene(new GUITranslator());
+        }
+        private void setInfo(){
+            String translation = AppLogin.getArraylistResource().get(index).getTranslatedConent();
+            txtTranslation.setText(translation);
+            String original = AppLogin.getArraylistResource().get(index).getTextualContent();
+            lblOriginal.setText(original);
         }
     }
 }
