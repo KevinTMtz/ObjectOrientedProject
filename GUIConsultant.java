@@ -70,7 +70,7 @@ public class GUIConsultant extends Scene {
             listPane.add(lvResource, 0, 1);
             leftPane.getChildren().add(listPane);
             lvResource.setMaxWidth(220);
-            readData();
+            //readData();
             
             //RightPane-->Right Side and the info
             infoPane=new GridPane();
@@ -183,7 +183,7 @@ public class GUIConsultant extends Scene {
                 infoPane.add(lblPath, 0, 7);
                 infoPane.add(txtPath, 1, 7);
             }
-        }
+        }/*
         private void readData(){
             try {
                 FileInputStream fis = new FileInputStream("resources/resources.list");
@@ -205,7 +205,7 @@ public class GUIConsultant extends Scene {
                             data.add(t);
                         }
                     }
-                    saveData();
+                    //saveData();
                 }
                 ois.close();
             } catch (IOException ioe) {
@@ -213,8 +213,8 @@ public class GUIConsultant extends Scene {
             } catch(ClassNotFoundException cnfe){
                 System.out.println(cnfe.getMessage());
             }
-        }
-        private void saveData(){
+        }*/
+        /*private void saveData(){
             // Create the arraylist
             ArrayList<Resource> temp = new ArrayList<>();
             temp = resources;
@@ -233,7 +233,7 @@ public class GUIConsultant extends Scene {
             } catch (IOException ioe) {
                 System.out.println(ioe.getMessage());
             } 
-        }
+        }*/
         
         private void setResource(Textual t){
             txtTitle.setText(t.getTitle());
