@@ -171,53 +171,9 @@ public class GUITranslator extends Scene {
             
         }
         private void readData(){
-            try {
-                FileInputStream fis = new FileInputStream("resources/resources.list");
-                ObjectInputStream ois = new ObjectInputStream(fis);
-                System.out.println("Readed");
-                resources = (ArrayList) ois.readObject();
-                //System.out.println("Size: " + resources.size());
-                Recording r=null;
-                Textual t=null;
-                // Add the existing data
-                for (int i = 0; i < resources.size(); i++) {
-                        if(resources.get(i) instanceof Recording) {
-                            r=(Recording) resources.get(i);
-                            data.add(r);
-                        }
-                        if(resources.get(i) instanceof Textual) {
-                            t=(Textual) resources.get(i);
-                            data.add(t);
-                        }
-                    
-                    saveData();
-                }
-                ois.close();
-            } catch (IOException ioe) {
-                System.out.println(ioe.getMessage());
-            } catch(ClassNotFoundException cnfe){
-                System.out.println(cnfe.getMessage());
+            for(int i=0; i<AppLogin.getArraylistResource().size(); i++){
+                data.add(AppLogin.getArraylistResource().get(i));
             }
-        }
-        private void saveData(){
-            // Create the arraylist
-            ArrayList<Recurso> temp = new ArrayList<>();
-            temp = resources;
-            // Add the resources
-            try {
-                // Save the file
-                File resourceFile = new File("build/arrayListResources");
-                resourceFile.delete();
-                FileOutputStream fos = new FileOutputStream("build/arrayListResources");
-                ObjectOutputStream oos = new ObjectOutputStream(fos);
-                oos.writeObject(temp);
-                oos.close();
-                fos.close();
-            } catch (FileNotFoundException fe) {
-                System.out.println("File not found");
-            } catch (IOException ioe) {
-                System.out.println(ioe.getMessage());
-            } 
         }
         
         private void setResource(Textual t){
