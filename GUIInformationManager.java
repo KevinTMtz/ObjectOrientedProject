@@ -33,7 +33,6 @@ import java.io.IOException;
 public class GUIInformationManager extends Scene {
     private static ObservableList<Recurso> data;
     private static ListView<Recurso> lvResource;
-    private static ArrayList<Recurso> resources = new ArrayList<Recurso>();
     private static TextField txtTitle, txtLanguage, txtRegion, txtResponsible;
     private static Text txtStatus;
     private static Label lblInfo, lblTitle, lblLanguage, lblRegion, lblResponsible, lblStatus;
@@ -503,28 +502,6 @@ public class GUIInformationManager extends Scene {
             r.setCurrentStatus("finding");
             r.setTranslatedContent("");
         }
-
-        /*
-        private void saveData(){
-            // Create the arraylist
-            ArrayList<Recurso> temp = new ArrayList<>();
-            temp = resources;
-            // Add the resources
-            try {
-                // Save the file
-                File resourceFile = new File("resources/resources.list");
-                resourceFile.delete();
-                FileOutputStream fos = new FileOutputStream("resources/resources.list");
-                ObjectOutputStream oos = new ObjectOutputStream(fos);
-                oos.writeObject(temp);
-                oos.close();
-                fos.close();
-            } catch (FileNotFoundException fe) {
-                System.out.println("File not found");
-            } catch (IOException ioe) {
-                System.out.println(ioe.getMessage());
-            }            
-        }*/
         
         private void readData(){
             for(int i=0; i<AppLogin.getArraylistResource().size(); i++){

@@ -33,7 +33,6 @@ import java.io.IOException;
 public class GUITranslator extends Scene {
     private static ObservableList<Recurso> data;
     private static ListView<Recurso> lvResource;
-    private static ArrayList<Recurso> resources = new ArrayList<Recurso>();
     private static Text txtTitle, txtLanguage, txtRegion, txtResponsible;
     private static Label lblInfo, lblTitle, lblLanguage, lblRegion, lblResponsible, lblClass;
     private static Text txtPages, txtWords;
@@ -44,7 +43,6 @@ public class GUITranslator extends Scene {
     private static BorderPane mainPane;
     private static FlowPane leftPane, rightPane;
     private static GridPane listPane, infoPane;
-    private static Stage newStage;
     private static int index;
 
     public GUITranslator() {
