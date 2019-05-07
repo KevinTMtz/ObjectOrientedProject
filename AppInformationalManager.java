@@ -1,6 +1,5 @@
 import java.util.ArrayList;
 
-import javax.annotation.Resource;
 public abstract class AppInformationalManager {
     private static ArrayList<Resource> resources = (ArrayList<Resource>)AppLogin.getArraylistResource();
 

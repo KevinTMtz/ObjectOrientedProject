@@ -1,5 +1,5 @@
 import java.io.Serializable;
-public abstract class Resource implements Serializable{
+public abstract class Recurso implements Serializable{
     private String textualContent;
     private String translatedContent;
     private String title;

@@ -4,11 +4,9 @@ import java.io.FileNotFoundException;
 import javafx.scene.control.*;
 import java.util.ArrayList;
 
-import javax.annotation.Resource;
-
 public abstract class AppLogin implements IPersist {
     private static ArrayList<User> arrayListUsers;
-    private static ArrayList<Resource> arrayListResources;
+    private static ArrayList<Recurso> arrayListResources;
 
     // Sign in
     public static void signIn() {
@@ -105,13 +103,13 @@ public abstract class AppLogin implements IPersist {
                 FileInputStream fis2 = new FileInputStream("build/arrayListResources");
                 ObjectInputStream ois2 = new ObjectInputStream(fis2);
 
-                arrayListResources = new ArrayList<Resource>();
-                arrayListResources = (ArrayList<Resource>) ois2.readObject();
+                arrayListResources = new ArrayList<Recurso>();
+                arrayListResources = (ArrayList<Recurso>) ois2.readObject();
                 
                 fis2.close();
                 ois2.close();
             } else {
-                arrayListResources = new ArrayList<Resource>();
+                arrayListResources = new ArrayList<Recurso>();
 
             }
         } catch (IOException ioe) {
@@ -175,11 +173,11 @@ public abstract class AppLogin implements IPersist {
         arrayListUsers = tempArrayList;
     }
 
-    public static ArrayList<Resource> getArraylistResource() {
+    public static ArrayList<Recurso> getArraylistResource() {
         return arrayListResources;
     }
 
-    public static void setArraylistResource(ArrayList<Resource> tempArrayList) {
+    public static void setArraylistResource(ArrayList<Recurso> tempArrayList) {
         arrayListResources = tempArrayList;
     }
 }

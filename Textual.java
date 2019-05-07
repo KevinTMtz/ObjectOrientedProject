@@ -1,5 +1,5 @@
 import java.io.Serializable;
-public class Textual extends Resource implements Serializable{
+public class Textual extends Recurso implements Serializable{
     private String numberOfPages;
     private String numberOfWords;
 
