@@ -55,7 +55,7 @@ public class GUITranslatingResource extends Scene{
             controls.getChildren().add(bttnSave);
             bttnSave.addEventFilter(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>(){
                 public void handle(MouseEvent e) {
-                    r.setTranslatedContent(txtTranslation.getText());
+                    save();
                 }
             });
             
@@ -75,6 +75,29 @@ public class GUITranslatingResource extends Scene{
             mainPane.setRight(rightPane);
             mainPane.setMargin(leftPane, new Insets(10, 0, 10, 10));
             mainPane.setMargin(rightPane, new Insets(10, 10, 10, 0));
+        }
+        private static void save(){
+            r.setTranslatedContent(txtTranslation.getText());
+
+            /*
+            try{
+                Movie[] m = new Movie[totalMovies];
+                for(int i = 0; i<m.length; i++)
+                    m[i] = data.get(i);
+                FileOutputStream fos = new FileOutputStream("Movies.oop");
+                ObjectOutputStream oos = new ObjectOutputStream(fos);
+                oos.writeObject(m);
+                oos.close();
+            } catch(FileNotFoundException fe){
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("File not found");
+                alert.setHeaderText("Error while reading the file");
+                alert.setContentText(fe.getMessage());
+                alert.showAndWait();
+            } catch(IOException ioe){
+                System.out.println(ioe.getMessage());
+            }
+            */
         }
     }
 }
