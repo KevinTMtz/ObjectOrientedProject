@@ -38,7 +38,7 @@ public class GUITranslatingResource extends Scene{
     private static HBox controls;
     private static TextField txtTranslation;
     private static Label lblTitle, lblOriginal;
-    private static Button bttnSave, bttnFree, bttnToAmend;
+    private static Button bttnSave, bttnToAmend;
     private static BorderPane mainPane;
 
     public GUITranslatingResource(Recurso r) {
@@ -47,7 +47,6 @@ public class GUITranslatingResource extends Scene{
 
     public static class Translating extends GridPane{
         public Translating(Recurso r) {
-            r.setCurrentStatus("translating");
 
             mainPane= new BorderPane();
             getChildren().add(mainPane);
@@ -59,20 +58,11 @@ public class GUITranslatingResource extends Scene{
                     save(r);
                 }
             });
-            bttnFree = new Button("Free");
-            controls.getChildren().add(bttnFree);
-            bttnFree.addEventFilter(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>(){
-                public void handle(MouseEvent e) {
-                    free(r);
-                    bttnFree.setOnAction(f -> GUILogin.changeScene(new GUITranslator()));
-                }
-            });
             bttnToAmend = new Button("Amend");
             controls.getChildren().add(bttnToAmend);
             bttnToAmend.addEventFilter(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>(){
                 public void handle(MouseEvent e) {
-                    amend(r);
-                    bttnToAmend.setOnAction(a -> GUILogin.changeScene(new GUITranslator()));
+                    //amend();
                 }
             });
             
@@ -97,8 +87,8 @@ public class GUITranslatingResource extends Scene{
             r.setTranslatedContent(txtTranslation.getText());
             /*
             try{
-                ArrayList<Recurso> tempArrayList = AppLogin.getArraylistResource();
-                for(Recurso r: tempArrayList){
+                ArrayList<Resource> tempArrayList = AppLogin.getArraylistResource();
+                for(Resource r: tempArrayList){
                     r[i] = data.get(i);
                 }
                 tempArrayList.add(r);
@@ -117,12 +107,6 @@ public class GUITranslatingResource extends Scene{
                 System.out.println(ioe.getMessage());
             }
             */
-        }
-        private static void free(Recurso r){
-            r.setCurrentStatus("finding");
-        }
-        private static void amend(Recurso r){
-            r.setCurrentStatus("to amend");
         }
     }
 }
