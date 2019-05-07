@@ -34,18 +34,27 @@ import java.io.IOException;
 
 public class GUITranslatingResource extends Scene{
 
-    /*private
     private static VBox leftPane, rightPane;
-    */
+    private static HBox controls;
+    private static TextField txtOriginal, txtTranslation;
+    private static Button bttnSave, bttnSaveAndQuit;
 
     public GUITranslatingResource() {
         super(new Translating());
     }
 
-    public static class Translating extends HBox{
+    public static class Translating extends GridPane{
         public  Translating() {
-            /*leftPane = new VBox();
-            rightPane = new VBox();*/
+
+            txtOriginal = new TextField();
+            txtTranslation = new TextField();
+
+            bttnSave = new Button("Save");
+            bttnSaveAndQuit = new Button("Save and quit");
+
+            controls = new HBox(bttnSave, bttnSaveAndQuit);
+            leftPane = new VBox(txtOriginal);
+            rightPane = new VBox(txtTranslation, controls);
         }
     }
 }
