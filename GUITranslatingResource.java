@@ -38,7 +38,7 @@ public class GUITranslatingResource extends Scene{
     private static HBox controls;
     private static TextField txtTranslation;
     private static Label lblTitle, lblOriginal;
-    private static Button bttnSave, bttnSaveAndQuit;
+    private static Button bttnSave;
     private static BorderPane mainPane;
 
     public GUITranslatingResource(Resource r) {
@@ -50,20 +50,32 @@ public class GUITranslatingResource extends Scene{
 
             mainPane= new BorderPane();
             getChildren().add(mainPane);
-            controls = new HBox(bttnSave, bttnSaveAndQuit);
-            leftPane = new VBox(lblTitle, txtOriginal);
+
+            
+            bttnSave = new Button("Save");
+            controls.getChildren().add(bttnSave);
+            bttnSave.addEventFilter(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>(){
+                public void handle(MouseEvent e) {
+                    r.setTranslatedContent(txtTranslation.getText());
+                }
+            });
+            
+            lblTitle = new Label(r.getTitle());
+            lblOriginal = new Label(r.getTextualContent());
+            leftPane = new VBox(lblTitle, lblOriginal);
+
+            txtTranslation = new TextField(r.getTranslatedConent());
+            controls = new HBox(bttnSave);
             rightPane = new VBox(txtTranslation, controls);
+
+            lblTitle.setPrefWidth(100);
+            lblOriginal.setPrefWidth(100);
+            lblOriginal.setPrefHeight(500);
+            
             mainPane.setLeft(leftPane);
             mainPane.setRight(rightPane);
             mainPane.setMargin(leftPane, new Insets(10, 0, 10, 10));
             mainPane.setMargin(rightPane, new Insets(10, 10, 10, 0));
-    
-            lblOriginal = new TextField(r.getTextualContent());
-            txtTranslation = new TextField(r.getTranslatedConent());
-    
-            bttnSave = new Button("Save");
-            bttnSaveAndQuit = new Button("Save and quit");
-
         }
     }
 }
