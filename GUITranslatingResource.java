@@ -87,7 +87,7 @@ public class GUITranslatingResource extends Scene{
             r.setTranslatedContent(txtTranslation.getText());
             /*
             try{
-                Movie[] m = new Movie[totalMovies];
+                ArrayList<Resource> tempArrayList = AppLogin.getArraylistResource();
                 for(int i = 0; i<m.length; i++)
                     m[i] = data.get(i);
                 FileOutputStream fos = new FileOutputStream("Movies.oop");
