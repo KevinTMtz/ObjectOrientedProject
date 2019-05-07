@@ -473,6 +473,7 @@ public class GUIInformationManager extends Scene {
             r.setCurrentStatus("finding");
             r.setTranslatedContent("");
         }
+
         /*
         private void saveData(){
             // Create the arraylist
