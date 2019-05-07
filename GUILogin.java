@@ -24,7 +24,7 @@ import javafx.stage.Stage;
 
 public class GUILogin extends Application {
     private static Stage newStage;
-    Scene signInScene, signUpScene;
+    private static Scene signInScene, signUpScene;
     private static TextField txtUserLogin, txtPasswordLogin, txtUserRegister, txtPasswordRegister;
 	private static ComboBox typeOfUser;
 
@@ -170,9 +170,10 @@ public class GUILogin extends Application {
         signUpButton.addEventFilter(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
             public void handle (MouseEvent e) {
                 AppLogin.registerUser();
+                backLogin();
             }
         });
-        
+
         Button buttonChangeToSignIn = new Button("Cancel sign up");
         buttonChangeToSignIn.setOnAction(e -> newStage.setScene(signInScene));
         signUpControlsPane.getChildren().add(buttonChangeToSignIn);
@@ -225,7 +226,11 @@ public class GUILogin extends Application {
     public static void changeScene(Scene scene) {
         newStage.setScene(scene);
     }
-
+    public static void backLogin(){
+        changeScene(signInScene);
+        txtUserLogin.setText("");
+        txtPasswordLogin.setText("");
+    }
     public static void main(String[] args) {
         launch(args);
     }
