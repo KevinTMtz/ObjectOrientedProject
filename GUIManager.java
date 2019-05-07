@@ -118,7 +118,7 @@ public class GUIManager extends Scene {
             controlsPane.getChildren().add(buttonSave);
             buttonSave.addEventFilter(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
                 public void handle (MouseEvent e) {
-                    updateUser();
+                    // updateUser();
                 }
             });
             
@@ -186,32 +186,30 @@ public class GUIManager extends Scene {
         }
 
         public void updateUser() {
-            try {
-                ArrayList<User> tempArrayList = AppLogin.getArraylistUser();
-                int userIndex = lvUser.getSelectionModel().getSelectedIndex();
-    
-                User updatedUser = null;
-                
-                if (((String) typeOfUser.getValue()).equals("Manager")) {
-                    updatedUser = new Manager();
-                } else if (((String) typeOfUser.getValue()).equals("Information Manager")) {
-                    updatedUser = new InformationManager();
-                } else if (((String) typeOfUser.getValue()).equals("Translator")) {
-                    updatedUser = new Translator();
-                } else if (((String) typeOfUser.getValue()).equals("Consultant")) {
-                    updatedUser = new Consultant();
-                }
-    
-                updatedUser.setUsername(txtUsername.getText());
-                updatedUser.setPassword(txtPassword.getText());
-                updatedUser.setUserType((String) typeOfUser.getValue());
-    
-                data.set(userIndex, updatedUser);
-                tempArrayList.set(userIndex, updatedUser);
-                AppLogin.setArraylistUser(tempArrayList);
-            } catch (EmptyFieldException efe) {
-                System.out.println(efe.getMessage());
+            ArrayList<User> tempArrayList = AppLogin.getArraylistUser();
+
+            User newUser = lvUser.getSelectionModel().getSelectedItem();
+            int userIndex = lvUser.getSelectionModel().getSelectedIndex();
+
+            User updatedUser = null;
+            
+            if (((String) typeOfUser.getValue()).equals("Manager")) {
+                newUser = new Manager();
+            } else if (((String) typeOfUser.getValue()).equals("Information Manager")) {
+                newUser = new InformationManager();
+            } else if (((String) typeOfUser.getValue()).equals("Translator")) {
+                newUser = new Translator();
+            } else if (((String) typeOfUser.getValue()).equals("Consultant")) {
+                newUser = new Consultant();
             }
+
+            newUser.setUsername(txtUsername.getText());
+            newUser.setPassword(txtPassword.getText());
+            newUser.setUserType((String) typeOfUser.getValue());
+
+            data.set(userIndex, element);
+            tempArrayList.set(userIndex, newUser);
+            AppLogin.setArraylistUser(tempArrayList);
         }
     }
 }
