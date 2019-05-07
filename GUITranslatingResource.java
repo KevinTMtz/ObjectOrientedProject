@@ -40,6 +40,7 @@ public class GUITranslatingResource extends Scene{
     private static Label lblTitle, lblOriginal;
     private static Button bttnSave;
     private static BorderPane mainPane;
+    private static Resource r;
 
     public GUITranslatingResource(Resource r) {
         super(new Translating(r));
@@ -48,6 +49,8 @@ public class GUITranslatingResource extends Scene{
     public static class Translating extends GridPane{
         public Translating(Resource r) {
 
+            this.r = r;
+
             mainPane= new BorderPane();
             getChildren().add(mainPane);
             
@@ -55,7 +58,7 @@ public class GUITranslatingResource extends Scene{
             controls.getChildren().add(bttnSave);
             bttnSave.addEventFilter(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>(){
                 public void handle(MouseEvent e) {
-                    save();
+                    r.setTranslatedContent(txtTranslation.getText());
                 }
             });
             
@@ -77,8 +80,6 @@ public class GUITranslatingResource extends Scene{
             mainPane.setMargin(rightPane, new Insets(10, 10, 10, 0));
         }
         private static void save(){
-            r.setTranslatedContent(txtTranslation.getText());
-
             /*
             try{
                 Movie[] m = new Movie[totalMovies];
