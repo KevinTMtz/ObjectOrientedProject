@@ -193,6 +193,10 @@ public class GUILogin extends Application {
         Add style to the scene
         scene.getStylesheets().add(GUILogin.class.getResource("GUILogin.css").toExternalForm());
         */
+
+        newStage.setOnHiding( event -> {
+            AppLogin.persist();
+        });
         
         newStage.setScene(signInScene);
         newStage.show();
