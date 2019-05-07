@@ -169,7 +169,10 @@ public class GUITranslator extends Scene {
                     infoPane.getChildren().remove(lblPath);
                     infoPane.getChildren().remove(txtPath);
                     infoPane.getChildren().remove(lblClass);
+                    infoPane.getChildren().remove(bttnTranslate);
 
+                    infoPane.add(bttnTranslate, 1, 8);
+                    
                     if(lvResource.getSelectionModel().getSelectedItem() instanceof Textual){
                         System.out.println("The selected resource is: textual");
                         Textual t=(Textual) lvResource.getSelectionModel().getSelectedItem();
