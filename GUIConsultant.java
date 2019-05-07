@@ -144,6 +144,10 @@ public class GUIConsultant extends Scene {
 
                 //For the margins
                 infoPane.setMargin(lblClass, new Insets(10, 0, 0, 0));
+                Button bttnLogOut=new Button("Log out");
+                infoPane.add(bttnLogOut, 2, 15);
+                bttnLogOut.setAlignment(Pos.BOTTOM_RIGHT);
+                bttnLogOut.setOnAction(e -> GUILogin.backLogin());
 
                 //Escribe tu código a partir de aquií. Agrega los botones al rightPane
             

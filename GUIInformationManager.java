@@ -155,7 +155,10 @@ public class GUIInformationManager extends Scene {
 
                 //bttnContent.setOnAction(e->newStage);
 
-
+                Button bttnLogOut=new Button("Log out");
+                infoPane.add(bttnLogOut, 2, 15);
+                bttnLogOut.setAlignment(Pos.BOTTOM_RIGHT);
+                bttnLogOut.setOnAction(e -> GUILogin.backLogin());
 
                 //The events
                 lvResource.addEventFilter(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
