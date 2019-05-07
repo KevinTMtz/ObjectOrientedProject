@@ -1,4 +1,4 @@
 public interface IPersist {
-    public void persist(Resource[] resource);
-    public Resource retreive();
+    public void persist(Recurso[] resource);
+    public Recurso retreive();
 }
