@@ -88,11 +88,14 @@ public class GUITranslatingResource extends Scene{
             /*
             try{
                 ArrayList<Resource> tempArrayList = AppLogin.getArraylistResource();
-                for(int i = 0; i<m.length; i++)
-                    m[i] = data.get(i);
+                for(Resource r: tempArrayList){
+                    r[i] = data.get(i);
+                }
+                tempArrayList.add(r);
+                AppLogin.setArraylistResource();
                 FileOutputStream fos = new FileOutputStream("Movies.oop");
                 ObjectOutputStream oos = new ObjectOutputStream(fos);
-                oos.writeObject(m);
+                oos.writeObject(tempArrayList);
                 oos.close();
             } catch(FileNotFoundException fe){
                 Alert alert = new Alert(Alert.AlertType.ERROR);
