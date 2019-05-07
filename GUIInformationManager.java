@@ -315,11 +315,14 @@ public class GUIInformationManager extends Scene {
                     if(recording.isSelected()){
                         getResource(r);
                         AppInformationalManager.addToArray(r);
+                        data.add(r);
                     }
                     if(textual.isSelected()) {
                         getResource(t);
                         AppInformationalManager.addToArray(t);
+                        data.add(t);
                     }      
+                    
                         // Clear the Form
                         newResource();
                         //saveData();
@@ -367,8 +370,26 @@ public class GUIInformationManager extends Scene {
             }
         }
         private void updateResource(){
-            addResource();
-            deleteResource();
+            
+            try {
+                int index=lvResource.getSelectionModel().getSelectedIndex();
+                if(index!=-1){
+                    //Delete it with App...
+                    AppInformationalManager.deleteFromArrayList(index);
+                    data.remove(lvResource.getSelectionModel().getSelectedItem());
+                    // Empty the fields
+                    //saveData();
+                    lvResource.getSelectionModel().clearSelection();
+                    addResource();
+                }else throw new NullPointerException();
+
+            } catch(NullPointerException npe){
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Delete a resource");
+                alert.setHeaderText("Error while deleting a resource");
+                alert.setContentText("You have not selected a resource");
+                alert.showAndWait();
+            }
             /*
             try {
                 addResource();
