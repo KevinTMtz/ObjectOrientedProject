@@ -43,6 +43,7 @@ public class GUITranslatingResource extends Scene{
     private static TextArea txtTranslation;
     private static HBox controls;
     private static Button bttnSave, bttnToAmend, bttnFreeResource;
+    private static int index;
     
     public GUITranslatingResource() {
         super(new SignUpPane());
@@ -56,6 +57,7 @@ public class GUITranslatingResource extends Scene{
             readData();
             for(int i = 0; i<resources.size(); i++){
                 if(resources.get(i).getTranslating()){
+                    index = i;
                     r = resources.get(i);
                     break;
                 }
@@ -70,10 +72,7 @@ public class GUITranslatingResource extends Scene{
             controls.getChildren().add(bttnSave);
             bttnSave.addEventFilter(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>(){
                 public void handle(MouseEvent e) {
-                    save();
-                    /*
-                    Arreglar cuando da OutOfMemory
-                    */
+                    saveData();
                 }
             });
 
@@ -92,12 +91,6 @@ public class GUITranslatingResource extends Scene{
                     FreeResource();
                 }
             });
-
-            try{
-                r.setTextualContent("[This is the textual content and it is exciting because it has automatic text wrap, you can see this because it continues in the next line]");
-            } catch(EmptyFieldException e){
-                System.out.println("Cannot add an empty content");
-            }
 
             lblOriginal = new Text(0,0,r.getTextualContent());
             lblOriginal.setWrappingWidth(300);
@@ -120,23 +113,12 @@ public class GUITranslatingResource extends Scene{
             mainPane.setMargin(leftPane, new Insets(30, 0, 10, 50));
             
         }
-        private void save(){
-            ArrayList<Recurso> temporalArray = resources;
-            resources.clear();
-            r.setTranslatedContent(txtTranslation.getText());
-            resources.add(r);
-            for(int i = 0; i<temporalArray.size(); i++)
-                resources.add(temporalArray.get(i));
-            
-            try {
-                FileOutputStream userResource = new FileOutputStream("build/arrayListResources");
-                ObjectOutputStream resourceWrite = new ObjectOutputStream(userResource);
-                
-                resourceWrite.writeObject(resources);
-                resourceWrite.close();
-            } catch (IOException ioe) {
-                System.out.println(ioe.getMessage());
-            }
+        public static void saveData() {
+            ArrayList<Recurso> tempArray = AppLogin.getArraylistResource();
+
+            tempArray.get(index).setTranslatedContent(txtTranslation.getText());
+
+            AppLogin.setArraylistResource(tempArray);
         }
         private void amend(){
 
@@ -154,7 +136,7 @@ public class GUITranslatingResource extends Scene{
         }
         private void FreeResource(){
             try{
-                r.setCurrentStatus("finding");
+                r.setCurrentStatus("freed");
             } catch (EmptyFieldException e){
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Title cannot be null");

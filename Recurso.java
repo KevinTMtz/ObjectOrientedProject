@@ -81,5 +81,6 @@ public abstract class Recurso implements Serializable{
     public Boolean getTranslating(){
         return translating;
     }
+
     
 }
