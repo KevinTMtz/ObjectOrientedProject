@@ -60,7 +60,26 @@ public abstract class AppLogin implements IPersist {
         }
     }
 
-    // For loading all the saved users
+    // For writing users and resources in files
+    public static void persist() {
+        try {
+            FileOutputStream userFile = new FileOutputStream("build/arrayListUsers");
+            ObjectOutputStream userWrite = new ObjectOutputStream(userFile);
+            
+            FileOutputStream userResource = new FileOutputStream("build/arrayListResources");
+            ObjectOutputStream resourceWrite = new ObjectOutputStream(userFile);
+
+            userWrite.writeObject(arrayListUsers);
+            resourceWrite.writeObject(arrayListResources);
+            
+            userWrite.close();
+            resourceWrite.close();
+        } catch (IOException ioe) {
+            System.out.println(ioe.getMessage());
+        }
+    }
+
+    // For loading all the saved resources & users
     public static void retrieveResourcesAndUsers() {
         try {
             File checkUserArrayList = new File("build/arrayListUsers");
@@ -127,9 +146,6 @@ public abstract class AppLogin implements IPersist {
                 alert.setHeaderText("Enter user and password");
                 alert.showAndWait();
             } else if (!userCheck) {
-                FileOutputStream userFile = new FileOutputStream("build/arrayListUsers");
-                ObjectOutputStream userWrite = new ObjectOutputStream(userFile);
-
                 User newUser = null;
     
                 if (GUILogin.getUserTypeRegister().equals("Manager")) {
@@ -145,26 +161,17 @@ public abstract class AppLogin implements IPersist {
                 newUser.setUsername(GUILogin.getUsernameRegisterValue());
                 newUser.setPassword(GUILogin.getPasswordRegisterValue());
                 newUser.setUserType(GUILogin.getUserTypeRegister());
-
-                arrayListUsers.add(newUser);
     
-                userWrite.writeObject(arrayListUsers);
-                userWrite.close();
+                arrayListUsers.add(newUser);
                 
             } else {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("User not available");
                 alert.setHeaderText("This user, already exist");
                 alert.showAndWait();
-            }
-        } catch (EmptyFieldException e) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Enter all info");
-            alert.setHeaderText("Enter user and password");
-            alert.showAndWait();
-
-        } catch (IOException ioe) {
-            System.out.println(ioe.getMessage());
-        } 
+            } 
+        } catch (EmptyFieldException efe) {
+            System.out.println(efe.getMessage());
+        }
     }
 }
