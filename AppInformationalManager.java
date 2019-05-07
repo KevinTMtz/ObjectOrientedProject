@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 public abstract class AppInformationalManager implements IPersist {
-    private static ArrayList<Resource> resources = new ArrayList<Resource>();
+    private static ArrayList<Resource> resources = AppLogin.getArraylistResource();
 
         public void addToArray(Resource r) throws SameResourceException{
             //Check if it is different from other resources
