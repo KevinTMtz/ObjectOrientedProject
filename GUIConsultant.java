@@ -43,6 +43,7 @@ public class GUIConsultant extends Scene {
     private static BorderPane mainPane;
     private static FlowPane leftPane, rightPane;
     private static GridPane listPane, infoPane;
+    private static Button bttnconsult;
 
     public GUIConsultant() {
         super(new SignUpPane());
@@ -109,6 +110,9 @@ public class GUIConsultant extends Scene {
                 infoPane.add(lblResponsible, 0, 4);
                 txtResponsible=new Text("-");
                 infoPane.add(txtResponsible, 1, 4);
+
+                bttnconsult = new Button("Consult");
+                bttnconsult.setOnAction(e -> beginConsult());
 
                 lblClass=new Label();
 
@@ -242,6 +246,9 @@ public class GUIConsultant extends Scene {
             txtResponsible.setText(r.getResponsibleOfTheFinding());
             txtDuration.setText(""+r.getDuration());
             txtPath.setText(r.getPathOfFile());
+        }
+        private void beginConsult(){
+            GUILogin.changeScene(new GUITranslatingResource());
         }
     }
 }
