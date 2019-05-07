@@ -36,8 +36,8 @@ public class GUITranslatingResource extends Scene{
 
     private static VBox leftPane, rightPane;
     private static HBox controls;
-    private static TextField txtOriginal, txtTranslation;
-    private static Label lblTitle;
+    private static TextField txtTranslation;
+    private static Label lblTitle, lblOriginal;
     private static Button bttnSave, bttnSaveAndQuit;
     private static BorderPane mainPane;
 
@@ -57,10 +57,8 @@ public class GUITranslatingResource extends Scene{
             mainPane.setRight(rightPane);
             mainPane.setMargin(leftPane, new Insets(10, 0, 10, 10));
             mainPane.setMargin(rightPane, new Insets(10, 10, 10, 0));
-
-            //Recibe resource
     
-            txtOriginal = new TextField(r.getTextualContent());
+            lblOriginal = new TextField(r.getTextualContent());
             txtTranslation = new TextField(r.getTranslatedConent());
     
             bttnSave = new Button("Save");
