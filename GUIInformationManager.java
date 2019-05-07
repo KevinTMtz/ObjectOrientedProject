@@ -312,50 +312,18 @@ public class GUIInformationManager extends Scene {
                 else{
                     Recording r=new Recording();
                     Textual t=new Textual();
-                    boolean different=true;
                     if(recording.isSelected()){
                         getResource(r);
-                        for(int i=0; i<resources.size();i++){
-                            if(r.getTitle().equalsIgnoreCase(resources.get(i).getTitle())){
-                                different=false;
-                            }
-                        }
+                        AppInformationalManager.addToArray(r);
                     }
                     if(textual.isSelected()) {
                         getResource(t);
-                        for(int i=0; i<resources.size();i++){
-                            if(t.getTitle().equalsIgnoreCase(resources.get(i).getTitle())){
-                                different=false;
-                            }
-                        }
-                    }
-                    
-                    if(different){
-                        if(recording.isSelected()){
-                            /*FileOutputStream ofs = new FileOutputStream(new File("resources/" +
-                            txtTitle.getText() + ".rcd"));
-                            ObjectOutputStream oos = new ObjectOutputStream(ofs);
-                            // Add the object to my list
-                            oos.writeObject(r);
-                            oos.close();*/
-                            resources.add(r);
-                            data.add(r);
-                        }
-                        if(textual.isSelected()) {
-                            /*FileOutputStream ofs = new FileOutputStream(new File("resources/" +
-                            txtTitle.getText() + ".txtl"));
-                            ObjectOutputStream oos = new ObjectOutputStream(ofs);
-                            // Add the object to my list
-                            oos.writeObject(t);
-                            oos.close();*/
-                            resources.add(t);
-                            data.add(t);
-                        }
+                        AppInformationalManager.addToArray(t);
+                    }      
                         // Clear the Form
                         newResource();
-                        saveData();
+                        //saveData();
                         lvResource.getSelectionModel().clearSelection();
-                    }else throw new SameResourceException("You already added this resource");
                 }
                 
             }catch(EmptyFieldException efe){
@@ -379,31 +347,18 @@ public class GUIInformationManager extends Scene {
             }
         }
         private void deleteResource(){
-            try{
-                if(lvResource.getSelectionModel().getSelectedIndex()!=-1){
-                    //Check which type of resource it is
-                    boolean deleted=false;
-                    resources.remove(lvResource.getSelectionModel().getSelectedIndex());
-                    if(lvResource.getSelectionModel().getSelectedItem() instanceof Recording && !deleted){
-                        deleted=true;
-                        Recording r=(Recording)lvResource.getSelectionModel().getSelectedItem();
-                        /*File recordingD= new File("resources/"+r.getTitle()+".rcd");
-                        recordingD.delete();*/
-                        data.remove(r);
-                    }
-                    if(lvResource.getSelectionModel().getSelectedItem() instanceof Textual&& !deleted){
-                        deleted=true;
-                        Textual t=(Textual)lvResource.getSelectionModel().getSelectedItem();
-                        /*File textualD= new File("resources/"+t.getTitle()+".txtl");
-                        textualD.delete();*/
-                        data.remove(t);
-                    }
+            try {
+                int index=lvResource.getSelectionModel().getSelectedIndex();
+                if(index!=-1){
+                    //Delete it with App...
+                    AppInformationalManager.deleteFromArrayList(index);
+                    data.remove(lvResource.getSelectionModel().getSelectedItem());
                     // Empty the fields
                     newResource();
-                    saveData();
+                    //saveData();
                     lvResource.getSelectionModel().clearSelection();
-                }
-                else throw new NullPointerException();
+                }else throw new NullPointerException();
+
             } catch(NullPointerException npe){
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Delete a resource");
@@ -411,10 +366,28 @@ public class GUIInformationManager extends Scene {
                 alert.setContentText("You have not selected a resource");
                 alert.showAndWait();
             }
-            
         }
         private void updateResource(){
-            
+            try {
+                addResource();
+                int index=lvResource.getSelectionModel().getSelectedIndex();
+                if(index!=-1){
+                    //Delete it with App...
+                    AppInformationalManager.deleteFromArrayList(index);
+                    data.remove(lvResource.getSelectionModel().getSelectedItem());
+                    // Empty the fields
+                    newResource();
+                    //saveData();
+                    lvResource.getSelectionModel().clearSelection();
+                }else throw new NullPointerException();
+            } catch(NullPointerException npe){
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Delete a resource");
+                alert.setHeaderText("Error while deleting a resource");
+                alert.setContentText("You have not selected a resource");
+                alert.showAndWait();
+            }
+            /*
             try {
                 if(lvResource.getSelectionModel().getSelectedIndex()!=-1){
                     //Add it again
@@ -426,26 +399,14 @@ public class GUIInformationManager extends Scene {
                         System.out.println("It is a recording");
                         deleted=true;
                         Recording r=(Recording)lvResource.getSelectionModel().getSelectedItem();
-                        /*File recordingD= new File("resources/"+r.getTitle()+".rcd");
-                        recordingD.delete();*/
                         data.remove(r);
                     }
                     if(lvResource.getSelectionModel().getSelectedItem() instanceof Textual && !deleted){
                         deleted=true;
                         System.out.println("It is a textual");
                         Textual t=(Textual)lvResource.getSelectionModel().getSelectedItem();
-                        /*File textualD= new File("resources/"+t.getTitle()+".txtl");
-                        textualD.delete();*/
                         data.remove(t);
-                    }
-                } else throw new NullPointerException();
-                }catch(NullPointerException npe){
-                    Alert alert = new Alert(Alert.AlertType.ERROR);
-                    alert.setTitle("Update a resource");
-                    alert.setHeaderText("Error while updating a resource");
-                    alert.setContentText("You have not selected a resource");
-                    alert.showAndWait();
-                }
+                    }*/
         }
         private void selectResource() {
             //Remove previous nodes
@@ -530,7 +491,7 @@ public class GUIInformationManager extends Scene {
             r.setCurrentStatus("finding");
             r.setTranslatedContent("");
         }
-        
+        /*
         private void saveData(){
             // Create the arraylist
             ArrayList<Resource> temp = new ArrayList<>();
@@ -550,8 +511,8 @@ public class GUIInformationManager extends Scene {
             } catch (IOException ioe) {
                 System.out.println(ioe.getMessage());
             }            
-        }
-        private void readData(){
+        }*/
+        /*private void readData(){
             try {
                 FileInputStream fis = new FileInputStream("resources/resources.list");
                 ObjectInputStream ois = new ObjectInputStream(fis);
@@ -578,7 +539,7 @@ public class GUIInformationManager extends Scene {
             } catch(ClassNotFoundException cnfe){
                 System.out.println(cnfe.getMessage());
             }
-        }
+        }*/
         
     }
 }
