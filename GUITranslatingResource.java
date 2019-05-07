@@ -49,8 +49,6 @@ public class GUITranslatingResource extends Scene{
     public static class Translating extends GridPane{
         public Translating(Resource r) {
 
-            this.r = r;
-
             mainPane= new BorderPane();
             getChildren().add(mainPane);
             
