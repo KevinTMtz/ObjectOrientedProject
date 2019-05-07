@@ -50,7 +50,6 @@ public class GUITranslatingResource extends Scene{
 
             mainPane= new BorderPane();
             getChildren().add(mainPane);
-
             
             bttnSave = new Button("Save");
             controls.getChildren().add(bttnSave);
