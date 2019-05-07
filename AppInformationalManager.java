@@ -22,7 +22,14 @@ public abstract class AppInformationalManager {
             //Check if it is different from other resources
             boolean different=true;
             for(int i=0; i<resources.size(); i++){
-                if(t.getTitle().equals(resources.get(i).getTitle())){
+                if(t.getTitle().equals(resources.get(i).getTitle())
+                 &&(t.getCurrentStatus().equals(resources.get(i).getCurrentStatus()))
+                 &&(t.getLanguage().equals(resources.get(i).getLanguage()))
+                 &&(t.getRegionOfOrigin().equals(resources.get(i).getRegionOfOrigin()))
+                 &&(t.getResponsibleOfTheFinding().equals(resources.get(i).getResponsibleOfTheFinding()))
+                 &&(t.getTextualContent().equals(resources.get(i).getTextualContent()))
+                 &&(t.getTranslatedConent().equals(resources.get(i).getTranslatedConent()))
+                 ){
                     different=false;
                 }
             }
