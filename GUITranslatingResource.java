@@ -56,27 +56,26 @@ public class GUITranslatingResource extends Scene{
             controls.getChildren().add(bttnSave);
             bttnSave.addEventFilter(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>(){
                 public void handle(MouseEvent e) {
-                    saveResource();
+                    r.setTranslatedContent(txtTranslation.getText());
                 }
             });
             
             lblTitle = new Label(r.getTitle());
             lblOriginal = new Label(r.getTextualContent());
             leftPane = new VBox(lblTitle, lblOriginal);
+
             txtTranslation = new TextField(r.getTranslatedConent());
-            lblOriginal = new TextField(r.getTextualContent());
-            
             controls = new HBox(bttnSave);
             rightPane = new VBox(txtTranslation, controls);
+
+            lblTitle.setPrefWidth(100);
+            lblOriginal.setPrefWidth(100);
+            lblOriginal.setPrefHeight(500);
             
             mainPane.setLeft(leftPane);
             mainPane.setRight(rightPane);
             mainPane.setMargin(leftPane, new Insets(10, 0, 10, 10));
             mainPane.setMargin(rightPane, new Insets(10, 10, 10, 0));
-        }
-
-        public static void saveResource() {
-            r.setTranslatedContent(txtTranslation.getText());
         }
     }
 }
