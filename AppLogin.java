@@ -122,7 +122,7 @@ public abstract class AppLogin implements IPersist {
     }
 
     // Add user in the register window
-    public static void addUser() {
+    public static void registerUser() {
         try {
             Boolean userCheck = false;
 
@@ -167,19 +167,19 @@ public abstract class AppLogin implements IPersist {
         }
     }
 
-    public ArrayList<User> getArraylistUser() {
+    public static ArrayList<User> getArraylistUser() {
         return arrayListUsers;
     }
 
-    public void setArraylistUser(ArrayList<User> tempArrayList) {
+    public static void setArraylistUser(ArrayList<User> tempArrayList) {
         arrayListUsers = tempArrayList;
     }
 
-    public ArrayList<Resource> getArraylistResource() {
+    public static ArrayList<Resource> getArraylistResource() {
         return arrayListResources;
     }
 
-    public void setArraylistResource(ArrayList<Resource> tempArrayList) {
+    public static void setArraylistResource(ArrayList<Resource> tempArrayList) {
         arrayListResources = tempArrayList;
     }
 }

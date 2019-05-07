@@ -169,7 +169,7 @@ public class GUILogin extends Application {
         signUpControlsPane.getChildren().add(signUpButton);
         signUpButton.addEventFilter(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
             public void handle (MouseEvent e) {
-                AppLogin.addUser();
+                AppLogin.registerUser();
             }
         });
         
