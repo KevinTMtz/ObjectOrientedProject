@@ -117,11 +117,7 @@ public class GUITranslator extends Scene {
                 txtPath=new Text("-");
                 
                 bttnTranslate = new Button("Translate");
-                try{
-                    bttnTranslate.setOnAction(e -> GUILogin.changeScene(new GUITranslatingResource(lvResource.getSelectionModel().getSelectedItem())));
-                } catch(NullPointerException n){
-                    System.out.println("Please select a resource");
-                }
+                bttnTranslate.setOnAction(e -> GUILogin.changeScene(new GUITranslatingResource(lvResource.getSelectionModel().getSelectedItem())));
 
                 lblClass.setFont(Font.font("Verdana", FontWeight.BOLD, 10));
                 lvResource.addEventFilter(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
@@ -158,42 +154,21 @@ public class GUITranslator extends Scene {
             
             rightPane.getChildren().add(infoPane);
         }
-        private void selectResource() {
-            //Remove previous nodes
-            infoPane.getChildren().remove(lblPages);
-            infoPane.getChildren().remove(txtPages);
-            infoPane.getChildren().remove(lblWords);
-            infoPane.getChildren().remove(txtWords);
-            infoPane.getChildren().remove(lblDuration);
-            infoPane.getChildren().remove(txtDuration);
-            infoPane.getChildren().remove(lblPath);
-            infoPane.getChildren().remove(txtPath);
-            infoPane.getChildren().remove(lblClass);
-            infoPane.getChildren().remove(bttnTranslate);
-            infoPane.add(bttnTranslate, 1, 8);
-
-            if(lvResource.getSelectionModel().getSelectedItem() instanceof Textual){
-                System.out.println("The selected resource is: textual");
-                Textual t=(Textual) lvResource.getSelectionModel().getSelectedItem();
-                setResource(t);
-                lblClass.setText("Text info:");
-                infoPane.add(lblClass, 0, 5);
-                infoPane.add(lblPages, 0, 6);
-                infoPane.add(txtPages, 1, 6);
-                infoPane.add(lblWords, 0, 7);
-                infoPane.add(txtWords, 1, 7);
+        private Resource selectResource() {
+            try{
+                if(lvResource.getSelectionModel().getSelectedIndex()!=-1){
+                    return lvResource.getSelectionModel().getSelectedItem();
+                }
+                else throw new NullPointerException();
+            } catch(NullPointerException npe){
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Translating resource");
+                alert.setHeaderText("Error while translating a new resource");
+                alert.setContentText("You have not selected a resource");
+                alert.showAndWait();
+                return new Recording();
             }
-            if(lvResource.getSelectionModel().getSelectedItem() instanceof Recording){
-                System.out.println("The selected resource is: recording");
-                Recording r=(Recording) lvResource.getSelectionModel().getSelectedItem();
-                setResource(r);
-                lblClass.setText("Audio info: ");
-                infoPane.add(lblClass, 0, 5);
-                infoPane.add(lblDuration, 0, 6);
-                infoPane.add(txtDuration, 1, 6);
-                infoPane.add(lblPath, 0, 7);
-                infoPane.add(txtPath, 1, 7);
-            }
+            
         }
         private void readData(){
             try {
