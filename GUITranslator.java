@@ -154,7 +154,7 @@ public class GUITranslator extends Scene {
             
             rightPane.getChildren().add(infoPane);
         }
-        private Resources selectResource() {
+        private Resource selectResource() {
             try{
                 if(lvResource.getSelectionModel().getSelectedIndex()!=-1){
                     return lvResource.getSelectionModel().getSelectedItem();
@@ -166,6 +166,7 @@ public class GUITranslator extends Scene {
                 alert.setHeaderText("Error while translating a new resource");
                 alert.setContentText("You have not selected a resource");
                 alert.showAndWait();
+                return new Recording();
             }
             
         }
