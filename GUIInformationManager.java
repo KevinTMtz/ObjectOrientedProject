@@ -298,7 +298,7 @@ public class GUIInformationManager extends Scene {
             infoPane.getChildren().remove(txtPath);
             infoPane.getChildren().remove(lblStatus);
             infoPane.getChildren().remove(txtStatus);
-
+            infoPane.add(bttnContent, 1, 11);
             
 
         }
