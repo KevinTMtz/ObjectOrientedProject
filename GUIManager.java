@@ -130,6 +130,14 @@ public class GUIManager extends Scene {
                 }
             });
             
+            Button buttonLogOut = new Button("Log out");
+            controlsPane.getChildren().add(buttonLogOut);
+            buttonLogOut.addEventFilter(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+                public void handle (MouseEvent e) {
+                    logOut();
+                }
+            });
+            
             controlsPane.setAlignment(Pos.CENTER);
             controlsPane.setPadding(new Insets(20));
             controlsPane.setVgap(10);
@@ -286,6 +294,10 @@ public class GUIManager extends Scene {
     
                 alert.showAndWait();
             }
+        }
+
+        public void logOut(){
+            GUILogin.backLogin();
         }
     }
 }

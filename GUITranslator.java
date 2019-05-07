@@ -33,7 +33,6 @@ import java.io.IOException;
 public class GUITranslator extends Scene {
     private static ObservableList<Recurso> data;
     private static ListView<Recurso> lvResource;
-    private static ArrayList<Recurso> resources = new ArrayList<Recurso>();
     private static Text txtTitle, txtLanguage, txtRegion, txtResponsible;
     private static Label lblInfo, lblTitle, lblLanguage, lblRegion, lblResponsible, lblClass;
     private static Text txtPages, txtWords;
@@ -44,7 +43,7 @@ public class GUITranslator extends Scene {
     private static BorderPane mainPane;
     private static FlowPane leftPane, rightPane;
     private static GridPane listPane, infoPane;
-    private static Stage newStage;
+    private static int index;
 
     public GUITranslator() {
         super(new SignUpPane());
@@ -53,8 +52,6 @@ public class GUITranslator extends Scene {
     public static class SignUpPane extends GridPane {
         public SignUpPane() {
             this.setAlignment(Pos.CENTER);
-            for(int i = 0; i<resources.size(); i++)
-                resources.get(i).setTranslating(false);
 
             mainPane= new BorderPane();
             getChildren().add(mainPane);
@@ -132,6 +129,11 @@ public class GUITranslator extends Scene {
                 
                 bttnTranslate = new Button("Translate");
                 bttnTranslate.setOnAction(e -> beginTranslate());
+                
+                Button bttnLogOut=new Button("Log out");
+                infoPane.add(bttnLogOut, 1, 15);
+                bttnLogOut.setAlignment(Pos.BOTTOM_RIGHT);
+                bttnLogOut.setOnAction(e -> GUILogin.backLogin());
 
                 lblClass.setFont(Font.font("Verdana", FontWeight.BOLD, 10));
                 lvResource.addEventFilter(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
@@ -180,8 +182,9 @@ public class GUITranslator extends Scene {
                 }
                 else{
                     lvResource.getSelectionModel().getSelectedItem().setCurrentStatus("translating");
-                    lvResource.getSelectionModel().getSelectedItem().setTranslating(true);
-                    GUILogin.changeScene(new GUITranslatingResource());
+                    index = lvResource.getSelectionModel().getSelectedIndex();
+                    GUILogin.changeScene(new GUITranslatingResource(index));
+
                 }
             } catch (EmptyFieldException e){
                 Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -265,5 +268,8 @@ public class GUITranslator extends Scene {
             txtDuration.setText(""+r.getDuration());
             txtPath.setText(r.getPathOfFile());
         }
+        public static int getIndex() {
+            return index;
+        } 
     }
 }

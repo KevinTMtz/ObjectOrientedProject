@@ -43,25 +43,19 @@ public class GUIConsultorResource extends Scene{
     private static Text txtTranslation;
     private static HBox controls;
     private static Button bttnSave, bttnToAmend, bttnFreeResource, bttnBack;
-    private static int index;
     
-    public GUIConsultorResource() {
-        super(new SignUpPane());
+    
+    public GUIConsultorResource(int index) {
+        super(new SignUpPane(index));
     }
 
     public static class SignUpPane extends GridPane{
-        public SignUpPane() {
+        private static int index;
+        public SignUpPane(int index) {
+            this.index=index;
             this.setAlignment(Pos.CENTER);
             //select the resource to translate
-            resources = new ArrayList<Recurso>();
-            readData();
-            for(int i = 0; i<resources.size(); i++){
-                if(resources.get(i).getTranslating()){
-                    index = i;
-                    r = resources.get(i);
-                    break;
-                }
-            }    
+            resources = new ArrayList<Recurso>();  
             mainPane = new BorderPane();
             mainPane.setPrefWidth(900);
             mainPane.setPrefHeight(620);
@@ -83,7 +77,7 @@ public class GUIConsultorResource extends Scene{
             txtTranslation.prefWidth(300);
             lblOriginal.prefHeight(500);
             lblOriginal.prefWidth(300);
-
+            setInfo();
             rightPane = new VBox();
             rightPane.getChildren().add(txtTranslation);
             mainPane.setBottom(controls);
@@ -96,10 +90,11 @@ public class GUIConsultorResource extends Scene{
             mainPane.setMargin(leftPane, new Insets(30, 0, 10, 50));
             
         }
-        private void readData(){
-            for(int i=0; i<AppLogin.getArraylistResource().size(); i++){
-                resources.add(AppLogin.getArraylistResource().get(i));
-            }
+        private void setInfo(){
+            String translation = AppLogin.getArraylistResource().get(index).getTranslatedConent();
+            txtTranslation.setText(translation);
+            String original = AppLogin.getArraylistResource().get(index).getTextualContent();
+            lblOriginal.setText(original);
         }
         private void goBack(){
             GUILogin.changeScene(new GUIConsultant());
