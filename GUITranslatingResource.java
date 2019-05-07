@@ -47,7 +47,9 @@ public class GUITranslatingResource extends Scene{
 
     public static class Translating extends GridPane{
         public Translating(Recurso r) {
-            r.setCurrentStatus("translating");
+            try{
+                r.setCurrentStatus("translating");
+            } catch (EmptyFieldException e){}
 
             mainPane= new BorderPane();
             getChildren().add(mainPane);
@@ -119,10 +121,14 @@ public class GUITranslatingResource extends Scene{
             */
         }
         private static void free(Recurso r){
-            r.setCurrentStatus("finding");
+            try{
+                r.setCurrentStatus("finding");
+            } catch (EmptyFieldException e){}
         }
         private static void amend(Recurso r){
-            r.setCurrentStatus("to amend");
+            try{
+                r.setCurrentStatus("to amend");
+            } catch (EmptyFieldException e){}
         }
     }
 }
