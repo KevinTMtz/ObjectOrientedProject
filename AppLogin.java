@@ -4,9 +4,11 @@ import java.io.FileNotFoundException;
 import javafx.scene.control.*;
 import java.util.ArrayList;
 
+import javax.annotation.Resource;
+
 public abstract class AppLogin implements IPersist {
     private static ArrayList<User> arrayListUsers;
-    private static ArrayList<Resource> arrayListResource;
+    private static ArrayList<Resource> arrayListResources;
 
     // Sign in
     public static void signIn() {
@@ -59,12 +61,13 @@ public abstract class AppLogin implements IPersist {
     }
 
     // For loading all the saved users
-    public static void loadUsers() {
+    public static void retrieveResourcesAndUsers() {
         try {
-            File checkArrayList = new File("users/arrayListUsers");
+            File checkUserArrayList = new File("build/arrayListUsers");
+            File checkResourceArrayList = new File("build/arrayListResources");
 
-            if (checkArrayList.exists()) {
-                FileInputStream fis = new FileInputStream("users/arrayListUsers");
+            if (checkUserArrayList.exists()) {
+                FileInputStream fis = new FileInputStream("build/arrayListUsers");
                 ObjectInputStream ois = new ObjectInputStream(fis);
 
                 arrayListUsers = new ArrayList<User>();
@@ -74,9 +77,28 @@ public abstract class AppLogin implements IPersist {
             } else {
                 arrayListUsers = new ArrayList<User>();
 
-                FileOutputStream fos = new FileOutputStream("users/arrayListUsers");
+                FileOutputStream fos = new FileOutputStream("build/arrayListUsers");
                 ObjectOutputStream oos = new ObjectOutputStream(fos);
                 oos.writeObject(arrayListUsers);
+                
+                oos.close();
+                fos.close();
+            }
+
+            if (checkResourceArrayList.exists()) {
+                FileInputStream fis = new FileInputStream("build/arrayListResources");
+                ObjectInputStream ois = new ObjectInputStream(fis);
+
+                arrayListResources = new ArrayList<Resource>();
+                arrayListResources = (ArrayList<Resource>) ois.readObject();
+                
+                ois.close();
+            } else {
+                arrayListResources = new ArrayList<Resource>();
+
+                FileOutputStream fos = new FileOutputStream("build/arrayListResources");
+                ObjectOutputStream oos = new ObjectOutputStream(fos);
+                oos.writeObject(arrayListResources);
                 
                 oos.close();
                 fos.close();
@@ -105,7 +127,7 @@ public abstract class AppLogin implements IPersist {
                 alert.setHeaderText("Enter user and password");
                 alert.showAndWait();
             } else if (!userCheck) {
-                FileOutputStream userFile = new FileOutputStream("users/arrayListUsers");
+                FileOutputStream userFile = new FileOutputStream("build/arrayListUsers");
                 ObjectOutputStream userWrite = new ObjectOutputStream(userFile);
 
                 User newUser = null;
