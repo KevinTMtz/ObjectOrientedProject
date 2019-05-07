@@ -207,7 +207,7 @@ public class GUIManager extends Scene {
             newUser.setPassword(txtPassword.getText());
             newUser.setUserType((String) typeOfUser.getValue());
 
-            data.set(userIndex, element);
+            data.set(userIndex, newUser);
             tempArrayList.set(userIndex, newUser);
             AppLogin.setArraylistUser(tempArrayList);
         }
