@@ -231,11 +231,6 @@ public class GUIInformationManager extends Scene {
                     } 
       
                 };
-                bttnContent.addEventFilter(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
-                    public void handle(MouseEvent a){
-                        displayContent();
-                    }
-                });
 
                 // set event to checkbox 
                 recording.setOnAction(eventRecording); 
