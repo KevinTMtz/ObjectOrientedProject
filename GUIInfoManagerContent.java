@@ -31,7 +31,7 @@ public class GUIInfoManagerContent extends Scene {
     }
 
     public static class AddContentPane extends BorderPane {
-        private TextArea txtContent;
+        private static TextArea txtContent;
         private Button saveButton, returnButton;
 
         public AddContentPane() {
@@ -64,7 +64,7 @@ public class GUIInfoManagerContent extends Scene {
             controlsPane.getChildren().add(saveButton);
             saveButton.addEventFilter(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
                 public void handle (MouseEvent e) {
-                    
+                    saveContent();
                 }
             });
 
@@ -72,7 +72,7 @@ public class GUIInfoManagerContent extends Scene {
             controlsPane.getChildren().add(returnButton);
             returnButton.addEventFilter(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
                 public void handle (MouseEvent e) {
-                    
+                    GUILogin.changeScene(new GUIInformationManager());
                 }
             });
             
@@ -80,6 +80,30 @@ public class GUIInfoManagerContent extends Scene {
             controlsPane.setPadding(new Insets(20));
             controlsPane.setVgap(10);
             controlsPane.setHgap(10);
+
+            setInfo();
+        }
+
+        public static void setInfo() {
+            String content = AppLogin.getArraylistResource().get(GUIInformationManager.getIndex()).getTextualContent();
+
+            txtContent.setText(content);
+        }
+
+        public static void saveContent() {
+            try {
+                ArrayList<Recurso> tempArray = AppLogin.getArraylistResource();
+
+                tempArray.get(GUIInformationManager.getIndex()).setTextualContent(txtContent.getText());
+    
+                AppLogin.setArraylistResource(tempArray);
+            } catch (EmptyFieldException efe) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("TextArea empty");
+                alert.setHeaderText("Error while adding content");
+                alert.setContentText("Content can't be empty");
+                alert.showAndWait();
+            }
         }
     }
 }

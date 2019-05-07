@@ -153,10 +153,12 @@ public class GUIInformationManager extends Scene {
                 bttnContent.setAlignment(Pos.CENTER);
                 bttnContent.setOnAction(e -> GUILogin.changeScene(new GUIInfoManagerContent()));
 
-                infoPane.add(bttnContent, 1, 11);
                 //bttnContent.setOnAction(e->newStage);
 
-
+                Button bttnLogOut=new Button("Log out");
+                infoPane.add(bttnLogOut, 2, 15);
+                bttnLogOut.setAlignment(Pos.BOTTOM_RIGHT);
+                bttnLogOut.setOnAction(e -> GUILogin.backLogin());
 
                 //The events
                 lvResource.addEventFilter(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
@@ -299,7 +301,7 @@ public class GUIInformationManager extends Scene {
             infoPane.getChildren().remove(txtPath);
             infoPane.getChildren().remove(lblStatus);
             infoPane.getChildren().remove(txtStatus);
-
+            infoPane.add(bttnContent, 1, 11);
             
 
         }
@@ -516,11 +518,15 @@ public class GUIInformationManager extends Scene {
                 System.out.println(ioe.getMessage());
             }            
         }*/
+        
         private void readData(){
             for(int i=0; i<AppLogin.getArraylistResource().size(); i++){
                 data.add(AppLogin.getArraylistResource().get(i));
             }
         }
-        
     }
+
+    public static int getIndex() {
+        return(lvResource.getSelectionModel().getSelectedIndex());
+    } 
 }
