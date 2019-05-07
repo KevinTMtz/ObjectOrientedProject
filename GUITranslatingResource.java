@@ -38,7 +38,7 @@ public class GUITranslatingResource extends Scene{
     private static Recurso r;
     private static BorderPane mainPane;
     private static VBox leftPane, rightPane;
-    private static Text lblOriginal;
+    private static Label lblOriginal;
     private static TextField txtTranslation;
     private static HBox controls;
     private static Button bttnSave, bttnToAmend;
@@ -88,15 +88,13 @@ public class GUITranslatingResource extends Scene{
                 System.out.println("Cannot add an empty content");
             }
 
-            lblOriginal = new Text(r.getTextualContent());
+            lblOriginal = new Label(r.getTextualContent());
             txtTranslation = new TextField(r.getTranslatedConent());
             
-            /*
             lblOriginal.setPrefHeight(500);
-            lblOriginal.setPrefWidth(500);
-            */
+            lblOriginal.setPrefWidth(300);
             txtTranslation.setPrefHeight(500);
-            txtTranslation.setPrefWidth(500);
+            txtTranslation.setPrefWidth(300);
 
             rightPane = new VBox();
             rightPane.getChildren().add(txtTranslation);
