@@ -227,9 +227,9 @@ public class GUITranslator extends Scene {
             // Add the resources
             try {
                 // Save the file
-                File resourceFile = new File("resources/resources.list");
+                File resourceFile = new File("build/arrayListResources");
                 resourceFile.delete();
-                FileOutputStream fos = new FileOutputStream("resources/resources.list");
+                FileOutputStream fos = new FileOutputStream("build/arrayListResources");
                 ObjectOutputStream oos = new ObjectOutputStream(fos);
                 oos.writeObject(temp);
                 oos.close();

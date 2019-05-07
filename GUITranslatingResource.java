@@ -42,16 +42,16 @@ public class GUITranslatingResource extends Scene{
     public GUITranslatingResource() {
         super(new Translating());
     }
-
-    public static class Translating extends GridPane{
+    
+    public static class Translating extends HBox{
         public  Translating() {
-
+    
             txtOriginal = new TextField();
             txtTranslation = new TextField();
-
+    
             bttnSave = new Button("Save");
             bttnSaveAndQuit = new Button("Save and quit");
-
+    
             controls = new HBox(bttnSave, bttnSaveAndQuit);
             leftPane = new VBox(txtOriginal);
             rightPane = new VBox(txtTranslation, controls);
