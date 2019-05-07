@@ -64,7 +64,7 @@ public class GUIInfoManagerContent extends Scene {
             controlsPane.getChildren().add(saveButton);
             saveButton.addEventFilter(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
                 public void handle (MouseEvent e) {
-                    
+                
                 }
             });
 
@@ -72,7 +72,7 @@ public class GUIInfoManagerContent extends Scene {
             controlsPane.getChildren().add(returnButton);
             returnButton.addEventFilter(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
                 public void handle (MouseEvent e) {
-                    
+                    GUILogin.changeScene(new GUIInformationManager());
                 }
             });
             
@@ -80,6 +80,14 @@ public class GUIInfoManagerContent extends Scene {
             controlsPane.setPadding(new Insets(20));
             controlsPane.setVgap(10);
             controlsPane.setHgap(10);
+
+            //setInfo();
         }
+
+        /*public void setInfo() {
+            String content = AppLogin.getArraylistResource().get(GUIInformationManager.getSelectedIndex()).getTextualContent();
+
+            txtContent.setText(content);
+        }*/
     }
 }
