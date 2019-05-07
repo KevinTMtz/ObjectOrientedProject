@@ -83,12 +83,14 @@ public class GUITranslatingResource extends Scene{
             });
 
             try{
-                r.setTextualContent("[This is the textual content]");
+                r.setTextualContent("[This is the textual content and it is exciting because it has automatic text wrap, you can see this because it continues in the next line]");
             } catch(EmptyFieldException e){
                 System.out.println("Cannot add an empty content");
             }
 
             lblOriginal = new Label(r.getTextualContent());
+            lblOriginal.setWrapText(true);
+            lblOriginal.setTextAlignment(TextAlignment.JUSTIFY);
             txtTranslation = new TextArea(r.getTranslatedConent());
             txtTranslation.setWrapText(true);
             
