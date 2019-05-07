@@ -70,7 +70,7 @@ public class GUIConsultant extends Scene {
             listPane.add(lvResource, 0, 1);
             leftPane.getChildren().add(listPane);
             lvResource.setMaxWidth(220);
-            //readData();
+            readData();
             
             //RightPane-->Right Side and the info
             infoPane=new GridPane();
@@ -183,37 +183,12 @@ public class GUIConsultant extends Scene {
                 infoPane.add(lblPath, 0, 7);
                 infoPane.add(txtPath, 1, 7);
             }
-        }/*
+        }
         private void readData(){
-            try {
-                FileInputStream fis = new FileInputStream("resources/resources.list");
-                ObjectInputStream ois = new ObjectInputStream(fis);
-                System.out.println("Readed");
-                resources = (ArrayList) ois.readObject();
-                //System.out.println("Size: " + resources.size());
-                Recording r=null;
-                Textual t=null;
-                // Add the existing data
-                for (int i = 0; i < resources.size(); i++) {
-                    if(resources.get(i).getCurrentStatus().equalsIgnoreCase("freed")){
-                        if(resources.get(i) instanceof Recording) {
-                            r=(Recording) resources.get(i);
-                            data.add(r);
-                        }
-                        if(resources.get(i) instanceof Textual) {
-                            t=(Textual) resources.get(i);
-                            data.add(t);
-                        }
-                    }
-                    //saveData();
-                }
-                ois.close();
-            } catch (IOException ioe) {
-                System.out.println(ioe.getMessage());
-            } catch(ClassNotFoundException cnfe){
-                System.out.println(cnfe.getMessage());
+            for(int i=0; i<AppLogin.getArraylistResource().size(); i++){
+                data.add(AppLogin.getArraylistResource().get(i));
             }
-        }*/
+        }
         /*private void saveData(){
             // Create the arraylist
             ArrayList<Recurso> temp = new ArrayList<>();
