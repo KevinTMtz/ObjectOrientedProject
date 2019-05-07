@@ -186,7 +186,9 @@ public class GUIConsultant extends Scene {
         }
         private void readData(){
             for(int i=0; i<AppLogin.getArraylistResource().size(); i++){
-                data.add(AppLogin.getArraylistResource().get(i));
+                if(AppLogin.getArraylistResource().get(i).getCurrentStatus().equalsIgnoreCase("freed")){
+                    data.add(AppLogin.getArraylistResource().get(i));
+                }
             }
         }
         /*private void saveData(){
