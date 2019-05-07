@@ -38,7 +38,7 @@ public class GUITranslatingResource extends Scene{
     private static HBox controls;
     private static TextField txtTranslation;
     private static Label lblTitle, lblOriginal;
-    private static Button bttnSave;
+    private static Button bttnSave, bttnToAmend;
     private static BorderPane mainPane;
     private static Resource r;
 
@@ -57,6 +57,13 @@ public class GUITranslatingResource extends Scene{
             bttnSave.addEventFilter(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>(){
                 public void handle(MouseEvent e) {
                     r.setTranslatedContent(txtTranslation.getText());
+                }
+            });
+            bttnToAmend = new Button("Amend");
+            controls.getChildren().add(bttnToAmend);
+            bttnToAmend.addEventFilter(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>(){
+                public void handle(MouseEvent e) {
+                    //amend();
                 }
             });
             
