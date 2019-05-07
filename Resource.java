@@ -1,6 +1,7 @@
 import java.io.Serializable;
 public abstract class Resource implements Serializable{
     private String textualContent;
+    private String translatedContent;
     private String title;
     private String language;
     private String currentStatus;
@@ -47,6 +48,9 @@ public abstract class Resource implements Serializable{
         }
         this.responsibleOfTheFinding = responsibleOfTheFinding;
     }
+    public void setTranslatedContent(String translatedContent){
+        this.translatedContent = translatedContent;
+    }
 
     public String getTextualContent() {
         return textualContent;
@@ -65,6 +69,9 @@ public abstract class Resource implements Serializable{
     }
     public String getResponsibleOfTheFinding() {
         return responsibleOfTheFinding;
+    }
+    public String getTranslatedConent(){
+        return translatedContent;
     }
     
 }

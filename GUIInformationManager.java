@@ -498,10 +498,6 @@ public class GUIInformationManager extends Scene {
                 recording.setSelected(true);
             }
         }
-        private void displayContent(){
-            //Scene contentScene=new Scene();
-            //GUICulturalHeritage.changeScene(contentScene);
-        }
         //Getters and setters
         private void setResource(Textual t){
             txtTitle.setText(t.getTitle());
@@ -527,6 +523,7 @@ public class GUIInformationManager extends Scene {
             t.setRegionOfOrigin(txtRegion.getText());
             t.setResponsibleOfTheFinding(txtResponsible.getText());
             t.setCurrentStatus("finding");
+            t.setTranslatedContent("");
         }
         private void getResource(Recording r) throws EmptyFieldException{
             r.setTitle(txtTitle.getText());
@@ -536,6 +533,7 @@ public class GUIInformationManager extends Scene {
             r.setRegionOfOrigin(txtRegion.getText());
             r.setResponsibleOfTheFinding(txtResponsible.getText());
             r.setCurrentStatus("finding");
+            r.setTranslatedContent("");
         }
         
         private void saveData(){

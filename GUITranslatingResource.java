@@ -36,25 +36,47 @@ public class GUITranslatingResource extends Scene{
 
     private static VBox leftPane, rightPane;
     private static HBox controls;
-    private static TextField txtOriginal, txtTranslation;
-    private static Button bttnSave, bttnSaveAndQuit;
+    private static TextField txtTranslation;
+    private static Label lblTitle, lblOriginal;
+    private static Button bttnSave;
+    private static BorderPane mainPane;
 
-    public GUITranslatingResource() {
-        super(new Translating());
+    public GUITranslatingResource(Resource r) {
+        super(new Translating(r));
     }
 
-    public static class Translating extends HBox{
-        public  Translating() {
+    public static class Translating extends GridPane{
+        public  Translating(Resource r) {
 
-            txtOriginal = new TextField();
-            txtTranslation = new TextField();
+            mainPane= new BorderPane();
+            getChildren().add(mainPane);
 
+            
             bttnSave = new Button("Save");
-            bttnSaveAndQuit = new Button("Save and quit");
-
-            controls = new HBox(bttnSave, bttnSaveAndQuit);
-            leftPane = new VBox(txtOriginal);
+            controls.getChildren().add(bttnSave);
+            bttnSave.addEventFilter(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>(){
+                public void handle(MouseEvent e) {
+                    saveResource();
+                }
+            });
+            
+            lblTitle = new Label(r.getTitle());
+            lblOriginal = new Label(r.getTextualContent());
+            leftPane = new VBox(lblTitle, lblOriginal);
+            txtTranslation = new TextField(r.getTranslatedConent());
+            lblOriginal = new TextField(r.getTextualContent());
+            
+            controls = new HBox(bttnSave);
             rightPane = new VBox(txtTranslation, controls);
+            
+            mainPane.setLeft(leftPane);
+            mainPane.setRight(rightPane);
+            mainPane.setMargin(leftPane, new Insets(10, 0, 10, 10));
+            mainPane.setMargin(rightPane, new Insets(10, 10, 10, 0));
+        }
+
+        public static void saveResource() {
+            r.setTranslatedContent(txtTranslation.getText());
         }
     }
 }

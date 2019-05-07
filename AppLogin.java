@@ -66,13 +66,15 @@ public abstract class AppLogin implements IPersist {
             FileOutputStream userFile = new FileOutputStream("build/arrayListUsers");
             ObjectOutputStream userWrite = new ObjectOutputStream(userFile);
             
-            FileOutputStream userResource = new FileOutputStream("build/arrayListResources");
-            ObjectOutputStream resourceWrite = new ObjectOutputStream(userFile);
-
             userWrite.writeObject(arrayListUsers);
-            resourceWrite.writeObject(arrayListResources);
-            
+            userFile.close();
             userWrite.close();
+
+            FileOutputStream userResource = new FileOutputStream("build/arrayListResources");
+            ObjectOutputStream resourceWrite = new ObjectOutputStream(userResource);
+            
+            resourceWrite.writeObject(arrayListResources);
+            userResource.close();
             resourceWrite.close();
         } catch (IOException ioe) {
             System.out.println(ioe.getMessage());
@@ -86,41 +88,31 @@ public abstract class AppLogin implements IPersist {
             File checkResourceArrayList = new File("build/arrayListResources");
 
             if (checkUserArrayList.exists()) {
-                FileInputStream fis = new FileInputStream("build/arrayListUsers");
-                ObjectInputStream ois = new ObjectInputStream(fis);
+                FileInputStream fis1 = new FileInputStream("build/arrayListUsers");
+                ObjectInputStream ois1 = new ObjectInputStream(fis1);
 
                 arrayListUsers = new ArrayList<User>();
-                arrayListUsers = (ArrayList<User>) ois.readObject();
+                arrayListUsers = (ArrayList<User>) ois1.readObject();
                 
-                ois.close();
+                fis1.close();
+                ois1.close();
             } else {
                 arrayListUsers = new ArrayList<User>();
-
-                FileOutputStream fos = new FileOutputStream("build/arrayListUsers");
-                ObjectOutputStream oos = new ObjectOutputStream(fos);
-                oos.writeObject(arrayListUsers);
                 
-                oos.close();
-                fos.close();
             }
 
             if (checkResourceArrayList.exists()) {
-                FileInputStream fis = new FileInputStream("build/arrayListResources");
-                ObjectInputStream ois = new ObjectInputStream(fis);
+                FileInputStream fis2 = new FileInputStream("build/arrayListResources");
+                ObjectInputStream ois2 = new ObjectInputStream(fis2);
 
                 arrayListResources = new ArrayList<Resource>();
-                arrayListResources = (ArrayList<Resource>) ois.readObject();
+                arrayListResources = (ArrayList<Resource>) ois2.readObject();
                 
-                ois.close();
+                fis2.close();
+                ois2.close();
             } else {
                 arrayListResources = new ArrayList<Resource>();
 
-                FileOutputStream fos = new FileOutputStream("build/arrayListResources");
-                ObjectOutputStream oos = new ObjectOutputStream(fos);
-                oos.writeObject(arrayListResources);
-                
-                oos.close();
-                fos.close();
             }
         } catch (IOException ioe) {
             System.out.println(ioe.getMessage());
@@ -173,5 +165,21 @@ public abstract class AppLogin implements IPersist {
         } catch (EmptyFieldException efe) {
             System.out.println(efe.getMessage());
         }
+    }
+
+    public ArrayList<User> getArraylistUser() {
+        return arrayListUsers;
+    }
+
+    public void setArraylistUser(ArrayList<User> tempArrayList) {
+        arrayListUsers = tempArrayList;
+    }
+
+    public ArrayList<Resource> getArraylistResource() {
+        return arrayListResources;
+    }
+
+    public void setArraylistResource(ArrayList<Resource> tempArrayList) {
+        arrayListResources = tempArrayList;
     }
 }
