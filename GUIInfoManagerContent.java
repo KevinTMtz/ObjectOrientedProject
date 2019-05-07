@@ -37,7 +37,7 @@ public class GUIInfoManagerContent extends Scene {
         public AddContentPane() {
             FlowPane title = new FlowPane();
             title.setAlignment(Pos.CENTER);
-            title.setPadding(new Insets(40, 0, 20, 0));
+            title.setPadding(new Insets(20, 0, 40, 0));
 
             Text titletxt = new Text("Add content");
             titletxt.setFont(Font.font("Tahoma", FontWeight.NORMAL, 25));
@@ -51,6 +51,7 @@ public class GUIInfoManagerContent extends Scene {
             txtContent = new TextArea();
             txtContent.setPrefWidth(850);
             txtContent.setPrefHeight(400);
+            txtContent.setWrapText(true);
             contentPane.getChildren().add(txtContent);
             
             FlowPane controlsPane = new FlowPane();
