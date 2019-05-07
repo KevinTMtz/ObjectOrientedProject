@@ -1,6 +1,8 @@
 import java.util.ArrayList;
+
+import javax.annotation.Resource;
 public abstract class AppInformationalManager {
-    private static ArrayList<javax.annotation.Resource> resources = AppLogin.getArraylistResource();
+    private static ArrayList<Resource> resources = (ArrayList<Resource>)AppLogin.getArraylistResource();
 
         public static void addToArray(Recording r) throws SameResourceException{
             //Check if it is different from other resources
