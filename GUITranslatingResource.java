@@ -35,8 +35,6 @@ import javafx.geometry.VPos;
 
 public class GUITranslatingResource extends Scene{
 
-    private static ArrayList<Recurso> resources;
-    private static Recurso r;
     private static BorderPane mainPane;
     private static VBox leftPane, rightPane;
     private static Text lblOriginal;
