@@ -473,6 +473,41 @@ public class GUIInformationManager extends Scene {
             r.setCurrentStatus("finding");
             r.setTranslatedContent("");
         }
+
+
+
+        public void checkResourceInfo() {
+            Resource r = lvResource.getSelectionModel().getSelectedItem();
+
+            //TODO: poner datos de resources
+            txtUsername.setText(u.getUsername());
+            txtPassword.setText(u.getPassword());
+            typeOfUser.setValue(u.getUserType());
+        }
+
+        public void addResource() {
+            try {
+                ArrayList<Resource> tempArrayList = AppLogin.getArraylistResource();
+
+                Resource newResource = null;
+    
+                if (recording.isSelected()) {
+                    newResource = new Recording();
+                } else if (textual.isSelected()) {
+                    newResource = new Textual();
+                }
+    
+                newUser.setUsername(txtUsername.getText());
+                newUser.setPassword(txtPassword.getText());
+                newUser.setUserType((String) typeOfUser.getValue());
+    
+                data.add(newResource);
+                tempArrayList.add(newResource);
+                AppLogin.setArraylistUser(tempArrayList);
+            } catch (EmptyFieldException efe) {
+                System.out.println(efe.getMessage());
+            }
+        }
         /*
         private void saveData(){
             // Create the arraylist
