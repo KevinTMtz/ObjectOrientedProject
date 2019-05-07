@@ -37,7 +37,8 @@ public class GUITranslatingResource extends Scene{
 
     private static BorderPane mainPane;
     private static VBox leftPane, rightPane;
-    private static Text lblOriginal;
+    private static Label lblOriginal, lblTranslated;
+    private static Text txtOriginal;
     private static TextArea txtTranslation;
     private static HBox controls;
     private static Button bttnSave, bttnToAmend, bttnFreeResource, bttnBack;
@@ -85,10 +86,10 @@ public class GUITranslatingResource extends Scene{
             controls.getChildren().add(bttnBack);
             bttnBack.setOnAction(e -> goBack());
 
-            lblOriginal = new Text(0,0,"");
-            lblOriginal.setWrappingWidth(300);
-            lblOriginal.setTextAlignment(TextAlignment.JUSTIFY);
-            lblOriginal.setTextOrigin(VPos.TOP);
+            txtOriginal = new Text(0,0,"");
+            txtOriginal.setWrappingWidth(300);
+            txtOriginal.setTextAlignment(TextAlignment.JUSTIFY);
+            txtOriginal.setTextOrigin(VPos.TOP);
             txtTranslation = new TextArea();
             txtTranslation.setWrapText(true);
 
@@ -101,7 +102,7 @@ public class GUITranslatingResource extends Scene{
             rightPane.getChildren().add(txtTranslation);
             rightPane.getChildren().add(controls);
             leftPane = new VBox();
-            leftPane.getChildren().add(lblOriginal);
+            leftPane.getChildren().add(txtOriginal);
             mainPane.setRight(rightPane);
             mainPane.setLeft(leftPane);
             mainPane.setMargin(rightPane, new Insets(20, 50, 10, 0));
@@ -149,7 +150,7 @@ public class GUITranslatingResource extends Scene{
             String translation = AppLogin.getArraylistResource().get(index).getTranslatedConent();
             txtTranslation.setText(translation);
             String original = AppLogin.getArraylistResource().get(index).getTextualContent();
-            lblOriginal.setText(original);
+            txtOriginal.setText(original);
         }
     }
 }
