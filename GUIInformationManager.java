@@ -31,9 +31,9 @@ import java.io.File;
 import java.io.IOException;
 
 public class GUIInformationManager extends Scene {
-    private static ObservableList<Resource> data;
-    private static ListView<Resource> lvResource;
-    private static ArrayList<Resource> resources = new ArrayList<Resource>();
+    private static ObservableList<Recurso> data;
+    private static ListView<Recurso> lvResource;
+    private static ArrayList<Recurso> resources = new ArrayList<Recurso>();
     private static TextField txtTitle, txtLanguage, txtRegion, txtResponsible;
     private static Text txtStatus;
     private static Label lblInfo, lblTitle, lblLanguage, lblRegion, lblResponsible, lblStatus;
@@ -498,7 +498,7 @@ public class GUIInformationManager extends Scene {
         /*
         private void saveData(){
             // Create the arraylist
-            ArrayList<Resource> temp = new ArrayList<>();
+            ArrayList<Recurso> temp = new ArrayList<>();
             temp = resources;
             // Add the resources
             try {
