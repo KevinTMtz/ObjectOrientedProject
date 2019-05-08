@@ -48,9 +48,9 @@ public class GUITranslatingResource extends Scene{
     }
 
     public static class SignUpPane extends GridPane{
-        private static int index;
+        private int index;
         public SignUpPane(int index) {
-            this.index = index;
+            setIndex(index);
             
             mainPane = new BorderPane();
             mainPane.setPrefWidth(900);
@@ -164,6 +164,9 @@ public class GUITranslatingResource extends Scene{
             txtTranslation.setText(translation);
             String original = AppLogin.getArraylistResource().get(index).getTextualContent();
             txtOriginal.setText(original);
+        }
+        private void setIndex(int index){
+            this.index = index;
         }
     }
 }
