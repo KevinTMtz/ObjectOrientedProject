@@ -35,6 +35,8 @@ import javafx.geometry.VPos;
 
 public class GUIConsultorResource extends Scene{
 
+    private static ArrayList<Recurso> resources;
+    private static Recurso r;
     private static BorderPane mainPane;
     private static VBox leftPane, rightPane;
     private static Text lblOriginal;
@@ -48,9 +50,9 @@ public class GUIConsultorResource extends Scene{
     }
 
     public static class SignUpPane extends GridPane{
-        private int index;
+        private static int index;
         public SignUpPane(int index) {
-            setIndex(index);
+            this.index=index;
             this.setAlignment(Pos.CENTER);
             
             //select the resource to translate
@@ -99,9 +101,6 @@ public class GUIConsultorResource extends Scene{
         }
         private void goBack(){
             GUILogin.changeScene(new GUIConsultant());
-        }
-        private void setIndex(int index){
-            this.index = index;
         }
     }
 }
