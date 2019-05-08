@@ -48,9 +48,9 @@ public class GUIConsultorResource extends Scene{
     }
 
     public static class SignUpPane extends GridPane{
-        private static int index;
+        private int index;
         public SignUpPane(int index) {
-            this.index=index;
+            setIndex(index);
             this.setAlignment(Pos.CENTER);
             
             //select the resource to translate
@@ -99,6 +99,9 @@ public class GUIConsultorResource extends Scene{
         }
         private void goBack(){
             GUILogin.changeScene(new GUIConsultant());
+        }
+        private void setIndex(int index){
+            this.index = index;
         }
     }
 }

@@ -159,8 +159,6 @@ public class GUIConsultant extends Scene {
                 infoPane.add(bttnLogOut, 1, 15);
                 bttnLogOut.setAlignment(Pos.BOTTOM_RIGHT);
                 bttnLogOut.setOnAction(e -> GUILogin.backLogin());
-
-                //Escribe tu código a partir de aquií. Agrega los botones al rightPane
             
             rightPane.getChildren().add(infoPane);
         }
