@@ -25,8 +25,9 @@ import javafx.stage.Stage;
 public class GUILogin extends Application {
     private static Stage newStage;
     private static Scene signInScene, signUpScene;
-    private static TextField txtUserLogin, txtPasswordLogin, txtUserRegister, txtPasswordRegister;
-	private static ComboBox typeOfUser;
+    private static TextField txtUserLogin, txtUserRegister, txtPasswordRegister;
+    private static PasswordField txtPasswordLogin;
+    private static ComboBox typeOfUser;
 
     public void start(Stage stage) throws Exception {
         newStage = stage;
@@ -76,7 +77,7 @@ public class GUILogin extends Application {
         loginPane.add(txtUserLogin, 1, 0);
 
         Label lblPasswordLogin = new Label("Password");
-        txtPasswordLogin = new TextField();
+        txtPasswordLogin = new PasswordField();
         loginPane.add(lblPasswordLogin, 0, 1);
         loginPane.add(txtPasswordLogin, 1, 1);
 
