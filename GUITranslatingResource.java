@@ -52,7 +52,7 @@ public class GUITranslatingResource extends Scene{
         private static int index;
         public SignUpPane(int index) {
             setIndex(index);
-            
+            this.setAlignment(Pos.CENTER);
             mainPane = new BorderPane();
             mainPane.setPrefWidth(900);
             mainPane.setPrefHeight(620);

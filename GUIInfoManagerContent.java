@@ -36,6 +36,7 @@ public class GUIInfoManagerContent extends Scene {
         private Button saveButton, returnButton;
 
         public AddContentPane() {
+            
             FlowPane title = new FlowPane();
             title.setAlignment(Pos.CENTER);
             title.setPadding(new Insets(20, 0, 40, 0));

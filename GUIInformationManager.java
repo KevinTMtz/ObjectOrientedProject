@@ -491,7 +491,6 @@ public class GUIInformationManager extends Scene {
             t.setRegionOfOrigin(txtRegion.getText());
             t.setResponsibleOfTheFinding(txtResponsible.getText());
             t.setCurrentStatus("finding");
-            t.setTranslatedContent("");
         }
 
         private void getResource(Recording r) throws EmptyFieldException {
@@ -502,7 +501,6 @@ public class GUIInformationManager extends Scene {
             r.setRegionOfOrigin(txtRegion.getText());
             r.setResponsibleOfTheFinding(txtResponsible.getText());
             r.setCurrentStatus("finding");
-            r.setTranslatedContent("");
         }
 
         private void readData() {
