@@ -28,6 +28,7 @@ import javafx.collections.ObservableList;
 public class GUIInfoManagerContent extends Scene {
     public GUIInfoManagerContent() {
         super(new AddContentPane());
+        this.getStylesheets().add(GUIInfoManagerContent.class.getResource("css/CulturalHeritage.css").toExternalForm());
     }
 
     public static class AddContentPane extends BorderPane {

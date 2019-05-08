@@ -45,6 +45,7 @@ public class GUITranslatingResource extends Scene{
     
     public GUITranslatingResource(int index) {
         super(new SignUpPane(index));
+        this.getStylesheets().add(GUITranslatingResource.class.getResource("css/CulturalHeritage.css").toExternalForm());
     }
 
     public static class SignUpPane extends GridPane{

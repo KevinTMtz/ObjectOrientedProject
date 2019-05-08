@@ -47,6 +47,7 @@ public class GUIConsultorResource extends Scene{
     
     public GUIConsultorResource(int index) {
         super(new SignUpPane(index));
+        this.getStylesheets().add(GUIConsultorResource.class.getResource("css/CulturalHeritage.css").toExternalForm());
     }
 
     public static class SignUpPane extends GridPane{

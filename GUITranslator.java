@@ -47,6 +47,7 @@ public class GUITranslator extends Scene {
 
     public GUITranslator() {
         super(new SignUpPane());
+        this.getStylesheets().add(GUITranslator.class.getResource("css/CulturalHeritage.css").toExternalForm());
     }
 
     public static class SignUpPane extends GridPane {
@@ -75,11 +76,10 @@ public class GUITranslator extends Scene {
 
             //ListPane-->Left Side and the list
             listPane=new GridPane();
-            Text user = new Text("Translator");
-            listPane.add(user, 0, 0);
             //getChildren().add(user);
             data = FXCollections.observableArrayList();
             lvResource = new ListView<>(data);
+            lvResource.setMinWidth(300);
             listPane.add(lvResource, 0, 1);
             leftPane.getChildren().add(listPane);
             lvResource.setMaxWidth(220);
@@ -89,26 +89,31 @@ public class GUITranslator extends Scene {
             infoPane=new GridPane();
             infoPane.setVgap(10);
             infoPane.setHgap(15);
-                lblInfo=new Label("Information: ");
+                lblInfo=new Label("Information:");
+                lblInfo.setMinWidth(150);
                 lblInfo.setFont(Font.font("Verdana", FontWeight.BOLD, 10));
                 infoPane.add(lblInfo, 0, 0);
 
-                lblTitle=new Label("Title");
+                lblTitle=new Label("Title:");
+                lblTitle.setMinWidth(150);
                 infoPane.add(lblTitle, 0, 1);
                 txtTitle=new Text("-");
                 infoPane.add(txtTitle, 1, 1);
 
                 lblLanguage=new Label("Language:");
+                lblLanguage.setMinWidth(150);
                 infoPane.add(lblLanguage, 0, 2);
                 txtLanguage=new Text("-");
                 infoPane.add(txtLanguage, 1, 2);
 
-                lblRegion=new Label("Region");
+                lblRegion=new Label("Region:");
+                lblRegion.setMinWidth(150);
                 infoPane.add(lblRegion, 0, 3);
                 txtRegion=new Text("-");
                 infoPane.add(txtRegion, 1, 3);
                 
-                lblResponsible=new Label("Responsible");
+                lblResponsible=new Label("Responsible:");
+                lblResponsible.setMinWidth(150);
                 infoPane.add(lblResponsible, 0, 4);
                 txtResponsible=new Text("-");
                 infoPane.add(txtResponsible, 1, 4);
@@ -116,15 +121,19 @@ public class GUITranslator extends Scene {
                 lblClass=new Label();
 
                 //If it is a text
-                lblPages= new Label("Number of Pages:");
+                lblPages= new Label("Num. of Pages:");
+                lblPages.setMinWidth(150);
                 txtPages= new Text("-");
-                lblWords=new Label("Number of Words");
+                lblWords=new Label("Num. of Words");
+                lblWords.setMinWidth(150);
                 txtWords= new Text("-");
 
                 //If it is a recording
                 lblDuration=new Label("Duration:");
+                lblDuration.setMinWidth(150);
                 txtDuration= new Text("-");
                 lblPath=new Label("Path:");
+                lblPath.setMinWidth(150);
                 txtPath=new Text("-");
                 
                 bttnTranslate = new Button("Translate");
@@ -218,6 +227,7 @@ public class GUITranslator extends Scene {
                         Textual t=(Textual) lvResource.getSelectionModel().getSelectedItem();
                         setResource(t);
                         lblClass.setText("Text info:");
+                        lblClass.setMinWidth(150);
                         infoPane.add(lblClass, 0, 5);
                         infoPane.add(lblPages, 0, 6);
                         infoPane.add(txtPages, 1, 6);
@@ -228,7 +238,8 @@ public class GUITranslator extends Scene {
                         System.out.println("The selected resource is: recording");
                         Recording r=(Recording) lvResource.getSelectionModel().getSelectedItem();
                         setResource(r);
-                        lblClass.setText("Audio info: ");
+                        lblClass.setText("Audio info:");
+                        lblClass.setMinWidth(150);
                         infoPane.add(lblClass, 0, 5);
                         infoPane.add(lblDuration, 0, 6);
                         infoPane.add(txtDuration, 1, 6);

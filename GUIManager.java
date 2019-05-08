@@ -28,6 +28,7 @@ import javafx.collections.ObservableList;
 public class GUIManager extends Scene {
     public GUIManager() {
         super(new SignUpPane());
+        this.getStylesheets().add(GUIManager.class.getResource("css/CulturalHeritage.css").toExternalForm());
     }
 
     public static class SignUpPane extends BorderPane {

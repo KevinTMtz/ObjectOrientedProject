@@ -32,7 +32,7 @@ public class GUILogin extends Application {
         newStage = stage;
         newStage.setTitle("Cultural Heritage");
         newStage.setWidth(900);
-        newStage.setHeight(620);
+        newStage.setHeight(800);
 
         /***************************************/
         /*            Sign in pane             */
@@ -190,11 +190,10 @@ public class GUILogin extends Application {
         // For loading all users
         AppLogin.retrieveResourcesAndUsers();
 
-        /*
-        Add style to the scene
-        scene.getStylesheets().add(GUILogin.class.getResource("GUILogin.css").toExternalForm());
-        */
-
+        //Add style to the scene
+        signInScene.getStylesheets().add(GUILogin.class.getResource("css/CulturalHeritage.css").toExternalForm());
+        signUpScene.getStylesheets().add(GUILogin.class.getResource("css/CulturalHeritage.css").toExternalForm());
+        
         newStage.setOnHiding( event -> {
             AppLogin.persist();
         });

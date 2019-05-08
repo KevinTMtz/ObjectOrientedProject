@@ -48,6 +48,7 @@ public class GUIInformationManager extends Scene {
 
     public GUIInformationManager() {
         super(new SignUpPane());
+        this.getStylesheets().add(GUIInformationManager.class.getResource("css/CulturalHeritage.css").toExternalForm());
     }
 
     public static class SignUpPane extends GridPane {
@@ -77,6 +78,7 @@ public class GUIInformationManager extends Scene {
             
             data = FXCollections.observableArrayList();
             lvResource = new ListView<>(data);
+            lvResource.setMinWidth(300);
             listPane.add(lvResource, 0, 1);
             leftPane.getChildren().add(listPane);
             lvResource.setMaxWidth(220);
@@ -87,46 +89,55 @@ public class GUIInformationManager extends Scene {
             infoPane.setVgap(10);
             infoPane.setHgap(15);
                 lblInfo=new Label("Information: ");
+                lblInfo.setMinWidth(150);
                 lblInfo.setFont(Font.font("Verdana", FontWeight.BOLD, 10));
                 infoPane.add(lblInfo, 0, 0);
 
-                lblTitle=new Label("Title");
+                lblTitle=new Label("Title:");
+                lblTitle.setMinWidth(150);
                 infoPane.add(lblTitle, 0, 1);
                 txtTitle=new TextField();
                 txtTitle.setPromptText("Title");
                 infoPane.add(txtTitle, 1, 1);
 
                 lblLanguage=new Label("Language:");
+                lblLanguage.setMinWidth(150);
                 infoPane.add(lblLanguage, 0, 2);
                 txtLanguage=new TextField();
                 txtLanguage.setPromptText("Language");
                 infoPane.add(txtLanguage, 1, 2);
 
-                lblRegion=new Label("Region");
+                lblRegion=new Label("Region:");
+                lblRegion.setMinWidth(150);
                 infoPane.add(lblRegion, 0, 3);
                 txtRegion=new TextField();
                 txtRegion.setPromptText("Region");
                 infoPane.add(txtRegion, 1, 3);
                 
                 lblResponsible=new Label("Responsible");
+                lblResponsible.setMinWidth(150);
                 infoPane.add(lblResponsible, 0, 4);
                 txtResponsible=new TextField();
                 txtResponsible.setPromptText("Responsible");
                 infoPane.add(txtResponsible, 1, 4);
 
                 //If it is a text
-                lblPages= new Label("Number of Pages:");
+                lblPages= new Label("Num. of pages:");
+                lblPages.setMinWidth(150);
                 txtPages= new TextField();
                 txtPages.setPromptText("Pages");
-                lblWords=new Label("Number of Words");
+                lblWords=new Label("Num. of words");
+                lblWords.setMinWidth(150);
                 txtWords= new TextField();
                 txtWords.setPromptText("Words");
 
                 //If it is a recording
                 lblDuration=new Label("Duration:");
+                lblDuration.setMinWidth(150);
                 txtDuration= new TextField();
                 txtDuration.setPromptText("Duration");
                 lblPath=new Label("Path:");
+                lblPath.setMinWidth(150);
                 txtPath=new TextField();
                 txtPath.setPromptText("Path");
 
@@ -134,6 +145,7 @@ public class GUIInformationManager extends Scene {
                 textual=new CheckBox("Textual");
                 Label lblSelect=new Label("Select one: ");
                 lblSelect.setFont(Font.font("Verdana", FontWeight.BOLD, 10));
+                lblSelect.setMinWidth(150);
                 infoPane.add(lblSelect, 0, 7);
                 infoPane.add(recording, 1, 8);
                 infoPane.add(textual, 1, 9);
