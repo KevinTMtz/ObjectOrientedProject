@@ -163,7 +163,7 @@ public class GUIInformationManager extends Scene {
                 controlsPane.add(bttnUpdate, 2, 0);
                 Button bttnNew= new Button("New");
                 controlsPane.add(bttnNew, 3, 0);
-                mainPane.setBottom(controlsPane);
+                leftPane.getChildren().add(controlsPane);
                 controlsPane.setAlignment(Pos.CENTER_LEFT);
 
                 bttnContent=new Button("Check content");
@@ -171,7 +171,7 @@ public class GUIInformationManager extends Scene {
                 bttnContent.setOnAction(e -> GUILogin.changeScene(new GUIInfoManagerContent()));
 
                 Button bttnLogOut=new Button("Log out");
-                infoPane.add(bttnLogOut, 1, 15);
+                controlsPane.add(bttnLogOut, 3, 2);
                 bttnLogOut.setAlignment(Pos.BOTTOM_RIGHT);
                 bttnLogOut.setOnAction(e -> GUILogin.backLogin());
 
@@ -295,7 +295,9 @@ public class GUIInformationManager extends Scene {
                 controlsPane.setMargin(bttnDelete, new Insets(0, 5, 20, 5));
                 controlsPane.setMargin(bttnNew, new Insets(0, 10, 20, 5));
                 controlsPane.setMargin(bttnUpdate, new Insets(0, 5, 20, 5));
-
+                controlsPane.setMargin(bttnLogOut, new Insets(0, 5, 20, 5));
+                controlsPane.setMargin(bttnContent, new Insets(0, 5, 20, 5));
+                leftPane.setMargin(controlsPane, new Insets(10, 0, 0, 0));
             rightPane.getChildren().add(infoPane);
         }
 
@@ -317,7 +319,7 @@ public class GUIInformationManager extends Scene {
             infoPane.getChildren().remove(txtPath);
             infoPane.getChildren().remove(lblStatus);
             infoPane.getChildren().remove(txtStatus);
-            infoPane.add(bttnContent, 1, 11);
+            controlsPane.getChildren().remove(bttnContent);
 
         }
 
@@ -342,6 +344,7 @@ public class GUIInformationManager extends Scene {
                     }
                     // Clear the Form
                     newResource();
+                    
                 }
 
             } catch (EmptyFieldException efe) {
@@ -425,10 +428,9 @@ public class GUIInformationManager extends Scene {
                     infoPane.getChildren().remove(txtPath);
                     infoPane.getChildren().remove(lblStatus);
                     infoPane.getChildren().remove(txtStatus);
-                    infoPane.getChildren().remove(bttnContent);
-
-                    infoPane.add(bttnContent, 1, 11);
-
+                    controlsPane.getChildren().remove(bttnContent);
+                    controlsPane.add(bttnContent, 3, 1);
+                    controlsPane.setAlignment(Pos.CENTER);
                     // Display the staus (Hide it if nothing is selected)
                     infoPane.add(lblStatus, 0, 10);
                     txtStatus
