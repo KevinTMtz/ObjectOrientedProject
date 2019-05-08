@@ -38,8 +38,7 @@ public class GUITranslatingResource extends Scene{
     private static BorderPane mainPane;
     private static VBox leftPane, rightPane;
     private static Label lblOriginal, lblTranslated;
-    private static Text txtOriginal;
-    private static TextArea txtTranslation;
+    private static TextArea txtTranslation, txtOriginal;
     private static HBox controls;
     private static Button bttnSave, bttnToAmend, bttnFreeResource, bttnBack;
     
@@ -87,15 +86,16 @@ public class GUITranslatingResource extends Scene{
             controls.getChildren().add(bttnBack);
             bttnBack.setOnAction(e -> goBack());
 
-            txtOriginal = new Text(0,0,"");
-            txtOriginal.setWrappingWidth(300);
-            txtOriginal.setTextAlignment(TextAlignment.JUSTIFY);
-            txtOriginal.setTextOrigin(VPos.TOP);
+            txtOriginal = new TextArea();
+            txtOriginal.setWrapText(true);
+            txtOriginal.setEditable(false);
             txtTranslation = new TextArea();
             txtTranslation.setWrapText(true);
 
             setInfo();
             
+            txtOriginal.setPrefHeight(500);
+            txtOriginal.setPrefWidth(300);
             txtTranslation.setPrefHeight(500);
             txtTranslation.setPrefWidth(300);
 
