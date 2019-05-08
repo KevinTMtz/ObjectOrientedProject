@@ -39,10 +39,11 @@ public class GUIConsultorResource extends Scene{
     private static Recurso r;
     private static BorderPane mainPane;
     private static VBox leftPane, rightPane;
-    private static Text lblOriginal;
+    private static Text txtOriginal;
     private static Text txtTranslation;
     private static HBox controls;
     private static Button bttnBack;
+    private static Label lblOriginal, lblTranslated;
     
     
     public GUIConsultorResource(int index) {
@@ -53,7 +54,7 @@ public class GUIConsultorResource extends Scene{
     public static class SignUpPane extends GridPane{
         private static int index;
         public SignUpPane(int index) {
-            this.index=index;
+            setIndex(index);
             this.setAlignment(Pos.CENTER);
             
             //select the resource to translate
@@ -67,27 +68,34 @@ public class GUIConsultorResource extends Scene{
             bttnBack = new Button("Back");
             controls.getChildren().add(bttnBack);
             bttnBack.setOnAction(e -> goBack());
+
+            lblTranslated = new Label("Translation");
+            lblOriginal = new Label("Original text");
+            lblTranslated.setFont(Font.font("Verdana", FontWeight.BOLD, 10));
+            lblOriginal.setFont(Font.font("Verdana", FontWeight.BOLD, 10));
             
-            lblOriginal = new Text(0,0,"");
-            lblOriginal.setWrappingWidth(300);
-            lblOriginal.setTextAlignment(TextAlignment.JUSTIFY);
-            lblOriginal.setTextOrigin(VPos.TOP);
+            txtOriginal = new Text(0,0,"");
+            txtOriginal.setWrappingWidth(300);
+            txtOriginal.setTextAlignment(TextAlignment.JUSTIFY);
+            txtOriginal.setTextOrigin(VPos.TOP);
             txtTranslation = new Text();
             txtTranslation.setWrappingWidth(300);
             setInfo();
             txtTranslation.prefHeight(500);
             txtTranslation.prefWidth(300);
-            lblOriginal.prefHeight(500);
-            lblOriginal.prefWidth(300);
+            txtOriginal.prefHeight(500);
+            txtOriginal.prefWidth(300);
+            
 
             
             rightPane = new VBox();
-
+            rightPane.getChildren().add(lblTranslated);
             rightPane.getChildren().add(txtTranslation);
             mainPane.setBottom(controls);
             controls.setAlignment(Pos.CENTER);
             leftPane = new VBox();
             leftPane.getChildren().add(lblOriginal);
+            leftPane.getChildren().add(txtOriginal);
             mainPane.setRight(rightPane);
             mainPane.setLeft(leftPane);
             mainPane.setMargin(rightPane, new Insets(20, 50, 10, 0));
@@ -98,10 +106,13 @@ public class GUIConsultorResource extends Scene{
             String translation = AppLogin.getArraylistResource().get(index).getTranslatedConent();
             txtTranslation.setText(translation);
             String original = AppLogin.getArraylistResource().get(index).getTextualContent();
-            lblOriginal.setText(original);
+            txtOriginal.setText(original);
         }
         private void goBack(){
             GUILogin.changeScene(new GUIConsultant());
+        }
+        private void setIndex(int index){
+            this.index=index;
         }
     }
 }

@@ -153,7 +153,6 @@ public class GUILogin extends Application {
 
         signUpContentPane.getChildren().add(registerPane);
 
-        // Combo box
         String users[] = { "Manager", "Information Manager", "Translator", "Consultant" };
         
         Label lblTypeOfUserRegister = new Label("Type of user");

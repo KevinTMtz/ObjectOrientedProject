@@ -76,7 +76,7 @@ public class GUITranslator extends Scene {
 
             //ListPane-->Left Side and the list
             listPane=new GridPane();
-            //getChildren().add(user);
+
             data = FXCollections.observableArrayList();
             lvResource = new ListView<>(data);
             lvResource.setMinWidth(300);
@@ -174,8 +174,6 @@ public class GUITranslator extends Scene {
 
                 //For the margins
                 infoPane.setMargin(lblClass, new Insets(10, 0, 0, 0));
-
-                //Escribe tu código a partir de aquií. Agrega los botones al rightPane
             
             rightPane.getChildren().add(infoPane);
         }

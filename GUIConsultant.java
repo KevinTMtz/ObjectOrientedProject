@@ -24,7 +24,7 @@ import javafx.geometry.Pos;
 import javafx.collections.ObservableList;
 import java.util.ArrayList;
 import javafx.scene.control.CheckBox;
-import javafx.event.ActionEvent; 
+import javafx.event.ActionEvent;
 import java.io.FileNotFoundException;
 import java.io.*;
 import java.io.File;
@@ -52,17 +52,17 @@ public class GUIConsultant extends Scene {
     public static class SignUpPane extends GridPane {
         public SignUpPane() {
             this.setAlignment(Pos.CENTER);
-            mainPane= new BorderPane();
+            mainPane = new BorderPane();
             getChildren().add(mainPane);
-            leftPane= new FlowPane();
-            rightPane= new FlowPane();
+            leftPane = new FlowPane();
+            rightPane = new FlowPane();
             mainPane.setPrefWidth(900);
             mainPane.setPrefHeight(620);
             mainPane.setLeft(leftPane);
             mainPane.setRight(rightPane);
             mainPane.setMargin(leftPane, new Insets(10, 0, 10, 10));
             mainPane.setMargin(rightPane, new Insets(10, 10, 10, 0));
-            
+
             FlowPane title = new FlowPane();
             title.setAlignment(Pos.CENTER);
             title.setPadding(new Insets(20, 0, 40, 0));
@@ -71,9 +71,9 @@ public class GUIConsultant extends Scene {
             titletxt.setFill(Color.BLACK);
             title.getChildren().add(titletxt);
             mainPane.setTop(title);
-            //ListPane-->Left Side and the list
-            listPane=new GridPane();
-            //getChildren().add(user);
+            // ListPane-->Left Side and the list
+            listPane = new GridPane();
+            // getChildren().add(user);
             data = FXCollections.observableArrayList();
             lvResource = new ListView<>(data);
             lvResource.setMinWidth(300);
@@ -81,9 +81,9 @@ public class GUIConsultant extends Scene {
             leftPane.getChildren().add(listPane);
             lvResource.setMaxWidth(220);
             readData();
-            
-            //RightPane-->Right Side and the info
-            infoPane=new GridPane();
+
+            // RightPane-->Right Side and the info
+            infoPane = new GridPane();
             infoPane.setVgap(10);
             infoPane.setHgap(15);
                 lblInfo=new Label("Information:");
@@ -175,6 +175,7 @@ public class GUIConsultant extends Scene {
             
             rightPane.getChildren().add(infoPane);
         }
+
         private void selectResource() {
             //Remove previous nodes
             infoPane.getChildren().remove(lblPages);
@@ -214,33 +215,37 @@ public class GUIConsultant extends Scene {
                 infoPane.add(lblPath, 0, 7);
                 infoPane.add(txtPath, 1, 7);
             }
+
         }
-        private void readData(){
-            for(int i=0; i<AppLogin.getArraylistResource().size(); i++){
-                if(AppLogin.getArraylistResource().get(i).getCurrentStatus().equalsIgnoreCase("freed")){
+
+        private void readData() {
+            for (int i = 0; i < AppLogin.getArraylistResource().size(); i++) {
+                if (AppLogin.getArraylistResource().get(i).getCurrentStatus().equalsIgnoreCase("freed")) {
                     data.add(AppLogin.getArraylistResource().get(i));
                 }
             }
         }
-        
-        private void setResource(Textual t){
+
+        private void setResource(Textual t) {
             txtTitle.setText(t.getTitle());
             txtLanguage.setText(t.getLanguage());
             txtRegion.setText(t.getRegionOfOrigin());
             txtResponsible.setText(t.getResponsibleOfTheFinding());
-            txtWords.setText(""+t.getNumberOfWords());
-            txtPages.setText(""+t.getNumberOfPages());
+            txtWords.setText("" + t.getNumberOfWords());
+            txtPages.setText("" + t.getNumberOfPages());
         }
-        private void setResource(Recording r){
+
+        private void setResource(Recording r) {
             txtTitle.setText(r.getTitle());
             txtLanguage.setText(r.getLanguage());
             txtRegion.setText(r.getRegionOfOrigin());
             txtResponsible.setText(r.getResponsibleOfTheFinding());
-            txtDuration.setText(""+r.getDuration());
+            txtDuration.setText("" + r.getDuration());
             txtPath.setText(r.getPathOfFile());
         }
-        private void beginConsult(){
-            int index=AppLogin.getArraylistResource().indexOf(lvResource.getSelectionModel().getSelectedItem());
+
+        private void beginConsult() {
+            int index = AppLogin.getArraylistResource().indexOf(lvResource.getSelectionModel().getSelectedItem());
 
             GUILogin.changeScene(new GUIConsultorResource(index));
         }
