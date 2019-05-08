@@ -48,7 +48,7 @@ public class GUITranslatingResource extends Scene{
     }
 
     public static class SignUpPane extends GridPane{
-        private int index;
+        private static int index;
         public SignUpPane(int index) {
             setIndex(index);
             
