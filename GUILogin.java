@@ -170,7 +170,6 @@ public class GUILogin extends Application {
         signUpButton.addEventFilter(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
             public void handle (MouseEvent e) {
                 AppLogin.registerUser();
-                
             }
         });
 
