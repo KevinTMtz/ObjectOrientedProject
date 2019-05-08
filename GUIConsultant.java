@@ -248,8 +248,8 @@ public class GUIConsultant extends Scene {
             txtPath.setText(r.getPathOfFile());
         }
         private void beginConsult(){
-            int index = lvResource.getSelectionModel().getSelectedIndex();
-            System.out.println(index);
+            int index=AppLogin.getArraylistResource().indexOf(lvResource.getSelectionModel().getSelectedItem());
+
             GUILogin.changeScene(new GUIConsultorResource(index));
         }
     }
