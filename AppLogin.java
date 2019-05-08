@@ -4,6 +4,8 @@ import java.io.FileNotFoundException;
 import javafx.scene.control.*;
 import java.util.ArrayList;
 
+import javax.annotation.Resource;
+
 public abstract class AppLogin implements IPersist {
     private static ArrayList<User> arrayListUsers;
     private static ArrayList<Recurso> arrayListResources;
@@ -80,7 +82,10 @@ public abstract class AppLogin implements IPersist {
     }
 
     // For loading all the saved resources & users
-    public static void retrieve() {
+    public Recurso retrieve(){
+        return null;
+    }
+    public static void retrieveImp() {
         try {
             File checkUserArrayList = new File("build/arrayListUsers");
             File checkResourceArrayList = new File("build/arrayListResources");
