@@ -80,7 +80,7 @@ public abstract class AppLogin implements IPersist {
     }
 
     // For loading all the saved resources & users
-    public static void retrieveResourcesAndUsers() {
+    public static void retrieve() {
         try {
             File checkUserArrayList = new File("build/arrayListUsers");
             File checkResourceArrayList = new File("build/arrayListResources");
