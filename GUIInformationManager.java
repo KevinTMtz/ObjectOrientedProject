@@ -75,7 +75,6 @@ public class GUIInformationManager extends Scene {
             //ListPane-->Left Side and the list
             listPane=new GridPane();
             
-            //getChildren().add(user);
             data = FXCollections.observableArrayList();
             lvResource = new ListView<>(data);
             listPane.add(lvResource, 0, 1);
@@ -158,8 +157,6 @@ public class GUIInformationManager extends Scene {
                 bttnContent=new Button("Check content");
                 bttnContent.setAlignment(Pos.CENTER);
                 bttnContent.setOnAction(e -> GUILogin.changeScene(new GUIInfoManagerContent()));
-
-                //bttnContent.setOnAction(e->newStage);
 
                 Button bttnLogOut=new Button("Log out");
                 infoPane.add(bttnLogOut, 1, 15);
@@ -329,11 +326,9 @@ public class GUIInformationManager extends Scene {
                         getResource(t);
                         AppInformationalManager.addToArray(t);
                         data.add(t);
-                    }      
-                    
+                    } 
                         // Clear the Form
                         newResource();
-                        //saveData();
                 }
                 
             }catch(EmptyFieldException efe){
@@ -365,7 +360,6 @@ public class GUIInformationManager extends Scene {
                     data.remove(lvResource.getSelectionModel().getSelectedItem());
                     // Empty the fields
                     newResource();
-                    //saveData();
                     lvResource.getSelectionModel().clearSelection();
                 }else throw new NullPointerException();
 
@@ -386,7 +380,6 @@ public class GUIInformationManager extends Scene {
                     AppInformationalManager.deleteFromArrayList(index);
                     data.remove(lvResource.getSelectionModel().getSelectedItem());
                     // Empty the fields
-                    //saveData();
                     lvResource.getSelectionModel().clearSelection();
                     addResource();
                 }else throw new NullPointerException();
@@ -398,26 +391,6 @@ public class GUIInformationManager extends Scene {
                 alert.setContentText("You have not selected a resource");
                 alert.showAndWait();
             }
-            /*
-            try {
-                addResource();
-                int index=lvResource.getSelectionModel().getSelectedIndex();
-                if(index!=-1){
-                    //Delete it with App...
-                    AppInformationalManager.deleteFromArrayList(index);
-                    data.remove(lvResource.getSelectionModel().getSelectedItem());
-                    // Empty the fields
-                    newResource();
-                    //saveData();
-                    lvResource.getSelectionModel().clearSelection();
-                }else throw new NullPointerException();
-            } catch(NullPointerException npe){
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Delete a resource");
-                alert.setHeaderText("Error while deleting a resource");
-                alert.setContentText("You have not selected a resource");
-                alert.showAndWait();
-            }*/
         }
         private void selectResource() {
             //Remove previous nodes

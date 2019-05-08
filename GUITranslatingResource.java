@@ -98,10 +98,17 @@ public class GUITranslatingResource extends Scene{
             txtTranslation.setPrefHeight(500);
             txtTranslation.setPrefWidth(300);
 
+            lblTranslated = new Label("Translation");
+            lblOriginal = new Label("Original text");
+            lblTranslated.setFont(Font.font("Verdana", FontWeight.BOLD, 10));
+            lblOriginal.setFont(Font.font("Verdana", FontWeight.BOLD, 10));
+
             rightPane = new VBox();
+            rightPane.getChildren().add(lblTranslated);
             rightPane.getChildren().add(txtTranslation);
             rightPane.getChildren().add(controls);
             leftPane = new VBox();
+            leftPane.getChildren().add(lblOriginal);
             leftPane.getChildren().add(txtOriginal);
             mainPane.setRight(rightPane);
             mainPane.setLeft(leftPane);
