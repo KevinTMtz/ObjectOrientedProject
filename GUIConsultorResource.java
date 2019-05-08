@@ -42,7 +42,7 @@ public class GUIConsultorResource extends Scene{
     private static Text lblOriginal;
     private static Text txtTranslation;
     private static HBox controls;
-    private static Button bttnSave, bttnToAmend, bttnFreeResource, bttnBack;
+    private static Button bttnBack;
     
     
     public GUIConsultorResource(int index) {
@@ -54,6 +54,7 @@ public class GUIConsultorResource extends Scene{
         public SignUpPane(int index) {
             this.index=index;
             this.setAlignment(Pos.CENTER);
+            
             //select the resource to translate
             resources = new ArrayList<Recurso>();  
             mainPane = new BorderPane();
@@ -65,20 +66,22 @@ public class GUIConsultorResource extends Scene{
             bttnBack = new Button("Back");
             controls.getChildren().add(bttnBack);
             bttnBack.setOnAction(e -> goBack());
-
-            lblOriginal = new Text(0,0,r.getTextualContent());
+            
+            lblOriginal = new Text(0,0,"");
             lblOriginal.setWrappingWidth(300);
             lblOriginal.setTextAlignment(TextAlignment.JUSTIFY);
             lblOriginal.setTextOrigin(VPos.TOP);
-            txtTranslation = new Text(r.getTranslatedConent());
+            txtTranslation = new Text();
             txtTranslation.setWrappingWidth(300);
-            
+            setInfo();
             txtTranslation.prefHeight(500);
             txtTranslation.prefWidth(300);
             lblOriginal.prefHeight(500);
             lblOriginal.prefWidth(300);
-            setInfo();
+
+            
             rightPane = new VBox();
+
             rightPane.getChildren().add(txtTranslation);
             mainPane.setBottom(controls);
             controls.setAlignment(Pos.CENTER);
