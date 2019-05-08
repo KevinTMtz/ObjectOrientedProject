@@ -32,7 +32,7 @@ public class GUILogin extends Application {
         newStage = stage;
         newStage.setTitle("Cultural Heritage");
         newStage.setWidth(900);
-        newStage.setHeight(800);
+        newStage.setHeight(700);
 
         /***************************************/
         /*            Sign in pane             */
