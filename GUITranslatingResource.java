@@ -117,11 +117,17 @@ public class GUITranslatingResource extends Scene{
             
         }
         public static void saveData() {
-            ArrayList<Recurso> tempArray = AppLogin.getArraylistResource();
-
-            tempArray.get(index).setTranslatedContent(txtTranslation.getText());
-
-            AppLogin.setArraylistResource(tempArray);
+            try{
+                ArrayList<Recurso> tempArray = AppLogin.getArraylistResource();
+                tempArray.get(index).setTranslatedContent(txtTranslation.getText());
+                AppLogin.setArraylistResource(tempArray);
+            } catch(EmptyFieldException e){
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Title cannot be null");
+                alert.setHeaderText("Error");
+                alert.setContentText(e.getMessage());
+                alert.showAndWait();
+            }
         }
         private void amend(){
 

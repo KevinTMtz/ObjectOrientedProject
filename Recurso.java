@@ -1,8 +1,7 @@
 import java.io.Serializable;
 public abstract class Recurso implements Serializable{
-    //Cambiar a que esto se haga en Info manager
-    private String textualContent = "";
-    private String translatedContent = "";
+    private String textualContent;
+    private String translatedContent;
     private String title;
     private String language;
     private String currentStatus;
@@ -18,6 +17,12 @@ public abstract class Recurso implements Serializable{
             throw new EmptyFieldException("The content cannot be null");
         }
         this.textualContent = textualContent;
+    }
+    public void setTranslatedContent(String translatedContent) throws EmptyFieldException{
+        if(translatedContent==null || translatedContent.length()==0){
+            throw new EmptyFieldException("The content cannot be null");
+        }
+        this.translatedContent = translatedContent;
     }
     public void setTitle(String title) throws EmptyFieldException{
         if(title==null || title.length()==0){
@@ -49,12 +54,12 @@ public abstract class Recurso implements Serializable{
         }
         this.responsibleOfTheFinding = responsibleOfTheFinding;
     }
-    public void setTranslatedContent(String translatedContent){
-        this.translatedContent = translatedContent;
-    }
 
     public String getTextualContent() {
         return textualContent;
+    }
+    public String getTranslatedConent(){
+        return translatedContent;
     }
     public String getTitle() {
         return title;
@@ -70,8 +75,5 @@ public abstract class Recurso implements Serializable{
     }
     public String getResponsibleOfTheFinding() {
         return responsibleOfTheFinding;
-    }
-    public String getTranslatedConent(){
-        return translatedContent;
     }
 }
