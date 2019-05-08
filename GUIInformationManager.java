@@ -406,8 +406,8 @@ public class GUIInformationManager extends Scene {
 
             } catch (NullPointerException npe) {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Delete a resource");
-                alert.setHeaderText("Error while deleting a resource");
+                alert.setTitle("Updating a resource");
+                alert.setHeaderText("Error while updating a resource");
                 alert.setContentText("You have not selected a resource");
                 alert.showAndWait();
             }
